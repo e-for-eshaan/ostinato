@@ -8,16 +8,16 @@ interface ControlsProps {
     description: string;
     loop: number;
   }[];
+  vid: string;
 }
 
-export const Controls: React.FC<ControlsProps> = ({ setter, timeMap }) => {
+export const Controls: React.FC<ControlsProps> = ({ setter, timeMap, vid }) => {
   const [selected, setSelected] = useState<number>(-1);
   const timeStampRef = useRef<any>();
   const descriptionRef = useRef<any>(null);
   const loopRef = useRef<any>(null);
 
-  useEffect(() => {}, [selected]);
-
+  // console.log(timeMap);
   return (
     //wrapper
     <div className="flex overflow-x-auto gap-8 items-center">
@@ -77,9 +77,9 @@ export const Controls: React.FC<ControlsProps> = ({ setter, timeMap }) => {
                     );
                     let temp = [...timeMap];
                     temp[i].proficiency = value;
-                    console.log(temp);
+                    // console.log(temp);
                     setter(temp);
-                    localStorage.setItem("timeMap", JSON.stringify(timeMap));
+                    localStorage.setItem(vid, JSON.stringify(timeMap));
                   }
                 }}
               />
@@ -108,7 +108,7 @@ export const Controls: React.FC<ControlsProps> = ({ setter, timeMap }) => {
                   : temp[selected].loop;
 
                 setter(temp);
-                localStorage.setItem("timeMap", JSON.stringify(timeMap));
+                localStorage.setItem(vid, JSON.stringify(timeMap));
                 setSelected(-1);
               }
             }}
@@ -151,7 +151,7 @@ export const Controls: React.FC<ControlsProps> = ({ setter, timeMap }) => {
             <p
               className={item.loop != 0 ? "" : "opacity-0"}
               onClick={() => {
-                console.log();
+                // console.log();
               }}
             >
               ∞ {item.loop}s
@@ -169,9 +169,9 @@ export const Controls: React.FC<ControlsProps> = ({ setter, timeMap }) => {
                     onClick={() => {
                       let temp = [...timeMap];
                       temp[index].proficiency = value;
-                      console.log(temp);
+                      // console.log(temp);
                       setter(temp);
-                      localStorage.setItem("timeMap", JSON.stringify(timeMap));
+                      localStorage.setItem(vid, JSON.stringify(timeMap));
                     }}
                   />
                 );
@@ -180,6 +180,25 @@ export const Controls: React.FC<ControlsProps> = ({ setter, timeMap }) => {
           </div>
         );
       })}
+      <div
+        className="p-5 cursor-pointer flex items-center"
+        onClick={() => {
+          if (timeMap) {
+            let temp = [...timeMap];
+            let x = {
+              timeStamp: 120,
+              description: "Chorus",
+              loop: 10,
+              proficiency: 0,
+            };
+            temp?.push(x);
+            localStorage.setItem(vid, JSON.stringify(temp));
+            setter(temp);
+          }
+        }}
+      >
+        ADD TIMESTAMP
+      </div>
     </div>
   );
 };
