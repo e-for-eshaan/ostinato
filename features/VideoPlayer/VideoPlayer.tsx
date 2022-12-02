@@ -45,12 +45,18 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ vid }) => {
     event.target.playVideo();
   };
   useEffect(() => {
-    if (typeof window !== undefined) {
+    if (typeof window !== undefined && vid) {
       // localStorage.setItem("timeMap", JSON.stringify(initMap));
-      let item = localStorage.getItem("timeMap");
-      if (item) setTimeMap(JSON.parse(item));
+      let item = localStorage.getItem(vid);
+      if (item) {
+        let itemObj = JSON.parse(item);
+        setTimeMap(itemObj);
+      } else {
+        localStorage.setItem(vid, JSON.stringify([]));
+        setTimeMap([]);
+      }
     }
-  }, []);
+  }, [vid]);
 
   const opts: YouTubeProps["opts"] = {
     height: "390",
@@ -66,7 +72,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ vid }) => {
   return (
     <div className="video-player" id="video-player">
       <YouTube videoId={vid as string} opts={opts} onReady={onPlayerReady} />
-      <Controls setter={setTimeMap} timeMap={timeMap} />
+      <Controls vid={vid} setter={setTimeMap} timeMap={timeMap} />
     </div>
   );
 };
