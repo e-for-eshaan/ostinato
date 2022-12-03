@@ -170,6 +170,7 @@ export const Controls: React.FC<ControlsProps> = ({
       </div>
     );
   };
+
   return (
     //wrapper
     <div className="flex bg-slate-600 max-w-full overflow-hidden items-stretch">
