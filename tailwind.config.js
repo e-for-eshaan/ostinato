@@ -6,6 +6,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        poppins: ['Poppins', 'sans-serif'],
+      },
       keyframes: {
         appear: {
           '0%': { width: 0 },

@@ -1,9 +1,11 @@
 import React from "react";
-import { CustomImage } from "../components";
+import { CustomImage, Layout, Piano } from "../components";
+import { AboutSection, LandingSection } from "../features";
 export default function Home() {
   return (
-    <div>
-      <CustomImage />
-    </div>
+    <Layout>
+      <LandingSection />
+      <AboutSection />
+    </Layout>
   );
 }
