@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { timeMapType } from "../../features/VideoPlayer/VideoPlayer";
-import { TimeCard, ProficiencyControl, Button } from "../../components";
+import { TimeCard, Button } from "../../components";
 
 interface ControlsProps {
   setter: (e: any) => void;
@@ -81,6 +81,7 @@ export const Controls: React.FC<ControlsProps> = ({
           {/* timestamp input */}
           <p className="text-[12px]">Time-stamp</p>
           <input
+            className="py-1 px-2 w-full"
             ref={timeStampRef}
             type="number"
             title="timeStamp"
@@ -91,9 +92,10 @@ export const Controls: React.FC<ControlsProps> = ({
             id=""
           />
           {/* description input */}
-          <hr />
+          {/* <hr /> */}
           <p className="text-[12px] mt-2">Description</p>
           <input
+            className="py-1 px-2 w-full"
             ref={descriptionRef}
             type="text"
             title="description"
@@ -104,10 +106,11 @@ export const Controls: React.FC<ControlsProps> = ({
             id=""
           />
           {/* loop input */}
-          <hr />
+          {/* <hr /> */}
           <p className="text-[12px] mt-2">Loop duration (0 = no loop)</p>
           {
             <input
+              className="py-1 px-2 w-full"
               ref={loopRef}
               type="number"
               title="loop"
@@ -121,7 +124,7 @@ export const Controls: React.FC<ControlsProps> = ({
             />
           }
           {/* proficiency input */}
-          <hr />
+          {/* <hr /> */}
           {/* <p className="text-[12px] mt-2">Proficiency</p>
           {selected != -1 && timeMap ? (
             <ProficiencyControl
@@ -167,10 +170,10 @@ export const Controls: React.FC<ControlsProps> = ({
   };
   return (
     //wrapper
-    <div className="flex">
+    <div className="flex bg-slate-600 max-w-full overflow-hidden items-stretch">
       {/* TimeStamp edit */}
       <EditValues />
-      <div className="w-screen transform duration-200 flex overflow-auto items-center">
+      <div className="bg-red-400 transform duration-200 flex overflow-auto items-center">
         {timeMap?.map((item, index) => {
           return (
             <TimeCard
@@ -190,10 +193,10 @@ export const Controls: React.FC<ControlsProps> = ({
       <div
         className={`${
           selected === -1 ? "cursor-pointer" : "cursor-not-allowed"
-        } p-5  flex items-center`}
+        } flex items-center my-auto px-3 hover:bg-slate-400 tranform duration-100 h-32`}
         onClick={selected === -1 ? addTimeStamp : () => {}}
       >
-        ADD TIMESTAMP
+        ADD <br /> TIMESTAMP
       </div>
     </div>
   );
