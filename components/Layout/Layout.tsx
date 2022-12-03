@@ -5,5 +5,5 @@ interface LayoutProps {
 }
 
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
-  return <main className="min-h-screen w-screen">{children}</main>;
+  return <main className="min-h-screen">{children}</main>;
 };

@@ -29,14 +29,16 @@ export const TimeCard: React.FC<TimeCardProps> = ({
           selected == index ? "bg-slate-200" : "bg-white"
         } flex-col p-5 gap-1 items-center`}
       >
-        <p
-          className="cursor-pointer hover:opacity-30 transform duration-100 absolute top-1 right-2 text-[11px]"
-          onClick={() => {
-            setSelected(index);
-          }}
-        >
-          Edit
-        </p>
+        {selected != index && (
+          <p
+            className="cursor-pointer hover:opacity-30 transform duration-100 absolute top-1 right-2 text-[11px]"
+            onClick={() => {
+              setSelected(index);
+            }}
+          >
+            Edit
+          </p>
+        )}
         {selected !== index && (
           <p
             className="cursor-pointer text-red-600 hover:opacity-30 transform duration-100 absolute top-1 left-2 text-[11px]"

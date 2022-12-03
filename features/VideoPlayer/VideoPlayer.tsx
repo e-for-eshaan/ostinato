@@ -33,7 +33,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ v_id }) => {
   const playerRef = useRef(null);
   return (
     <section className="video-player" id="video-player">
-      <div className="w-[calc(100vw-20px)] h-[500px]">
+      <div className="w-full h-[500px]">
         <ReactPlayer
           ref={playerRef}
           className="react-player"
