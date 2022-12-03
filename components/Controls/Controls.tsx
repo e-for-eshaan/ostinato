@@ -23,13 +23,14 @@ export const Controls: React.FC<ControlsProps> = ({
       let temp = [...timeMap];
       let x = {
         timeStamp: 0,
-        description: "Title",
+        description: "Untitled",
         loop: 5,
         proficiency: 0,
       };
-      temp?.push(x);
+      temp?.unshift(x);
       localStorage.setItem(v_id, JSON.stringify(temp));
       setter(temp);
+      setSelected(0);
     }
   }
 
@@ -62,87 +63,135 @@ export const Controls: React.FC<ControlsProps> = ({
       setSelected(-1);
     }
   }
-  return (
-    //wrapper
-    <div className="flex overflow-x-auto gap-8 items-center">
-      {/* TimeStamp edit */}
-      <div
-        className={`p-5 flex flex-col gap-2 ${selected > -1 ? "" : "hidden"}`}
-        key={selected}
-      >
-        <h1>Edit Values?</h1>
-        {/* timestamp input */}
-        <input
-          ref={timeStampRef}
-          type="number"
-          title="timeStamp"
-          placeholder={timeMap ? timeMap[selected]?.timeStamp.toString() : "a"}
-          name=""
-          id=""
-        />
-        {/* description input */}
-        <input
-          ref={descriptionRef}
-          type="text"
-          title="description"
-          placeholder={
-            timeMap ? timeMap[selected]?.description.toString() : "a"
+  const EditValues = () => {
+    return (
+      <div className={`${selected === -1 ? "hidden" : ""}`}>
+        <div
+          className={`p-5 min-w-[200px] flex flex-col overflow-hidden gap-1 `}
+          // key={selected}
+        >
+          <h1>
+            {timeMap &&
+            selected > -1 &&
+            timeMap[selected].description === "Untitled" &&
+            timeMap[selected].timeStamp == 0
+              ? "Enter Values"
+              : "Edit Values"}
+          </h1>
+          {/* timestamp input */}
+          <p className="text-[12px]">Time-stamp</p>
+          <input
+            ref={timeStampRef}
+            type="number"
+            title="timeStamp"
+            placeholder={
+              timeMap ? timeMap[selected]?.timeStamp.toString() : "a"
+            }
+            name=""
+            id=""
+          />
+          {/* description input */}
+          <hr />
+          <p className="text-[12px] mt-2">Description</p>
+          <input
+            ref={descriptionRef}
+            type="text"
+            title="description"
+            placeholder={
+              timeMap ? timeMap[selected]?.description.toString() : "a"
+            }
+            name=""
+            id=""
+          />
+          {/* loop input */}
+          <hr />
+          <p className="text-[12px] mt-2">Loop duration (0 = no loop)</p>
+          {
+            <input
+              ref={loopRef}
+              type="number"
+              title="loop"
+              placeholder={
+                timeMap && selected > -1
+                  ? timeMap[selected]?.loop.toString() + "s"
+                  : ""
+              }
+              name=""
+              id=""
+            />
           }
-          name=""
-          id=""
-        />
-        {/* loop input */}
-        <input
-          ref={loopRef}
-          type="number"
-          title="loop"
-          placeholder={timeMap ? timeMap[selected]?.loop.toString() + "s" : "a"}
-          name=""
-          id=""
-        />
-        {/* proficiency input */}
-        {selected > -1 && timeMap && (
-          <ProficiencyControl
-            currentProficieny={timeMap[selected]?.proficiency}
-            setter={setProficiency}
-            index={selected}
-          />
-        )}
+          {/* proficiency input */}
+          <hr />
+          {/* <p className="text-[12px] mt-2">Proficiency</p>
+          {selected != -1 && timeMap ? (
+            <ProficiencyControl
+              currentProficieny={timeMap[selected]?.proficiency}
+              setter={setProficiency}
+              index={selected}
+            />
+          ) : (
+            <div className="h-4 opacity-0" />
+          )} */}
 
-        {/* button */}
-        <div className="flex gap-3">
-          {/* Save */}
-          <Button
-            className="bg-slate-600 p-2 rounded-lg text-white"
-            label="Save"
-            clickFunc={upadateTimestamp}
-          />
+          {/* button */}
+          <div className="flex gap-3 mt-3 justify-between">
+            {/* Save */}
+            <Button
+              className="bg-slate-600 p-2 rounded-lg text-white"
+              label="Save"
+              clickFunc={upadateTimestamp}
+            />
 
-          <Button
-            className="bg-slate-400 p-2 rounded-lg text-white"
-            label="Discard"
-            clickFunc={() => setSelected(-1)}
-          />
+            <Button
+              className="bg-slate-400 p-2 rounded-lg text-white"
+              label="Cancel"
+              clickFunc={() => {
+                if (
+                  timeMap &&
+                  selected === 0 &&
+                  timeMap[selected].description === "Untitled" &&
+                  timeMap[selected].timeStamp === 0
+                ) {
+                  let temp = [...timeMap];
+                  temp.splice(0, 1);
+                  localStorage.setItem(v_id, JSON.stringify(temp));
+                  setter(temp);
+                }
+                setSelected(-1);
+              }}
+            />
+          </div>
         </div>
       </div>
-      {timeMap?.map((item, index) => {
-        return (
-          <TimeCard
-            index={index}
-            item={item}
-            selected={selected}
-            setProficiency={setProficiency}
-            setSelected={setSelected}
-            setter={setter}
-            timeMap={timeMap}
-            v_id={v_id}
-            key={index}
-          />
-        );
-      })}
+    );
+  };
+  return (
+    //wrapper
+    <div className="flex">
+      {/* TimeStamp edit */}
+      <EditValues />
+      <div className="w-screen transform duration-200 flex overflow-auto items-center">
+        {timeMap?.map((item, index) => {
+          return (
+            <TimeCard
+              index={index}
+              item={item}
+              selected={selected}
+              setProficiency={setProficiency}
+              setSelected={setSelected}
+              setter={setter}
+              timeMap={timeMap}
+              v_id={v_id}
+              key={index}
+            />
+          );
+        })}
+      </div>
       <div
-        className="p-5 cursor-pointer flex items-center"
-        onClick={addTimeStamp}
+        className={`${
+          selected === -1 ? "cursor-pointer" : "cursor-not-allowed"
+        } p-5  flex items-center`}
+        onClick={selected === -1 ? addTimeStamp : () => {}}
       >
         ADD TIMESTAMP
       </div>
