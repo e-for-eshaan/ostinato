@@ -1,9 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Controls } from "../../components";
-import dynamic from "next/dynamic";
 import ReactPlayer from "react-player";
-import { timeStamp } from "console";
-// const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 
 interface VideoPlayerProps {
   v_id: string;
@@ -36,14 +33,27 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ v_id, pathName }) => {
   }, [v_id]);
 
   const seeker = (time: number, loop: number) => {
+    clearAllIntervals();
+    ref.current?.seekTo(time);
     if (loop > 0) {
-      const loopInterval = setInterval(() => {
+      setInterval(() => {
         ref.current?.seekTo(time);
       }, loop * 1000);
-    } else {
-      ref.current?.seekTo(time);
     }
   };
+
+  function clearAllIntervals() {
+    if (typeof window !== "undefined") {
+      // Get a reference to the last interval + 1
+      const interval_id = window.setInterval(function () {},
+      Number.MAX_SAFE_INTEGER);
+
+      // Clear any timeout/interval up to that id
+      for (let i = 1; i < interval_id; i++) {
+        window.clearInterval(i);
+      }
+    }
+  }
 
   return (
     <section className="video-player" id="video-player">
