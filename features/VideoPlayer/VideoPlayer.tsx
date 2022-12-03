@@ -1,10 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Controls } from "../../components";
 import dynamic from "next/dynamic";
-const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
+import ReactPlayer from "react-player";
+import { timeStamp } from "console";
+// const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 
 interface VideoPlayerProps {
   v_id: string;
+  pathName: string;
 }
 export type timeMapType = {
   timeStamp: number;
@@ -13,8 +16,10 @@ export type timeMapType = {
   loop: number;
 };
 
-export const VideoPlayer: React.FC<VideoPlayerProps> = ({ v_id }) => {
+export const VideoPlayer: React.FC<VideoPlayerProps> = ({ v_id, pathName }) => {
   const [timeMap, setTimeMap] = useState<timeMapType[] | undefined>();
+  const [selected, setSelected] = useState(-1);
+  const ref = React.useRef<ReactPlayer>(null);
 
   useEffect(() => {
     if (typeof window !== undefined && v_id) {
@@ -30,19 +35,44 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ v_id }) => {
     }
   }, [v_id]);
 
-  const playerRef = useRef(null);
+  const seeker = (time: number, loop: number) => {
+    if (loop > 0) {
+      const loopInterval = setInterval(() => {
+        ref.current?.seekTo(time);
+      }, loop * 1000);
+    } else {
+      ref.current?.seekTo(time);
+    }
+  };
+
   return (
     <section className="video-player" id="video-player">
-      <div className="w-full h-[500px]">
+      {v_id && (
         <ReactPlayer
-          ref={playerRef}
-          className="react-player"
-          url={"https://www.youtube.com/watch?v=" + v_id}
-          width="100%"
-          height="100%"
+          onPause={() => {
+            alert("paused");
+          }}
+          ref={ref}
+          url={pathName}
+          playing
+          controls
+          config={{
+            youtube: {
+              playerVars: { showinfo: 1 },
+            },
+          }}
+          width="320px"
+          height="180px"
         />
-      </div>
-      <Controls v_id={v_id} setter={setTimeMap} timeMap={timeMap} />
+      )}
+      <button onClick={() => ref.current?.seekTo(10)}>Seek to 00:10</button>
+
+      <Controls
+        seekFunc={seeker}
+        v_id={v_id}
+        setter={setTimeMap}
+        timeMap={timeMap}
+      />
     </section>
   );
 };
