@@ -1,8 +1,10 @@
 export { Button } from "./Button/Button";
 export { Controls } from "./Controls/Controls";
 export { CustomImage } from "./CustomImage/CustomImage";
+export { Footer } from "./Footer/Footer";
 export { Layout } from "./Layout/Layout";
 export { Modal } from "./Modal/Modal";
 export { Navbar } from "./Navbar/Navbar";
+export { Piano } from "./Piano/Piano";
 export { ProficiencyControl } from "./ProficiencyControl/ProficiencyControl";
 export { TimeCard } from "./TimeCard/TimeCard";
