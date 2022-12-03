@@ -33,13 +33,13 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ v_id }) => {
   const playerRef = useRef(null);
   return (
     <section className="video-player" id="video-player">
-      <div className="h-[500px]">
+      <div className="w-[calc(100vw-20px)] h-[500px]">
         <ReactPlayer
           ref={playerRef}
           className="react-player"
           url={"https://www.youtube.com/watch?v=" + v_id}
           width="100%"
-          height="500px"
+          height="100%"
         />
       </div>
       <Controls v_id={v_id} setter={setTimeMap} timeMap={timeMap} />
