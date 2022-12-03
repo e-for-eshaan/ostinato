@@ -1,23 +1,67 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
+import { timeMapType } from "../../features/VideoPlayer/VideoPlayer";
+import { TimeCard, ProficiencyControl, Button } from "../../components";
 
 interface ControlsProps {
   setter: (e: any) => void;
-  timeMap?: {
-    timeStamp: number;
-    proficiency: number;
-    description: string;
-    loop: number;
-  }[];
-  vid: string;
+  timeMap?: timeMapType[];
+  v_id: string;
 }
 
-export const Controls: React.FC<ControlsProps> = ({ setter, timeMap, vid }) => {
+export const Controls: React.FC<ControlsProps> = ({
+  setter,
+  timeMap,
+  v_id,
+}) => {
   const [selected, setSelected] = useState<number>(-1);
   const timeStampRef = useRef<any>();
   const descriptionRef = useRef<any>(null);
   const loopRef = useRef<any>(null);
 
-  // console.log(timeMap);
+  function addTimeStamp() {
+    if (typeof window !== "undefined" && timeMap) {
+      let temp = [...timeMap];
+      let x = {
+        timeStamp: 0,
+        description: "Title",
+        loop: 5,
+        proficiency: 0,
+      };
+      temp?.push(x);
+      localStorage.setItem(v_id, JSON.stringify(temp));
+      setter(temp);
+    }
+  }
+
+  function setProficiency(value: number, index: number) {
+    if (timeMap) {
+      let temp = [...timeMap];
+      temp[index].proficiency = value;
+      setter(temp);
+      localStorage.setItem(v_id, JSON.stringify(timeMap));
+    }
+  }
+
+  function upadateTimestamp() {
+    if (timeMap) {
+      let temp = [...timeMap];
+      temp[selected].timeStamp = timeStampRef.current.value
+        ? timeStampRef.current.value
+        : temp[selected].timeStamp;
+
+      temp[selected].description = descriptionRef.current.value
+        ? descriptionRef.current.value
+        : temp[selected].description;
+
+      temp[selected].loop = loopRef.current.value
+        ? loopRef.current.value
+        : temp[selected].loop;
+
+      setter(temp);
+      localStorage.setItem(v_id, JSON.stringify(timeMap));
+      setSelected(-1);
+    }
+  }
   return (
     //wrapper
     <div className="flex overflow-x-auto gap-8 items-center">
@@ -57,145 +101,48 @@ export const Controls: React.FC<ControlsProps> = ({ setter, timeMap, vid }) => {
           id=""
         />
         {/* proficiency input */}
-        <div className="flex flex-row gap-2 group">
-          {[1, 2, 3, 4, 5].map((value) => {
-            return (
-              <div
-                key={value}
-                className={
-                  "h-4 w-4 rounded-[50%] bg-yellow-300 cursor-pointer group-hover:opacity-20 " +
-                  (selected > -1 &&
-                  timeMap &&
-                  value <= timeMap[selected]?.proficiency
-                    ? "opacity-100"
-                    : "opacity-20")
-                }
-                onClick={() => {
-                  if (selected > -1 && timeMap) {
-                    let i = timeMap?.findIndex(
-                      (x) => x.timeStamp == timeMap[selected]?.timeStamp
-                    );
-                    let temp = [...timeMap];
-                    temp[i].proficiency = value;
-                    // console.log(temp);
-                    setter(temp);
-                    localStorage.setItem(vid, JSON.stringify(timeMap));
-                  }
-                }}
-              />
-            );
-          })}
-        </div>
+        {selected > -1 && timeMap && (
+          <ProficiencyControl
+            currentProficieny={timeMap[selected]?.proficiency}
+            setter={setProficiency}
+            index={selected}
+          />
+        )}
 
         {/* button */}
         <div className="flex gap-3">
           {/* Save */}
-          <button
+          <Button
             className="bg-slate-600 p-2 rounded-lg text-white"
-            onClick={() => {
-              if (timeMap) {
-                let temp = [...timeMap];
-                temp[selected].timeStamp = timeStampRef.current.value
-                  ? timeStampRef.current.value
-                  : temp[selected].timeStamp;
+            label="Save"
+            clickFunc={upadateTimestamp}
+          />
 
-                temp[selected].description = descriptionRef.current.value
-                  ? descriptionRef.current.value
-                  : temp[selected].description;
-
-                temp[selected].loop = loopRef.current.value
-                  ? loopRef.current.value
-                  : temp[selected].loop;
-
-                setter(temp);
-                localStorage.setItem(vid, JSON.stringify(timeMap));
-                setSelected(-1);
-              }
-            }}
-          >
-            Save
-          </button>
-
-          <button
+          <Button
             className="bg-slate-400 p-2 rounded-lg text-white"
-            onClick={() => {
-              setSelected(-1);
-            }}
-          >
-            Discard
-          </button>
+            label="Discard"
+            clickFunc={() => setSelected(-1)}
+          />
         </div>
       </div>
       {timeMap?.map((item, index) => {
         return (
-          <div
+          <TimeCard
+            index={index}
+            item={item}
+            selected={selected}
+            setProficiency={setProficiency}
+            setSelected={setSelected}
+            setter={setter}
+            timeMap={timeMap}
+            v_id={v_id}
             key={index}
-            className={`${
-              selected == index ? "bg-slate-200" : "bg-white"
-            } w-32 p-5 border my-5 flex relative flex-col gap-5 items-center`}
-          >
-            <p
-              className="cursor-pointer hover:opacity-30 transform duration-100 absolute top-1 right-2 text-[11px]"
-              onClick={() => {
-                setSelected(index);
-              }}
-            >
-              edit
-            </p>
-            <button className="bg-slate-400 p-2 rounded-xl">
-              {item.timeStamp}
-            </button>
-
-            <p>{item.description}</p>
-
-            <p
-              className={item.loop != 0 ? "" : "opacity-0"}
-              onClick={() => {
-                // console.log();
-              }}
-            >
-              ∞ {item.loop}s
-            </p>
-
-            <div className="flex flex-row gap-2 group">
-              {[1, 2, 3, 4, 5].map((value) => {
-                return (
-                  <div
-                    key={value}
-                    className={
-                      "h-4 w-4 rounded-[50%] bg-yellow-300 cursor-pointer group-hover:opacity-20 " +
-                      (value <= item.proficiency ? "opacity-100" : "opacity-20")
-                    }
-                    onClick={() => {
-                      let temp = [...timeMap];
-                      temp[index].proficiency = value;
-                      // console.log(temp);
-                      setter(temp);
-                      localStorage.setItem(vid, JSON.stringify(timeMap));
-                    }}
-                  />
-                );
-              })}
-            </div>
-          </div>
+          />
         );
       })}
       <div
         className="p-5 cursor-pointer flex items-center"
-        onClick={() => {
-          if (timeMap) {
-            let temp = [...timeMap];
-            let x = {
-              timeStamp: 120,
-              description: "Chorus",
-              loop: 10,
-              proficiency: 0,
-            };
-            temp?.push(x);
-            localStorage.setItem(vid, JSON.stringify(temp));
-            setter(temp);
-          }
-        }}
+        onClick={addTimeStamp}
       >
         ADD TIMESTAMP
       </div>

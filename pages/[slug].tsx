@@ -12,7 +12,7 @@ const URLPage = () => {
   return (
     <Layout>
       {videoID}
-      <VideoPlayer vid={videoID as string} />
+      <VideoPlayer v_id={videoID as string} />
     </Layout>
   );
 };

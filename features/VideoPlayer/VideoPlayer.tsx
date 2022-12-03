@@ -1,78 +1,48 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Controls } from "../../components";
-import YouTube, { YouTubeProps } from "react-youtube";
+import dynamic from "next/dynamic";
+const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 
 interface VideoPlayerProps {
-  vid: string;
+  v_id: string;
 }
+export type timeMapType = {
+  timeStamp: number;
+  proficiency: number;
+  description: string;
+  loop: number;
+};
 
-export const VideoPlayer: React.FC<VideoPlayerProps> = ({ vid }) => {
-  type timeMapType = {
-    timeStamp: number;
-    proficiency: number;
-    description: string;
-    loop: number;
-  }[];
-  const initMap: timeMapType = [
-    {
-      timeStamp: 120,
-      description: "Chorus",
-      loop: 10,
-      proficiency: 0,
-    },
-    {
-      timeStamp: 240,
-      description: "Solo",
-      loop: 0,
-      proficiency: 4,
-    },
-    {
-      timeStamp: 560,
-      description: "Riff",
-      loop: 0,
-      proficiency: 1,
-    },
-    {
-      timeStamp: 320,
-      description: "lick",
-      loop: 0,
-      proficiency: 1,
-    },
-  ];
-  const [timeMap, setTimeMap] = useState<timeMapType | undefined>();
-  const onPlayerReady: YouTubeProps["onReady"] = (event) => {
-    // access to player in all event handlers via event.target
-    event.target.playVideo();
-  };
+export const VideoPlayer: React.FC<VideoPlayerProps> = ({ v_id }) => {
+  const [timeMap, setTimeMap] = useState<timeMapType[] | undefined>();
+
   useEffect(() => {
-    if (typeof window !== undefined && vid) {
+    if (typeof window !== undefined && v_id) {
       // localStorage.setItem("timeMap", JSON.stringify(initMap));
-      let item = localStorage.getItem(vid);
+      let item = localStorage.getItem(v_id);
       if (item) {
         let itemObj = JSON.parse(item);
         setTimeMap(itemObj);
       } else {
-        localStorage.setItem(vid, JSON.stringify([]));
+        localStorage.setItem(v_id, JSON.stringify([]));
         setTimeMap([]);
       }
     }
-  }, [vid]);
+  }, [v_id]);
 
-  const opts: YouTubeProps["opts"] = {
-    height: "390",
-    width: "640",
-    playerVars: {
-      // https://developers.google.com/youtube/player_parameters
-      autoplay: 1,
-      start: 120,
-    },
-    id: "abc",
-  };
-
+  const playerRef = useRef(null);
   return (
-    <div className="video-player" id="video-player">
-      <YouTube videoId={vid as string} opts={opts} onReady={onPlayerReady} />
-      <Controls vid={vid} setter={setTimeMap} timeMap={timeMap} />
-    </div>
+    <section className="video-player" id="video-player">
+      <div className="h-[500px]">
+        <ReactPlayer
+          ref={playerRef}
+          className="react-player"
+          url={"https://www.youtube.com/watch?v=" + v_id}
+          width="100%"
+          height="500px"
+        />
+      </div>
+      <Controls v_id={v_id} setter={setTimeMap} timeMap={timeMap} />
+    </section>
   );
 };
