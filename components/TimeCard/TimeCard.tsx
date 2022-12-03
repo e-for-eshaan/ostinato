@@ -10,6 +10,7 @@ interface TimeCardProps {
   item: timeMapType;
   v_id: string;
   setProficiency: (index: number, value: number) => void;
+  seekFunc: (time: number, loop: number) => void;
 }
 
 export const TimeCard: React.FC<TimeCardProps> = ({
@@ -21,6 +22,7 @@ export const TimeCard: React.FC<TimeCardProps> = ({
   item,
   v_id,
   setProficiency,
+  seekFunc,
 }) => {
   return (
     <div className="mx-2 min-w-[150px] border my-5 flex relative animate-appear overflow-hidden ">
@@ -55,7 +57,12 @@ export const TimeCard: React.FC<TimeCardProps> = ({
             Delete
           </p>
         )}
-        <button className="bg-slate-400 p-2 rounded-xl">
+        <button
+          onClick={() => {
+            seekFunc(item.timeStamp as number, item.loop as number);
+          }}
+          className="bg-slate-400 p-2 rounded-xl"
+        >
           {item.timeStamp}
         </button>
 

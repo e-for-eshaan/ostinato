@@ -6,12 +6,14 @@ interface ControlsProps {
   setter: (e: any) => void;
   timeMap?: timeMapType[];
   v_id: string;
+  seekFunc: (time: number, loop: number) => void;
 }
 
 export const Controls: React.FC<ControlsProps> = ({
   setter,
   timeMap,
   v_id,
+  seekFunc,
 }) => {
   const [selected, setSelected] = useState<number>(-1);
   const timeStampRef = useRef<any>();
@@ -177,6 +179,7 @@ export const Controls: React.FC<ControlsProps> = ({
         {timeMap?.map((item, index) => {
           return (
             <TimeCard
+              seekFunc={seekFunc}
               index={index}
               item={item}
               selected={selected}
