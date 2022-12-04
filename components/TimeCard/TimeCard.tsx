@@ -14,6 +14,7 @@ interface TimeCardProps {
   seekFunc: (time: number, loop: number) => void;
   loopSelected: number;
   setSelectedLoop: (e: number) => void;
+  stopper: (e?: any) => void;
 }
 
 export const TimeCard: React.FC<TimeCardProps> = ({
@@ -28,6 +29,7 @@ export const TimeCard: React.FC<TimeCardProps> = ({
   seekFunc,
   loopSelected,
   setSelectedLoop,
+  stopper,
 }) => {
   return (
     <div className="mx-2 border min-w-[100px] my-5 flex relative rounded-md overflow-hidden ">
@@ -74,8 +76,14 @@ export const TimeCard: React.FC<TimeCardProps> = ({
 
         <p className="text-[12px]">{item.description}</p>
 
-        {loopSelected > -1 && selected === index ? (
-          <div className="h-10 w-10 rounded-[50%] border-2 border-blue-500" />
+        {loopSelected !== -1 && loopSelected === index ? (
+          <div
+            onClick={() => {
+              setSelectedLoop(-1);
+              stopper();
+            }}
+            className="cursor-pointer duration-150 relative h-6 w-6 ease-in rounded-[50%] border-[5px] border-t-blue-500 hover:rounded-none hover:animate-none hover:w-5 hover:mb-1 hover:h-5 hover:border-none hover:bg-red-600 border-l-blue-500 animate-spin hover:border-red-400"
+          ></div>
         ) : (
           <p
             className={item.loop != 0 ? "" : "opacity-0"}
