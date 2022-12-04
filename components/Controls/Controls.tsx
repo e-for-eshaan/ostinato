@@ -213,7 +213,7 @@ export const Controls: React.FC<ControlsProps> = ({
       <div className="flex justify-between align-top items-stretch">
         {/* TimeStamp edit */}
         <EditValues />
-        <div className="items-start bg-black min-h-[370px] w-full transform duration-200 flex flex-wrap">
+        <div className="items-start bg-black h-[380px] overflow-y-auto w-full transform duration-200 flex flex-wrap">
           {timeMap?.map((item, index) => {
             return (
               <TimeCard
