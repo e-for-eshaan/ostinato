@@ -1,10 +1,12 @@
 import React from "react";
-import { PageSection } from "../../components";
+import { Heading, PageSection } from "../../components";
 
 export const LandingSection = () => {
   return (
     <PageSection>
-      <h1 className="font-player text-5xl">OSTINATO</h1>
+      <Heading variant="h1" className="font-poppins text-5xl">
+        OSTINATO
+      </Heading>
     </PageSection>
   );
 };
