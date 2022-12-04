@@ -1,6 +1,7 @@
 Find the website [here](https://ostinato.eshaanyadav.repl.co/my-music)  
 # OSTINATO
-Ever tried learning a song by playing along, and getting frustrated by re-playing again and again. Presenting [OSTINATO](https://ostinato.eshaanyadav.repl.co/my-music)  . A video player for musicians, built by musicians!
+Ever tried learning a song by playing along, and getting frustrated by re-playing again and again. Presenting [OSTINATO](https://ostinato.eshaanyadav.repl.co/my-music)  .
+A video player for musicians, built by musicians!
 This project was built using NextJS, TailwindCSS. Enterprise-friendly practices were utilized to build this, keeping in mind, the robustness, type checks, and fool-proof design.
 
 ## Initialisation
