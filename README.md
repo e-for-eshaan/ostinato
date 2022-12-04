@@ -50,21 +50,21 @@ Within the NextJS App, several folders were created.
 ### Landing Page
 It was built by first initialising a layout component, that provided a basic view with Navabar and Footer. It then asks for children components, and displays the page with the provided props.
 
-![landing](./images/landing.png)
+![landing](./images/landing.gif)
 <br/>
 ###### *Fig 2. The Landing Page*
 <br/>
 
 ### Playable Piano
 A simple easter egg just for fun.
-![piano](./images/piano.png)
+![piano](./images/piano.gif)
 <br/>
 ###### *Fig 3. Piano keys emit sound on click*
 <br/>
 
 ### My Music page
 The website stores all the visited pages/video urls into localstorage and hence, can retrieve previous tutorials that the user might want to revisit.
-![myMusic](./images/myMusic.png)
+![myMusic](./images/myMusic.gif)
 <br/>
 ###### *Fig 4. My Music displays all the videos visited*
 <br/>
@@ -79,14 +79,14 @@ User doesn't require any search box or input to access the media in the player. 
 
 ### TimeStamp Edit
 CRUD operations can be performed on any timestamp. These can be created as loops or simple timestamps, and can be deleted or sorted.
-![timeStamps](./images/timeStamps.png)
+![timeStamps](./images/editting.gif)
 <br/>
 ###### *Fig 6. TimeStamps*
 <br/>
 
 ### TimeStamp Looping
 The video loops till the duration of the selected timestamp
-![looping](./images/looping.png)
+![looping](./images/loop.gif)
 <br/>
 ###### *Fig 6. looping*
 <br/>
