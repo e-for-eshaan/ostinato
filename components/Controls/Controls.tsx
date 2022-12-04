@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { timeMapType } from "../../features/VideoPlayer/VideoPlayer";
-import { TimeCard, Button, Heading } from "../../components";
+import { TimeCard, Button, Heading, Text } from "../../components";
 
 interface ControlsProps {
   setter: (e: any) => void;
@@ -87,9 +87,11 @@ export const Controls: React.FC<ControlsProps> = ({
               : "Edit Values"}
           </Heading>
           {/* timestamp input */}
-          <p className="text-[12px]">Time-stamp</p>
+          <Text variant="semibold" className="text-tone-1 text-[12px]">
+            Time-stamp
+          </Text>
           <input
-            className="py-1 px-2 w-full"
+            className="text-black rounded-sm outline-none py-1 px-2 w-full"
             ref={timeStampRef}
             type="number"
             title="timeStamp"
@@ -101,9 +103,11 @@ export const Controls: React.FC<ControlsProps> = ({
           />
           {/* description input */}
           {/* <hr /> */}
-          <p className="text-[12px] mt-2">Description</p>
+          <Text variant="semibold" className="text-tone-1 text-[12px] mt-2">
+            Description
+          </Text>
           <input
-            className="py-1 px-2 w-full"
+            className="text-black rounded-sm outline-none py-1 px-2 w-full"
             ref={descriptionRef}
             type="text"
             title="description"
@@ -115,10 +119,12 @@ export const Controls: React.FC<ControlsProps> = ({
           />
           {/* loop input */}
           {/* <hr /> */}
-          <p className="text-[12px] mt-2">Loop duration (0 = no loop)</p>
+          <Text variant="semibold" className="text-tone-1 text-[12px] mt-2">
+            Loop duration (0 = no loop)
+          </Text>
           {
             <input
-              className="py-1 px-2 w-full"
+              className="text-black rounded-sm outline-none py-1 px-2 w-full"
               ref={loopRef}
               type="number"
               title="loop"
@@ -148,13 +154,13 @@ export const Controls: React.FC<ControlsProps> = ({
           <div className="flex gap-3 mt-3 justify-between">
             {/* Save */}
             <Button
-              className="bg-slate-600 p-2 rounded-lg text-white"
+              className="bg-tone-1 p-2 rounded-lg text-black"
               label="Save"
               clickFunc={upadateTimestamp}
             />
 
             <Button
-              className="bg-slate-400 p-2 rounded-lg text-white"
+              className="bg-tone-2 p-2 rounded-lg text-white"
               label="Cancel"
               clickFunc={() => {
                 if (
@@ -179,37 +185,46 @@ export const Controls: React.FC<ControlsProps> = ({
 
   return (
     //wrapper
-    <div className="flex bg-slate-600 max-w-full overflow-hidden items-stretch">
-      {/* TimeStamp edit */}
-      <EditValues />
-      <div className="bg-red-400 transform duration-200 flex overflow-auto items-center">
-        {timeMap?.map((item, index) => {
-          return (
-            <TimeCard
-              stopper={stopper}
-              seekFunc={seekFunc}
-              index={index}
-              item={item}
-              selected={selected}
-              setProficiency={setProficiency}
-              setSelected={setSelected}
-              setter={setter}
-              timeMap={timeMap}
-              v_id={v_id}
-              key={index}
-              loopSelected={loopSelected}
-              setSelectedLoop={setSelectedLoop}
-            />
-          );
-        })}
+    <div className="pt-5 bg-black text-secondary w-full mb-10">
+      <div className="flex items-center gap-5">
+        <Heading variant="h1" className="ml-4 text-white">
+          Time Cards
+        </Heading>
+        <div
+          className={`${
+            selected === -1 ? "cursor-pointer" : "cursor-not-allowed"
+          } inline-flex border-tone-1 mr-4 text-tone-2 my-auto px-3 hover:bg-tone-1 border-2 rounded-lg items-center hover:text-white tranform duration-100`}
+          onClick={selected === -1 ? addTimeStamp : () => {}}
+        >
+          <Text className="text-center" variant="semibold">
+            ADD <br /> TIMESTAMP
+          </Text>
+        </div>
       </div>
-      <div
-        className={`${
-          selected === -1 ? "cursor-pointer" : "cursor-not-allowed"
-        } flex items-center my-auto px-3 hover:bg-slate-400 tranform duration-100 h-32`}
-        onClick={selected === -1 ? addTimeStamp : () => {}}
-      >
-        ADD <br /> TIMESTAMP
+      <div className="flex justify-between align-top items-stretch">
+        {/* TimeStamp edit */}
+        <EditValues />
+        <div className="items-start bg-black h-[370px] w-full transform duration-200 flex flex-wrap">
+          {timeMap?.map((item, index) => {
+            return (
+              <TimeCard
+                stopper={stopper}
+                seekFunc={seekFunc}
+                index={index}
+                item={item}
+                selected={selected}
+                setProficiency={setProficiency}
+                setSelected={setSelected}
+                setter={setter}
+                timeMap={timeMap}
+                v_id={v_id}
+                key={index}
+                loopSelected={loopSelected}
+                setSelectedLoop={setSelectedLoop}
+              />
+            );
+          })}
+        </div>
       </div>
     </div>
   );

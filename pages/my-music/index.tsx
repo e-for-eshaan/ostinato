@@ -18,9 +18,11 @@ const MyMusic = () => {
 
   return (
     <Layout>
-      <PageSection>
-        <Heading variant="h1">My Music</Heading>
-        <div className="grid grid-cols-2 sm:grid-cols-3 items-center justify-center md:grid-cols-4 lg:grid-cols-5 mt-10 w-fit md:w-full gap-5 md:gap-0 mx-auto">
+      <PageSection className="bg-black text-white pt-10 mt-10 min-h-[400px]">
+        <Heading variant="h1" className="mb-5">
+          My Music
+        </Heading>
+        <div className="grid grid-cols-2 sm:grid-cols-3 items-center justify-center md:grid-cols-4 w-fit md:w-full gap-5 mx-auto">
           {myMusic?.map((item, index) => {
             return <MusicCard v_id={item} key={index} />;
           })}
