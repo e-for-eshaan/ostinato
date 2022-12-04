@@ -49,6 +49,10 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ v_id, pathName }) => {
       <div className="w-full sm:max-w-[1000px] aspect-video mx-auto my-10 px-0 md:px-6">
         {v_id && (
           <ReactPlayer
+            onPause={() => {
+              clearAllIntervals();
+              setSelectedLoop(-1);
+            }}
             ref={ref}
             url={pathName}
             playing

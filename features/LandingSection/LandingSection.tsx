@@ -1,10 +1,18 @@
 import React from "react";
-import { PageSection } from "../../components";
+import { FormatHeading, PageSection, Piano, Text } from "../../components";
 
 export const LandingSection = () => {
   return (
-    <PageSection>
-      <h1 className="font-player text-5xl">OSTINATO</h1>
+    <PageSection className="bg-black pt-20 mt-10">
+      <FormatHeading />
+      <div className="flex flex-wrap items-center mt-16">
+        <Piano />
+        <Text className="text-white flex-1 text-right h-fit text-[50px]">
+          A video player <br /> for{" "}
+          <span className="text-tone-1">Musicians</span>, <br /> by{" "}
+          <span className="text-tone-2">Musicians</span>!
+        </Text>
+      </div>
     </PageSection>
   );
 };

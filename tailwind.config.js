@@ -8,7 +8,17 @@ module.exports = {
     extend: {
       fontFamily: {
         poppins: ['Poppins', 'sans-serif'],
-        player: ['Press Start 2P', 'cursive'],
+        righteous: ['Righteous', 'sans-serif'],
+
+      },
+      colors: {
+        'primary': '#000000',
+        'secondary': '#EAEAEA',
+        'tertiary': '#252A34',
+        'tone': {
+          1: '#08D9D6',
+          2: '#FF2E63',
+        }
       },
       keyframes: {
         appear: {

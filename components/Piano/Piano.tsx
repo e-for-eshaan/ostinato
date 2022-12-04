@@ -89,7 +89,7 @@ export const Piano = () => {
     }
   };
   return (
-    <div className="flex relative bg-red-600">
+    <div className="flex relative bg-primary m-2">
       {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((item) => {
         switch (item) {
           case 2: {
@@ -158,7 +158,7 @@ const BlackKeys: React.FC<Keys> = ({ className, clicker, keyNum }) => {
       onClick={() => {
         clicker(keyNum);
       }}
-      className={`${className} z-10 hover:bg-gray-500 transform duration-100 w-10 h-40 inline-block bg-black absolute left-5`}
+      className={`${className} z-10 cursor-pointer hover:bg-tone-1 transform duration-100 w-10 h-40 inline-block bg-black absolute`}
     />
   );
 };
@@ -169,7 +169,7 @@ const WhiteKeys: React.FC<Keys> = ({ clicker, keyNum }) => {
       onClick={() => {
         clicker(keyNum);
       }}
-      className={`hover:bg-gray-300 transform duration-100 w-12 h-56 inline-block mx-1 bg-white`}
+      className={`hover:bg-tone-2 cursor-pointer hover:skew-y-5 transform duration-100 w-12 h-56 inline-block mx-1 bg-white`}
     />
   );
 };

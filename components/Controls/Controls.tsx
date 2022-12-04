@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { timeMapType } from "../../features/VideoPlayer/VideoPlayer";
-import { TimeCard, Button } from "../../components";
+import { TimeCard, Button, Heading } from "../../components";
 
 interface ControlsProps {
   setter: (e: any) => void;
@@ -78,14 +78,14 @@ export const Controls: React.FC<ControlsProps> = ({
           className={`p-5 min-w-[200px] flex flex-col overflow-hidden gap-1 `}
           // key={selected}
         >
-          <h1>
+          <Heading variant="h4">
             {timeMap &&
             selected > -1 &&
             timeMap[selected].description === "Untitled" &&
             timeMap[selected].timeStamp == 0
               ? "Enter Values"
               : "Edit Values"}
-          </h1>
+          </Heading>
           {/* timestamp input */}
           <p className="text-[12px]">Time-stamp</p>
           <input
