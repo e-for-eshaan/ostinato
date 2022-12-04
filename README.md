@@ -1,7 +1,64 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Find the website [here](https://ostinato.eshaanyadav.repl.co/my-music)  
+# OSTINATO
 
-## OSTINATO
+A video player for musicians, built by musicians!
+This project was built using NextJS, TailwindCSS. Enterprise-friendly practices were utilized to build this, keeping in mind, the robustness, type checks, and fool-proof design.
 
+## Initialisation
+We initialise the application using NextJS and TailwindCSS, with TypeScript configuration. This was achieved using the following command 
+
+```bash
+npx create-next-app@latest --ts
+```
+
+After this Tailwind was added as follows:
+
+```bash
+npm install -D tailwindcss postcss autoprefixer
+# followed by
+npx tailwindcss init -p
+```
+
+## Development
+
+### Directory Structure
+
+![directories](./images/directory.png)
+<br/>
+###### *Fig 3. Directory structure for the web app.*
+<br/>
+
+Within the NextJS App, several folders were created.
+
+- **Components** include reusable single components, that can be called throughout the project.
+- **Features** include multiple components and JSX elements to create compound sections and features.
+- **Hooks** consist of user-defined hooks built by the user.
+- **Functions** include API functions and other functions as well.
+- **Types** include the type interface of the data retrieved using the API.
+
+### Typescript FTW
+
+- Typescript allows us to check the legitimacy of the code that we write.
+- Every single component has a type/interface attached, so if the developer skips over the essential props, or assigns unexpected values, it will throw errors.
+- This helps us to write foolproof and robust code.
+
+##Features
+
+### Landing Page
+It was built by first initialising a layout component, that provided a basic view with Navabar and Footer. It then asks for children components, and displays the page with the provided props.
+
+![typescript types](./images/typed.png)
+<br/>
+###### *Fig 4. This is the type Generated for the data fetched by the API*
+<br/>
+
+### Playable Piano
+A simple easter egg just for fun.
+
+### My Music page
+The website stores all the visited pages/video urls into localstorage and hence, can retrieve previous tutorials that the user might want to revisit.
+
+## NextJS setup
 First, run the development server:
 
 ```bash
