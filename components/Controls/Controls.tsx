@@ -73,7 +73,11 @@ export const Controls: React.FC<ControlsProps> = ({
   }
   const EditValues = () => {
     return (
-      <div className={`${selected === -1 ? "hidden" : ""}`}>
+      <div
+        className={`${
+          selected === -1 ? "opacity-50 cursor-not-allowed" : "opacity-100"
+        }`}
+      >
         <div
           className={`p-5 min-w-[200px] flex flex-col overflow-hidden gap-1 `}
           // key={selected}
@@ -91,7 +95,8 @@ export const Controls: React.FC<ControlsProps> = ({
             Time-stamp
           </Text>
           <input
-            className="text-black rounded-sm outline-none py-1 px-2 w-full"
+            disabled={selected === -1}
+            className="text-black rounded-sm outline-none py-1 px-2 w-44"
             ref={timeStampRef}
             type="number"
             title="timeStamp"
@@ -107,7 +112,8 @@ export const Controls: React.FC<ControlsProps> = ({
             Description
           </Text>
           <input
-            className="text-black rounded-sm outline-none py-1 px-2 w-full"
+            disabled={selected === -1}
+            className="text-black rounded-sm outline-none py-1 px-2 w-44"
             ref={descriptionRef}
             type="text"
             title="description"
@@ -124,7 +130,8 @@ export const Controls: React.FC<ControlsProps> = ({
           </Text>
           {
             <input
-              className="text-black rounded-sm outline-none py-1 px-2 w-full"
+              disabled={selected === -1}
+              className="text-black rounded-sm outline-none py-1 px-2 w-44"
               ref={loopRef}
               type="number"
               title="loop"
@@ -157,6 +164,7 @@ export const Controls: React.FC<ControlsProps> = ({
               className="bg-tone-1 p-2 rounded-lg text-black"
               label="Save"
               clickFunc={upadateTimestamp}
+              disabled={selected === -1}
             />
 
             <Button
@@ -176,6 +184,7 @@ export const Controls: React.FC<ControlsProps> = ({
                 }
                 setSelected(-1);
               }}
+              disabled={selected === -1}
             />
           </div>
         </div>
