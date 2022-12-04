@@ -4,6 +4,7 @@ export { CustomImage } from "./CustomImage/CustomImage";
 export { Footer } from "./Footer/Footer";
 export { Layout } from "./Layout/Layout";
 export { Modal } from "./Modal/Modal";
+export { MusicCard } from "./MusicCard/MusicCard";
 export { Navbar } from "./Navbar/Navbar";
 export { Piano } from "./Piano/Piano";
 export { PageSection } from "./PageSection/PageSection";
