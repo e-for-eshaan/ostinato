@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Controls, PageSection } from "../../components";
 import ReactPlayer from "react-player";
+import { clearAllIntervals, myvideosSetter } from "../../utils/functions";
 
 interface VideoPlayerProps {
   v_id: string;
@@ -21,6 +22,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ v_id, pathName }) => {
   useEffect(() => {
     if (typeof window !== undefined && v_id) {
       // localStorage.setItem("timeMap", JSON.stringify(initMap));
+      myvideosSetter(v_id);
       let item = localStorage.getItem(v_id);
       if (item) {
         let itemObj = JSON.parse(item);
@@ -41,19 +43,6 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ v_id, pathName }) => {
       }, loop * 1000);
     }
   };
-
-  function clearAllIntervals() {
-    if (typeof window !== "undefined") {
-      // Get a reference to the last interval + 1
-      const interval_id = window.setInterval(function () {},
-      Number.MAX_SAFE_INTEGER);
-
-      // Clear any timeout/interval up to that id
-      for (let i = 1; i < interval_id; i++) {
-        window.clearInterval(i);
-      }
-    }
-  }
 
   return (
     <section className="video-player">
