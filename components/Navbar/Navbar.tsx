@@ -18,7 +18,7 @@ export const Navbar = () => {
                 Home
               </Text>
             </Link>
-            <a href={"#how-to-use"}>
+            <a href={"/#how-to-use"}>
               <Text className="cursor-pointer hover:text-tone-2 transform duration-150 text-white">
                 How To Use
               </Text>
@@ -48,7 +48,7 @@ export const Navbar = () => {
                   Home
                 </Text>
               </Link>
-              <Link href={"/"}>
+              <Link href={"/#how-to-use"}>
                 <Text className="cursor-pointer hover:text-tone-2 transform duration-150 text-white">
                   How To Use
                 </Text>
