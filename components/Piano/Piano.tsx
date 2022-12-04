@@ -169,7 +169,9 @@ const WhiteKeys: React.FC<Keys> = ({ clicker, keyNum }) => {
       onClick={() => {
         clicker(keyNum);
       }}
-      className={`hover:bg-tone-2 cursor-pointer hover:skew-y-5 transform duration-100 w-12 h-56 inline-block mx-1 bg-white`}
+      className={`hover:bg-tone-2 ${
+        keyNum === 12 ? "hidden sm:inline-block" : ""
+      } cursor-pointer hover:skew-y-5 transform duration-100 w-12 h-56 inline-block mx-1 bg-white`}
     />
   );
 };
