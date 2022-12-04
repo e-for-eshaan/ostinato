@@ -68,7 +68,9 @@ export const TimeCard: React.FC<TimeCardProps> = ({
         )}
         <button
           onClick={() => {
-            setSelectedLoop(index);
+            if (item.loop != 0) {
+              setSelectedLoop(index);
+            }
             seekFunc(item.timeStamp as number, item.loop as number);
           }}
           className={
