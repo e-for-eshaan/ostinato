@@ -1,7 +1,10 @@
 Find the website [here](https://ostinato.eshaanyadav.repl.co/my-music)  
 # OSTINATO
-Ever tried learning a song by playing along, and getting frustrated by re-playing again and again. Presenting [OSTINATO](https://ostinato.eshaanyadav.repl.co/my-music)  .
+Ever tried learning a song by playing along, and getting frustrated by re-playing again and again. Presenting [OSTINATO](https://ostinato.eshaanyadav.repl.co/my-music). 
+<br/>
 A video player for musicians, built by musicians!
+<br/>
+<br/>
 This project was built using NextJS, TailwindCSS. Enterprise-friendly practices were utilized to build this, keeping in mind, the robustness, type checks, and fool-proof design.
 
 ## Initialisation
@@ -25,7 +28,7 @@ npx tailwindcss init -p
 
 ![directories](./images/directory.png)
 <br/>
-###### *Fig 3. Directory structure for the web app.*
+###### *Fig 1. Directory structure for the web app.*
 <br/>
 
 Within the NextJS App, several folders were created.
@@ -47,21 +50,46 @@ Within the NextJS App, several folders were created.
 ### Landing Page
 It was built by first initialising a layout component, that provided a basic view with Navabar and Footer. It then asks for children components, and displays the page with the provided props.
 
-![typescript types](./images/typed.png)
+![landing](./images/landing.png)
 <br/>
-###### *Fig 4. This is the type Generated for the data fetched by the API*
+###### *Fig 2. The Landing Page*
 <br/>
 
 ### Playable Piano
 A simple easter egg just for fun.
+![piano](./images/piano.png)
+<br/>
+###### *Fig 3. Piano keys emit sound on click*
+<br/>
 
 ### My Music page
 The website stores all the visited pages/video urls into localstorage and hence, can retrieve previous tutorials that the user might want to revisit.
+![myMusic](./images/myMusic.png)
+<br/>
+###### *Fig 4. My Music displays all the videos visited*
+<br/>
 
 ### Instant video querying
 User doesn't require any search box or input to access the media in the player. The user can directly access the player by copying the video URL onto the youtube URL and hence redirecting the video throught the player.
+![url](./images/url.png)
+<br/>
+###### *Fig 5. URL based video query*
+<br/>
+
+
+### TimeStamp Edit
+CRUD operations can be performed on any timestamp. These can be created as loops or simple timestamps, and can be deleted or sorted.
+![timeStamps](./images/timeStamps.png)
+<br/>
+###### *Fig 6. TimeStamps*
+<br/>
 
 ### TimeStamp Looping
+The video loops till the duration of the selected timestamp
+![looping](./images/looping.png)
+<br/>
+###### *Fig 6. looping*
+<br/>
 
 
 ## NextJS setup
