@@ -1,7 +1,6 @@
 Find the website [here](https://ostinato.eshaanyadav.repl.co/my-music)  
 # OSTINATO
-
-A video player for musicians, built by musicians!
+Ever tried learning a song by playing along, and getting frustrated by re-playing again and again. Presenting [OSTINATO](https://ostinato.eshaanyadav.repl.co/my-music)  . A video player for musicians, built by musicians!
 This project was built using NextJS, TailwindCSS. Enterprise-friendly practices were utilized to build this, keeping in mind, the robustness, type checks, and fool-proof design.
 
 ## Initialisation
@@ -42,7 +41,7 @@ Within the NextJS App, several folders were created.
 - Every single component has a type/interface attached, so if the developer skips over the essential props, or assigns unexpected values, it will throw errors.
 - This helps us to write foolproof and robust code.
 
-##Features
+## Features
 
 ### Landing Page
 It was built by first initialising a layout component, that provided a basic view with Navabar and Footer. It then asks for children components, and displays the page with the provided props.
@@ -57,6 +56,12 @@ A simple easter egg just for fun.
 
 ### My Music page
 The website stores all the visited pages/video urls into localstorage and hence, can retrieve previous tutorials that the user might want to revisit.
+
+### Instant video querying
+User doesn't require any search box or input to access the media in the player. The user can directly access the player by copying the video URL onto the youtube URL and hence redirecting the video throught the player.
+
+### TimeStamp Looping
+
 
 ## NextJS setup
 First, run the development server:
