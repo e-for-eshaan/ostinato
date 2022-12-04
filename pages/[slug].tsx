@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import React from "react";
-import { Layout } from "../components";
+import { Layout, PageSection } from "../components";
 import getYouTubeID from "get-youtube-id";
 import { VideoPlayer } from "../features";
 import ReactPlayer from "react-player";
@@ -13,7 +13,6 @@ const URLPage = () => {
   return (
     <Layout>
       {videoID && <VideoPlayer pathName={pathname} v_id={videoID as string} />}
-      <button onClick={() => ref.current?.seekTo(10)}>Seek to 00:10</button>
     </Layout>
   );
 };

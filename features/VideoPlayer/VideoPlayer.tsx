@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Controls } from "../../components";
+import { Controls, PageSection } from "../../components";
 import ReactPlayer from "react-player";
 
 interface VideoPlayerProps {
@@ -56,8 +56,8 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ v_id, pathName }) => {
   }
 
   return (
-    <section className="video-player" id="video-player">
-      <div className="w-full sm:max-w-[800px] aspect-video">
+    <section className="video-player">
+      <div className="w-full sm:max-w-[1000px] aspect-video mx-auto my-10 px-0 md:px-6">
         {v_id && (
           <ReactPlayer
             ref={ref}
@@ -74,15 +74,17 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ v_id, pathName }) => {
           />
         )}
       </div>
-
-      <Controls
-        seekFunc={seeker}
-        v_id={v_id}
-        setter={setTimeMap}
-        timeMap={timeMap}
-        setSelectedLoop={setSelectedLoop}
-        loopSelected={selectedLoop}
-      />
+      <PageSection>
+        <Controls
+          stopper={clearAllIntervals}
+          seekFunc={seeker}
+          v_id={v_id}
+          setter={setTimeMap}
+          timeMap={timeMap}
+          setSelectedLoop={setSelectedLoop}
+          loopSelected={selectedLoop}
+        />
+      </PageSection>
     </section>
   );
 };
