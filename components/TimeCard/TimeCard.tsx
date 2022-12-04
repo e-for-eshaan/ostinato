@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { timeMapType } from "../../features/VideoPlayer/VideoPlayer";
 import { ProficiencyControl } from "../ProficiencyControl/ProficiencyControl";
 
@@ -11,6 +12,8 @@ interface TimeCardProps {
   v_id: string;
   setProficiency: (index: number, value: number) => void;
   seekFunc: (time: number, loop: number) => void;
+  loopSelected: number;
+  setSelectedLoop: (e: number) => void;
 }
 
 export const TimeCard: React.FC<TimeCardProps> = ({
@@ -23,13 +26,15 @@ export const TimeCard: React.FC<TimeCardProps> = ({
   v_id,
   setProficiency,
   seekFunc,
+  loopSelected,
+  setSelectedLoop,
 }) => {
   return (
-    <div className="mx-2 min-w-[150px] border my-5 flex relative animate-appear overflow-hidden ">
+    <div className="mx-2 border min-w-[100px] my-5 flex relative rounded-md overflow-hidden ">
       <div
         className={`${
           selected == index ? "bg-slate-200" : "bg-white"
-        } flex-col p-5 gap-1 items-center`}
+        } flex-col flex py-5 gap-1 items-center w-full justify-center`}
       >
         {selected != index && (
           <p
@@ -59,23 +64,28 @@ export const TimeCard: React.FC<TimeCardProps> = ({
         )}
         <button
           onClick={() => {
+            setSelectedLoop(index);
             seekFunc(item.timeStamp as number, item.loop as number);
           }}
-          className="bg-slate-400 p-2 rounded-xl"
+          className="bg-slate-400 p-2 rounded-md w-[80px] mt-1"
         >
           {item.timeStamp}
         </button>
 
-        <p>{item.description}</p>
+        <p className="text-[12px]">{item.description}</p>
 
-        <p
-          className={item.loop != 0 ? "" : "opacity-0"}
-          onClick={() => {
-            // console.log();
-          }}
-        >
-          ∞ {item.loop}s
-        </p>
+        {loopSelected > -1 && selected === index ? (
+          <div className="h-10 w-10 rounded-[50%] border-2 border-blue-500" />
+        ) : (
+          <p
+            className={item.loop != 0 ? "" : "opacity-0"}
+            onClick={() => {
+              // console.log();
+            }}
+          >
+            ∞ {item.loop}s
+          </p>
+        )}
         <ProficiencyControl
           currentProficieny={item.proficiency}
           setter={setProficiency}
