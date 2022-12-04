@@ -1,5 +1,6 @@
 import React from "react";
+import { PageSection } from "../../components";
 
 export const AboutSection = () => {
-  return <div>AboutSection</div>;
+  return <PageSection>AboutSection</PageSection>;
 };

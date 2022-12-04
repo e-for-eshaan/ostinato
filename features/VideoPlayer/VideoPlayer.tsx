@@ -15,7 +15,7 @@ export type timeMapType = {
 
 export const VideoPlayer: React.FC<VideoPlayerProps> = ({ v_id, pathName }) => {
   const [timeMap, setTimeMap] = useState<timeMapType[] | undefined>();
-  const [selected, setSelected] = useState(-1);
+  const [selectedLoop, setSelectedLoop] = useState(-1);
   const ref = React.useRef<ReactPlayer>(null);
 
   useEffect(() => {
@@ -57,31 +57,31 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ v_id, pathName }) => {
 
   return (
     <section className="video-player" id="video-player">
-      {v_id && (
-        <ReactPlayer
-          onPause={() => {
-            alert("paused");
-          }}
-          ref={ref}
-          url={pathName}
-          playing
-          controls
-          config={{
-            youtube: {
-              playerVars: { showinfo: 1 },
-            },
-          }}
-          width="320px"
-          height="180px"
-        />
-      )}
-      <button onClick={() => ref.current?.seekTo(10)}>Seek to 00:10</button>
+      <div className="w-full sm:max-w-[800px] aspect-video">
+        {v_id && (
+          <ReactPlayer
+            ref={ref}
+            url={pathName}
+            playing
+            controls
+            config={{
+              youtube: {
+                playerVars: { showinfo: 1 },
+              },
+            }}
+            width="100%"
+            height="100%"
+          />
+        )}
+      </div>
 
       <Controls
         seekFunc={seeker}
         v_id={v_id}
         setter={setTimeMap}
         timeMap={timeMap}
+        setSelectedLoop={setSelectedLoop}
+        loopSelected={selectedLoop}
       />
     </section>
   );

@@ -1,5 +1,6 @@
 import React from "react";
+import { PageSection } from "../../components";
 
 export const LandingSection = () => {
-  return <section>LandingSection</section>;
+  return <PageSection>LandingSection</PageSection>;
 };
