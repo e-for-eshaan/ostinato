@@ -1,7 +1,98 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Find the website [here](https://ostinato.eshaanyadav.repl.co/my-music)  
+# OSTINATO
+Ever tried learning a song by playing along, and getting frustrated by re-playing again and again. Presenting [OSTINATO](https://ostinato.eshaanyadav.repl.co/my-music). 
+<br/>
+A video player for musicians, built by musicians!
+<br/>
+<br/>
+This project was built using NextJS, TailwindCSS. Enterprise-friendly practices were utilized to build this, keeping in mind, the robustness, type checks, and fool-proof design.
 
-## Getting Started
+## Initialisation
+We initialise the application using NextJS and TailwindCSS, with TypeScript configuration. This was achieved using the following command 
 
+```bash
+npx create-next-app@latest --ts
+```
+
+After this Tailwind was added as follows:
+
+```bash
+npm install -D tailwindcss postcss autoprefixer
+# followed by
+npx tailwindcss init -p
+```
+
+## Development
+
+### Directory Structure
+
+![directories](./images/directory.png)
+<br/>
+###### *Fig 1. Directory structure for the web app.*
+<br/>
+
+Within the NextJS App, several folders were created.
+
+- **Components** include reusable single components, that can be called throughout the project.
+- **Features** include multiple components and JSX elements to create compound sections and features.
+- **Hooks** consist of user-defined hooks built by the user.
+- **Functions** include API functions and other functions as well.
+- **Types** include the type interface of the data retrieved using the API.
+
+### Typescript FTW
+
+- Typescript allows us to check the legitimacy of the code that we write.
+- Every single component has a type/interface attached, so if the developer skips over the essential props, or assigns unexpected values, it will throw errors.
+- This helps us to write foolproof and robust code.
+
+## Features
+
+### Landing Page
+It was built by first initialising a layout component, that provided a basic view with Navabar and Footer. It then asks for children components, and displays the page with the provided props.
+
+![landing](./images/landing.gif)
+<br/>
+###### *Fig 2. The Landing Page*
+<br/>
+
+### Playable Piano
+A simple easter egg just for fun.
+![piano](./images/piano.gif)
+<br/>
+###### *Fig 3. Piano keys emit sound on click*
+<br/>
+
+### My Music page
+The website stores all the visited pages/video urls into localstorage and hence, can retrieve previous tutorials that the user might want to revisit.
+![myMusic](./images/myMusic.gif)
+<br/>
+###### *Fig 4. My Music displays all the videos visited*
+<br/>
+
+### Instant video querying
+User doesn't require any search box or input to access the media in the player. The user can directly access the player by copying the video URL onto the youtube URL and hence redirecting the video throught the player.
+![url](./images/url.gif)
+<br/>
+###### *Fig 5. URL based video query*
+<br/>
+
+
+### TimeStamp Edit
+CRUD operations can be performed on any timestamp. These can be created as loops or simple timestamps, and can be deleted or sorted.
+![editting](./images/editting.gif)
+<br/>
+###### *Fig 6. TimeStamps*
+<br/>
+
+### TimeStamp Looping
+The video loops till the duration of the selected timestamp
+![loop](./images/loop.gif)
+<br/>
+###### *Fig 6. looping*
+<br/>
+
+
+## NextJS setup
 First, run the development server:
 
 ```bash
