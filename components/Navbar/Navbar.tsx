@@ -18,19 +18,14 @@ export const Navbar = () => {
                 Home
               </Text>
             </Link>
-            <Link href={"/"}>
+            <a href={"#how-to-use"}>
               <Text className="cursor-pointer hover:text-tone-2 transform duration-150 text-white">
                 How To Use
               </Text>
-            </Link>
+            </a>
             <Link href={"/my-music"}>
               <Text className="cursor-pointer hover:text-tone-1 transform duration-150 text-white">
                 My Music
-              </Text>
-            </Link>
-            <Link href={"/"}>
-              <Text className="cursor-pointer hover:text-tone-2 transform duration-150 text-white">
-                About
               </Text>
             </Link>
           </ul>
@@ -61,11 +56,6 @@ export const Navbar = () => {
               <Link href={"/my-music"}>
                 <Text className="cursor-pointer hover:text-tone-1 transform duration-150 text-white">
                   My Music
-                </Text>
-              </Link>
-              <Link href={"/"}>
-                <Text className="cursor-pointer hover:text-tone-2 transform duration-150 text-white">
-                  About
                 </Text>
               </Link>
             </ul>

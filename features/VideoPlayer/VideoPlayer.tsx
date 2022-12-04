@@ -67,7 +67,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ v_id, pathName }) => {
           />
         )}
       </div>
-      <PageSection>
+      <section className="sm:px-6 max-w-[1000px] mx-auto">
         <Controls
           stopper={clearAllIntervals}
           seekFunc={seeker}
@@ -77,7 +77,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ v_id, pathName }) => {
           setSelectedLoop={setSelectedLoop}
           loopSelected={selectedLoop}
         />
-      </PageSection>
+      </section>
     </section>
   );
 };
