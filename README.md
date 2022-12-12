@@ -26,7 +26,7 @@ npx tailwindcss init -p
 
 ### Directory Structure
 
-![directories](./images/directory.png)
+![directories](https://i.postimg.cc/yxnvmB3k/directory.png)
 <br/>
 ###### *Fig 1. Directory structure for the web app.*
 <br/>
@@ -50,21 +50,24 @@ Within the NextJS App, several folders were created.
 ### Landing Page
 It was built by first initialising a layout component, that provided a basic view with Navabar and Footer. It then asks for children components, and displays the page with the provided props.
 
-![landing](./images/landing.gif)
+<br/>
+![landing](https://i.postimg.cc/4xYB9Dfx/landing.gif)
 <br/>
 ###### *Fig 2. The Landing Page*
 <br/>
 
 ### Playable Piano
 A simple easter egg just for fun.
-![piano](./images/piano.gif)
+<br/>
+![piano](https://i.postimg.cc/T2c7MjNf/piano.gif)
 <br/>
 ###### *Fig 3. Piano keys emit sound on click*
 <br/>
 
 ### My Music page
 The website stores all the visited pages/video urls into localstorage and hence, can retrieve previous tutorials that the user might want to revisit.
-![myMusic](./images/myMusic.gif)
+<br/>
+![myMusic](https://i.postimg.cc/7YsKbHyR/myMusic.gif)
 <br/>
 ###### *Fig 4. My Music displays all the videos visited*
 <br/>
@@ -72,7 +75,7 @@ The website stores all the visited pages/video urls into localstorage and hence,
 ### Instant video querying
 User doesn't require any search box or input to access the media in the player. The user can directly access the player by copying the video URL onto the youtube URL and hence redirecting the video throught the player.
 <br/>
-![url](./images/url.gif)
+![url](https://i.postimg.cc/N0TDNRrh/url.gif)
 <br/>
 ###### *Fig 5. URL based video query*
 <br/>
@@ -80,14 +83,16 @@ User doesn't require any search box or input to access the media in the player. 
 
 ### TimeStamp Edit
 CRUD operations can be performed on any timestamp. These can be created as loops or simple timestamps, and can be deleted or sorted.
-![timeStamps](./images/editting.gif)
+<br/>
+![timeStamps](https://i.postimg.cc/HkF346n4/editting.gif)
 <br/>
 ###### *Fig 6. TimeStamps*
 <br/>
 
 ### TimeStamp Looping
 The video loops till the duration of the selected timestamp
-![looping](./images/loop.gif)
+<br/>
+![looping](https://i.postimg.cc/8PPy1FxW/loop.gif)
 <br/>
 ###### *Fig 6. looping*
 <br/>
