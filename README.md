@@ -1,6 +1,6 @@
-Find the website [here](https://ostinato.eshaanyadav.repl.co)  
+Find the website [here](https://ostinato.netlify.app/)  
 # OSTINATO
-Ever tried learning a song by playing along, and getting frustrated by re-playing again and again. Presenting [OSTINATO](https://ostinato.eshaanyadav.repl.co). 
+Ever tried learning a song by playing along, and getting frustrated by re-playing again and again. Presenting [OSTINATO](https://ostinato.netlify.app/). 
 <br/>
 A video player for musicians, built by musicians!
 <br/>
