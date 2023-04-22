@@ -22,6 +22,12 @@ export const Slideshow = () => {
     "Step 3: Play with our player",
     "Step 4: Access anytime in My Music",
   ];
+  const images = [
+    "/assets/url.png",
+    "/assets/url2.png",
+    "/assets/img3.png",
+    "/assets/img4.png",
+  ];
   return (
     <div
       ref={ref}
@@ -31,12 +37,7 @@ export const Slideshow = () => {
         className="flex flex-col relative transform duration-300 w-full h-full"
         style={{ bottom: index * ((hVal * 9) / 16) }}
       >
-        {[
-          "/assets/img1.png",
-          "/assets/img2.png",
-          "/assets/img3.png",
-          "/assets/img4.png",
-        ].map((item, index) => {
+        {images.map((item, index) => {
           return (
             <img src={item} className={"w-full h-full"} key={index} alt="" />
           );
