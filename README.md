@@ -75,7 +75,7 @@ The website stores all the visited pages/video urls into localstorage and hence,
 ### Instant video querying
 User doesn't require any search box or input to access the media in the player. The user can directly access the player by copying the video URL onto the youtube URL and hence redirecting the video throught the player.
 <br/>
-![url](https://i.postimg.cc/N0TDNRrh/url.gif)
+![ezgif com-video-to-gif (3)](https://user-images.githubusercontent.com/76566992/233765304-46c4fb44-94e0-414d-ae30-cb2988c1e09a.gif)
 <br/>
 ###### *Fig 5. URL based video query*
 <br/>
