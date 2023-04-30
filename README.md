@@ -49,7 +49,6 @@ Within the NextJS App, several folders were created.
 
 ### Landing Page
 It was built by first initialising a layout component, that provided a basic view with Navabar and Footer. It then asks for children components, and displays the page with the provided props.
-
 <br/>
 ![landing](https://i.postimg.cc/4xYB9Dfx/landing.gif)
 <br/>
