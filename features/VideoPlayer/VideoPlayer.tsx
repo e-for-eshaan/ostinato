@@ -17,7 +17,8 @@ export type timeMapType = {
 export const VideoPlayer: React.FC<VideoPlayerProps> = ({ v_id, pathName }) => {
   const [timeMap, setTimeMap] = useState<timeMapType[] | undefined>();
   const [selectedLoop, setSelectedLoop] = useState(-1);
-  const ref = React.useRef<ReactPlayer>(null);
+  const [playing, setPlaying] = useState(false);
+  const playerRef = React.useRef<ReactPlayer>(null);
 
   useEffect(() => {
     if (typeof window !== undefined && v_id) {
@@ -31,16 +32,21 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ v_id, pathName }) => {
         localStorage.setItem(v_id, JSON.stringify([]));
         setTimeMap([]);
       }
+
     }
   }, [v_id]);
 
   const seeker = (time: number, loop: number) => {
     clearAllIntervals();
-    ref.current?.seekTo(time);
+    playerRef.current?.seekTo(time);
+    setPlaying(true);
+    const playBackRate = playerRef.current?.getInternalPlayer()?.getPlaybackRate() || 1;
+    const loopDuration = (loop * 1000) / playBackRate;
+
     if (loop > 0) {
       setInterval(() => {
-        ref.current?.seekTo(time);
-      }, loop * 1000);
+        playerRef.current?.seekTo(time);
+      }, loopDuration);
     }
   };
 
@@ -50,12 +56,14 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ v_id, pathName }) => {
         {v_id && (
           <ReactPlayer
             onPause={() => {
+              setPlaying(false);
               clearAllIntervals();
               setSelectedLoop(-1);
             }}
-            ref={ref}
+            onPlay={() => setPlaying(true)}
+            ref={playerRef}
             url={pathName}
-            playing
+            playing={playing}
             controls
             config={{
               youtube: {
@@ -76,6 +84,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ v_id, pathName }) => {
           timeMap={timeMap}
           setSelectedLoop={setSelectedLoop}
           loopSelected={selectedLoop}
+          onPause={() => setPlaying(false)}
         />
       </section>
     </section>
