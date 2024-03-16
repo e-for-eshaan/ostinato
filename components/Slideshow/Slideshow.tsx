@@ -1,9 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { clearAllIntervals } from "../../utils/functions";
-import img1 from "../../public/assets/img1.png";
-import img2 from "../../public/assets/img2.png";
-import img3 from "../../public/assets/img3.png";
-import img4 from "../../public/assets/img4.png";
+
 export const Slideshow = () => {
   const [index, setIndex] = useState(0);
   useState;
