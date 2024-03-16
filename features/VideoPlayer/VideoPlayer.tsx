@@ -17,6 +17,8 @@ export type timeMapType = {
 export const VideoPlayer: React.FC<VideoPlayerProps> = ({ v_id, pathName }) => {
   const [timeMap, setTimeMap] = useState<timeMapType[] | undefined>();
   const [selectedLoop, setSelectedLoop] = useState(-1);
+  const [playing, setPlaying] = useState(false);
+  const [playBackRate, setPlayBackRate] = useState(1);
   const ref = React.useRef<ReactPlayer>(null);
 
   useEffect(() => {
@@ -31,6 +33,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ v_id, pathName }) => {
         localStorage.setItem(v_id, JSON.stringify([]));
         setTimeMap([]);
       }
+
     }
   }, [v_id]);
 
@@ -41,6 +44,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ v_id, pathName }) => {
       setInterval(() => {
         ref.current?.seekTo(time);
       }, loop * 1000);
+      setPlaying(true);
     }
   };
 
@@ -50,12 +54,13 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ v_id, pathName }) => {
         {v_id && (
           <ReactPlayer
             onPause={() => {
+              setPlaying(false);
               clearAllIntervals();
               setSelectedLoop(-1);
             }}
             ref={ref}
             url={pathName}
-            playing
+            playing={playing}
             controls
             config={{
               youtube: {
@@ -64,6 +69,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ v_id, pathName }) => {
             }}
             width="100%"
             height="100%"
+            playbackRate={playBackRate}
           />
         )}
       </div>
@@ -76,6 +82,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ v_id, pathName }) => {
           timeMap={timeMap}
           setSelectedLoop={setSelectedLoop}
           loopSelected={selectedLoop}
+          onPause = {() => setPlaying(false)}
         />
       </section>
     </section>

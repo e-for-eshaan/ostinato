@@ -10,6 +10,7 @@ interface ControlsProps {
   loopSelected: number;
   setSelectedLoop: (e: number) => void;
   stopper: (e: any) => void;
+  onPause: () => void;
 }
 
 export const Controls: React.FC<ControlsProps> = ({
@@ -20,6 +21,7 @@ export const Controls: React.FC<ControlsProps> = ({
   loopSelected,
   setSelectedLoop,
   stopper,
+  onPause,
 }) => {
   const [selected, setSelected] = useState<number>(-1);
   const timeStampRef = useRef<any>();
@@ -230,6 +232,7 @@ export const Controls: React.FC<ControlsProps> = ({
                 key={index}
                 loopSelected={loopSelected}
                 setSelectedLoop={setSelectedLoop}
+                onPause={onPause}
               />
             );
           })}
