@@ -9,7 +9,6 @@ export const Slideshow = () => {
   useEffect(() => {
     clearAllIntervals();
     setInterval(() => {
-      console.log(ref?.current?.scrollHeight);
       setIndex((prev) => (prev >= 3 ? 0 : prev + 1));
     }, 2000);
   }, []);
