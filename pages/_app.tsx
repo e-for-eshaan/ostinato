@@ -7,7 +7,6 @@ import GoogleAuth from '../components/Auth/GoogleAuth';
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
-      <GoogleAuth />
       <Component {...pageProps} />
     </Provider>
   )

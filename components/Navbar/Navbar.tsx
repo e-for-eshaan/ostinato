@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import { Text } from "../Text/Text";
+import GoogleAuth from "../Auth/GoogleAuth";
 
 export const Navbar = () => {
   const [expand, setExpand] = useState(false);
@@ -28,6 +29,9 @@ export const Navbar = () => {
                 My Music
               </Text>
             </Link>
+            <Text className="cursor-pointer hover:text-tone-2 transform duration-150 text-white">
+              <GoogleAuth />
+            </Text>
           </ul>
           <div
             className="flex flex-col gap-1.5 group items-end cursor-pointer sm:hidden"
