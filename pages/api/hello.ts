@@ -1,13 +1,26 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import type { NextApiRequest, NextApiResponse } from 'next'
+// pages/api/getData.js
 
-type Data = {
-  name: string
-}
+import * as yup from 'yup';
+import { NextApiRequest, NextApiResponse } from 'next';
 
-export default function handler(
+// Define the schema using Yup
+const schema = yup.object().shape({
+  name: yup.string().required(),
+});
+
+export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse
 ) {
-  res.status(200).json({ name: 'John Doe' })
+  if (req.method === 'GET') {
+    try {
+      await schema.validate(req.query);
+
+      res.status(200).json({ message: 'Validation successful!' });
+    } catch (error:any) {
+      res.status(400).json({ error: error.message });
+    }
+  } else {
+    res.status(405).json({ error: 'Method Not Allowed' });
+  }
 }
