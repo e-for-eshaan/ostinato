@@ -26,7 +26,7 @@ export const Footer = () => {
           </Link>
         </ul>
       }
-      © Eshaan 2022
+      © Eshaan 2024
     </footer>
   );
 };
