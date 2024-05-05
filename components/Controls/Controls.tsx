@@ -1,10 +1,10 @@
 import React, { useRef, useState } from "react";
-import { timeMapType } from "../../features/VideoPlayer/VideoPlayer";
+import { LoopType } from "../../features/VideoPlayer/VideoPlayer";
 import { TimeCard, Button, Heading, Text } from "../../components";
 
 interface ControlsProps {
   setter: (e: any) => void;
-  timeMap?: timeMapType[];
+  timeMap?: LoopType[];
   v_id: string;
   seekFunc: (time: number, loop: number) => void;
   loopSelected: number;
@@ -46,10 +46,12 @@ export const Controls: React.FC<ControlsProps> = ({
 
   function setProficiency(value: number, index: number) {
     if (timeMap) {
-      let temp = [...timeMap];
-      temp[index].proficiency = value;
+      const temp = timeMap.map((item, idx) => {
+        if (index === idx) return { ...item, proficiency: value }
+        else return item
+      })
       setter(temp);
-      localStorage.setItem(v_id, JSON.stringify(timeMap));
+      localStorage.setItem(v_id, JSON.stringify(temp));
     }
   }
 
@@ -76,19 +78,17 @@ export const Controls: React.FC<ControlsProps> = ({
   const EditValues = () => {
     return (
       <div
-        className={`${
-          selected === -1 ? "opacity-50 cursor-not-allowed" : "opacity-100"
-        }`}
+        className={`${selected === -1 ? "opacity-50 cursor-not-allowed" : "opacity-100"
+          }`}
       >
         <div
           className={`p-5 min-w-[200px] flex flex-col overflow-hidden gap-1 `}
-          // key={selected}
         >
           <Heading variant="h4">
             {timeMap &&
-            selected > -1 &&
-            timeMap[selected].description === "Untitled" &&
-            timeMap[selected].timeStamp == 0
+              selected > -1 &&
+              timeMap[selected].description === "Untitled" &&
+              timeMap[selected].timeStamp == 0
               ? "Enter Values"
               : "Edit Values"}
           </Heading>
@@ -109,7 +109,6 @@ export const Controls: React.FC<ControlsProps> = ({
             id=""
           />
           {/* description input */}
-          {/* <hr /> */}
           <Text variant="semibold" className="text-tone-1 text-[12px] mt-2">
             Description
           </Text>
@@ -146,18 +145,6 @@ export const Controls: React.FC<ControlsProps> = ({
               id=""
             />
           }
-          {/* proficiency input */}
-          {/* <hr /> */}
-          {/* <p className="text-[12px] mt-2">Proficiency</p>
-          {selected != -1 && timeMap ? (
-            <ProficiencyControl
-              currentProficieny={timeMap[selected]?.proficiency}
-              setter={setProficiency}
-              index={selected}
-            />
-          ) : (
-            <div className="h-4 opacity-0" />
-          )} */}
 
           {/* button */}
           <div className="flex gap-3 mt-3 justify-between">
@@ -202,10 +189,9 @@ export const Controls: React.FC<ControlsProps> = ({
           Time Cards
         </Heading>
         <div
-          className={`${
-            selected === -1 ? "cursor-pointer" : "cursor-not-allowed"
-          } inline-flex border-tone-1 mr-4 text-tone-2 my-auto px-3 hover:bg-tone-1 border-2 rounded-lg items-center hover:text-white tranform duration-100`}
-          onClick={selected === -1 ? addTimeStamp : () => {}}
+          className={`${selected === -1 ? "cursor-pointer" : "cursor-not-allowed"
+            } inline-flex border-tone-1 mr-4 text-tone-2 my-auto px-3 hover:bg-tone-1 border-2 rounded-lg items-center hover:text-white tranform duration-100`}
+          onClick={selected === -1 ? addTimeStamp : () => { }}
         >
           <Text className="text-center" variant="semibold">
             ADD <br /> TIMESTAMP
