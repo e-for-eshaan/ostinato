@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { LoopType } from "../../features/VideoPlayer/VideoPlayer";
 import { TimeCard, Button, Heading, Text } from "../../components";
 import { cloneDeep } from "lodash";
+import { uuid } from "../../utils/functions";
 
 interface ControlsProps {
   setter: (e: any) => void;
@@ -33,6 +34,8 @@ export const Controls: React.FC<ControlsProps> = ({
     if (typeof window !== "undefined" && timeMap) {
       let temp = cloneDeep(timeMap);
       let x = {
+        id: uuid(),
+        vid: v_id,
         timeStamp: 0,
         description: "Untitled",
         loop: 5,

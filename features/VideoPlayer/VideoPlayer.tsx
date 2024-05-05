@@ -10,6 +10,8 @@ interface VideoPlayerProps {
   pathName: string;
 }
 export type LoopType = {
+  id: string;
+  vid: string;
   timeStamp: number;
   proficiency: number;
   description: string;

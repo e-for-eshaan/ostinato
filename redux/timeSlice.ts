@@ -3,12 +3,16 @@ import { LoopType } from "../features/VideoPlayer/VideoPlayer";
 
 interface TimeState {
     currentTimeStamp: LoopType,
-    allTimeStamps: LoopType[]
+    allTimeStamps: LoopType[],
+    timeMapById: Record<string, LoopType>,
+    timeMapByVideo: Record<string, LoopType[]>
 }
 
 const initialState: TimeState = {
     currentTimeStamp: {} as LoopType,
-    allTimeStamps: [] as LoopType[]
+    allTimeStamps: [] as LoopType[],
+    timeMapById: {} as Record<string, LoopType>,
+    timeMapByVideo: {} as Record<string, LoopType[]>
 };
 
 const timeSlice = createSlice({
@@ -20,6 +24,10 @@ const timeSlice = createSlice({
         },
         setAllTimeStamps: (state, action: PayloadAction<LoopType[]>) => {
             state.allTimeStamps = action.payload;
+            state.timeMapById = action.payload.reduce((acc, curr) => {
+                acc[curr.id] = curr;
+                return acc;
+            }, {} as Record<string, LoopType>);
         }
     },
 });

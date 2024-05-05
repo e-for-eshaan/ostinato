@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid';
+
 export function clearAllIntervals() {
   if (typeof window !== "undefined") {
     // Get a reference to the last interval + 1
@@ -31,3 +33,7 @@ export const youtubeURLGen = (v_id: string) => {
   const base = "watch?v=";
   return v_id ? base + v_id : undefined;
 };
+
+export const uuid = () => {
+  return uuidv4();
+}
