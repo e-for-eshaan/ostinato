@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { LoopType } from "../../features/VideoPlayer/VideoPlayer";
 import { TimeCard, Button, Heading, Text } from "../../components";
+import { cloneDeep } from "lodash";
 
 interface ControlsProps {
   setter: (e: any) => void;
@@ -30,7 +31,7 @@ export const Controls: React.FC<ControlsProps> = ({
 
   function addTimeStamp() {
     if (typeof window !== "undefined" && timeMap) {
-      let temp = [...timeMap];
+      let temp = cloneDeep(timeMap);
       let x = {
         timeStamp: 0,
         description: "Untitled",
@@ -57,7 +58,7 @@ export const Controls: React.FC<ControlsProps> = ({
 
   function upadateTimestamp() {
     if (timeMap) {
-      let temp = [...timeMap];
+      let temp = cloneDeep(timeMap);
       temp[selected].timeStamp = timeStampRef.current.value
         ? timeStampRef.current.value
         : temp[selected].timeStamp;
@@ -166,7 +167,7 @@ export const Controls: React.FC<ControlsProps> = ({
                   timeMap[selected].description === "Untitled" &&
                   timeMap[selected].timeStamp === 0
                 ) {
-                  let temp = [...timeMap];
+                  let temp = cloneDeep(timeMap);
                   temp.splice(0, 1);
                   localStorage.setItem(v_id, JSON.stringify(temp));
                   setter(temp);
