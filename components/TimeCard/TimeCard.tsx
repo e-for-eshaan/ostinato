@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { timeMapType } from "../../features/VideoPlayer/VideoPlayer";
+import { LoopType } from "../../features/VideoPlayer/VideoPlayer";
 import { ProficiencyControl } from "../ProficiencyControl/ProficiencyControl";
 
 interface TimeCardProps {
   selected: number;
   index: number;
   setSelected: (e: any) => void;
-  timeMap: timeMapType[];
+  timeMap: LoopType[];
   setter: (e: any) => void;
-  item: timeMapType;
+  item: LoopType;
   v_id: string;
   setProficiency: (index: number, value: number) => void;
   seekFunc: (time: number, loop: number) => void;

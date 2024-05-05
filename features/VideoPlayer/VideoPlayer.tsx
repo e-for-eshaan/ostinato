@@ -2,12 +2,14 @@ import React, { useEffect, useRef, useState } from "react";
 import { Controls, PageSection } from "../../components";
 import ReactPlayer from "react-player";
 import { clearAllIntervals, myvideosSetter } from "../../utils/functions";
+import { useDispatch, useSelector } from "../../redux";
+import timeSlice, { setAllTimeStamps } from "../../redux/timeSlice";
 
 interface VideoPlayerProps {
   v_id: string;
   pathName: string;
 }
-export type timeMapType = {
+export type LoopType = {
   timeStamp: number;
   proficiency: number;
   description: string;
@@ -15,7 +17,11 @@ export type timeMapType = {
 };
 
 export const VideoPlayer: React.FC<VideoPlayerProps> = ({ v_id, pathName }) => {
-  const [timeMap, setTimeMap] = useState<timeMapType[] | undefined>();
+  const timeMap = useSelector((state) => state.time.allTimeStamps) as LoopType[];
+  const dispatch = useDispatch();
+  const setTimeMap = (e: LoopType[]) => {
+    dispatch(setAllTimeStamps(e));
+  }
   const [selectedLoop, setSelectedLoop] = useState(-1);
   const [playing, setPlaying] = useState(false);
   const playerRef = React.useRef<ReactPlayer>(null);
