@@ -62,6 +62,9 @@ export const Navbar = () => {
                   My Music
                 </Text>
               </Link>
+              <Text className="cursor-pointer hover:text-tone-2 transform duration-150 text-white">
+                <GoogleAuth />
+              </Text>
             </ul>
           </div>
         )}
