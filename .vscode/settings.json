@@ -1,0 +1,8 @@
+{
+    "editor.trimTrailingWhitespace": true,
+    "editor.formatOnSave": true,
+    "files.insertFinalNewline": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "always"
+    }
+}

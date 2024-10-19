@@ -1,4 +1,3 @@
-import React from 'react';
 import useSound from 'use-sound';
 
 //@ts-ignore
@@ -93,19 +92,29 @@ export const Piano = () => {
       {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((item) => {
         switch (item) {
           case 2: {
-            return <BlackKeys keyNum={item} clicker={clicker} className={'left-[35px]'} />;
+            return (
+              <BlackKeys key={item} keyNum={item} clicker={clicker} className={'left-[35px]'} />
+            );
           }
           case 3: {
-            return <BlackKeys keyNum={item} clicker={clicker} className={'left-[91px]'} />;
+            return (
+              <BlackKeys key={item} keyNum={item} clicker={clicker} className={'left-[91px]'} />
+            );
           }
           case 7: {
-            return <BlackKeys keyNum={item} clicker={clicker} className={'left-[203px]'} />;
+            return (
+              <BlackKeys key={item} keyNum={item} clicker={clicker} className={'left-[203px]'} />
+            );
           }
           case 9: {
-            return <BlackKeys keyNum={item} clicker={clicker} className={'left-[259px]'} />;
+            return (
+              <BlackKeys key={item} keyNum={item} clicker={clicker} className={'left-[259px]'} />
+            );
           }
           case 11: {
-            return <BlackKeys keyNum={item} clicker={clicker} className={'left-[315px]'} />;
+            return (
+              <BlackKeys key={item} keyNum={item} clicker={clicker} className={'left-[315px]'} />
+            );
           }
           default: {
             return <WhiteKeys keyNum={item} clicker={clicker} />;
@@ -139,9 +148,7 @@ const WhiteKeys: React.FC<Keys> = ({ clicker, keyNum }) => {
       onClick={() => {
         clicker(keyNum);
       }}
-      className={`hover:bg-tone-2 ${
-        keyNum === 12 ? 'hidden sm:inline-block' : ''
-      } cursor-pointer hover:skew-y-5 transform duration-100 w-12 h-56 inline-block mx-1 bg-white`}
+      className={`hover:bg-tone-2 ${keyNum === 12 ? 'hidden sm:inline-block' : ''} cursor-pointer hover:skew-y-5 transform duration-100 w-12 h-56 inline-block mx-1 bg-white`}
     />
   );
 };

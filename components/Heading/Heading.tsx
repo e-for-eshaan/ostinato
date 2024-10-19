@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface HeadingProps {
   variant: 'h1' | 'h2' | 'h4';
   className?: string;

@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface LogoHeadingProps {
   type?: null | 'h1' | 'h2' | 'h3' | 'h4' | 'h5';
   className?: string | null;

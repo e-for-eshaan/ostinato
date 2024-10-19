@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface TextProps {
   variant?: 'paragraph' | 'bulleted-list' | 'semibold';
   className?: string;
