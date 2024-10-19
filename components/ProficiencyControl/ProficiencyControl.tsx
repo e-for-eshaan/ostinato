@@ -11,7 +11,7 @@ export const ProficiencyControl: React.FC<ProficiencyProps> = ({
 }) => {
   return (
     <div className="flex flex-row gap-1 group">
-      {[1, 2, 3, 4, 5].map((value) => {
+      {[1, 2, 3, 4, 5].map(value => {
         return (
           <div
             key={value}

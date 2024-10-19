@@ -9,7 +9,7 @@ export const Slideshow = () => {
   useEffect(() => {
     clearAllIntervals();
     setInterval(() => {
-      setIndex((prev) => (prev >= 3 ? 0 : prev + 1));
+      setIndex(prev => (prev >= 3 ? 0 : prev + 1));
     }, 2000);
   }, []);
   const steps = [

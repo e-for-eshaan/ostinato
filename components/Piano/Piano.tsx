@@ -89,7 +89,7 @@ export const Piano = () => {
   };
   return (
     <div className="flex relative bg-primary m-2">
-      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((item) => {
+      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(item => {
         switch (item) {
           case 2: {
             return (

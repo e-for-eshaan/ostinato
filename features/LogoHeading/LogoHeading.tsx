@@ -11,7 +11,7 @@ export const LogoHeading: React.FC<LogoHeadingProps> = ({
   className,
   children,
 }) => {
-  const textSpecified = className?.split(' ').some((item) => /text-\[#[A-Za-z0-9]+\]/g.test(item));
+  const textSpecified = className?.split(' ').some(item => /text-\[#[A-Za-z0-9]+\]/g.test(item));
 
   const textClass = 'text-' + type;
 

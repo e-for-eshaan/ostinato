@@ -3,6 +3,7 @@ import { Layout, PageSection } from '../components';
 import getYouTubeID from 'get-youtube-id';
 import { VideoPlayer } from '../features';
 import ReactPlayer from 'react-player';
+import React from 'react';
 
 const URLPage = () => {
   const router = useRouter();

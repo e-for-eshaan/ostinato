@@ -9,7 +9,7 @@ const provider = new GoogleAuthProvider();
 
 const GoogleAuth: React.FC = () => {
   const dispatch = useDispatch();
-  const isSignedIn = useSelector((state) => state.auth.isLoggedIn);
+  const isSignedIn = useSelector(state => state.auth.isLoggedIn);
   const handleSignIn = async () => {
     try {
       const result = await signInWithPopup(auth, provider);

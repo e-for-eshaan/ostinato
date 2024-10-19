@@ -1,11 +1,6 @@
 {
-  "extends": [
-    "eslint:recommended",
-    "next"
-  ],
-  "plugins": [
-    "prettier"
-  ],
+  "extends": ["eslint:recommended", "next"],
+  "plugins": ["prettier"],
   "rules": {
     "prettier/prettier": [
       "error",
@@ -19,6 +14,12 @@
       {
         "argsIgnorePattern": "^_"
       }
-    ] // Specific rule for TypeScript
+    ], // Specific rule for TypeScript,
+    "react/react-in-jsx-scope": "off"
+  },
+  "settings": {
+    "react": {
+      "version": "detect" // Automatically detect the react version
+    }
   }
 }
