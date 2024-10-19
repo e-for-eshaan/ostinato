@@ -19,7 +19,7 @@ export type LoopType = {
 };
 
 export const VideoPlayer: React.FC<VideoPlayerProps> = ({ v_id, pathName }) => {
-  const timeMap = useSelector((state) => state.time.allTimeStamps) as LoopType[];
+  const timeMap = useSelector(state => state.time.allTimeStamps) as LoopType[];
   const dispatch = useDispatch();
   const setTimeMap = (e: LoopType[]) => {
     dispatch(setAllTimeStamps(e));

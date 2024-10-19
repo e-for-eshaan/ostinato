@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface ButtonProps {
   label: string;
   clickFunc: (...args: any) => void;

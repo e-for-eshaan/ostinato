@@ -36,7 +36,7 @@ export const Navbar = () => {
           <div
             className="flex flex-col gap-1.5 group items-end cursor-pointer sm:hidden"
             onClick={() => {
-              setExpand((prev) => !prev);
+              setExpand(prev => !prev);
             }}
           >
             <div className="bg-white group-hover:bg-tone-1 group-hover:w-6 h-1 w-8 transform duration-150 rounded-[4px]" />

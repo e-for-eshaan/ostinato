@@ -21,7 +21,7 @@ export const MusicCard: React.FC<MusicCardProps> = ({ v_id }) => {
         <img
           onMouseEnter={() => {
             setInterval(() => {
-              setCurrentImg((prev) => (prev === 3 ? 0 : prev + 1));
+              setCurrentImg(prev => (prev === 3 ? 0 : prev + 1));
             }, 800);
           }}
           onMouseLeave={() => {

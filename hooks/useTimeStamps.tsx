@@ -11,16 +11,16 @@ import {
 export const useTimeStamps = () => {
   const dispatch = useDispatch();
   const allTimeStamps = useSelector<RootState, TimeState['allTimeStamps']>(
-    (state) => state.time.allTimeStamps
+    state => state.time.allTimeStamps
   );
   const currentTimeStamp = useSelector<RootState, TimeState['currentTimeStamp']>(
-    (state) => state.time.currentTimeStamp
+    state => state.time.currentTimeStamp
   );
   const timeMapById = useSelector<RootState, TimeState['timeMapById']>(
-    (state) => state.time.timeMapById
+    state => state.time.timeMapById
   );
   const timeMapByVideo = useSelector<RootState, TimeState['timeMapByVideo']>(
-    (state) => state.time.timeMapByVideo
+    state => state.time.timeMapByVideo
   );
 
   const setAllTimeStamps = (e: LoopType[]) => {

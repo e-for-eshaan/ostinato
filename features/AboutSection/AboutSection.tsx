@@ -1,4 +1,3 @@
-import React from 'react';
 import { FormatHeading, Heading, PageSection, Slideshow, Text } from '../../components';
 
 export const AboutSection = () => {

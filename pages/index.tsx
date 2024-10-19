@@ -1,4 +1,3 @@
-import React from 'react';
 import { Layout } from '../components';
 import { AboutSection, LandingSection } from '../features';
 

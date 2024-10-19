@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface LogoHeadingProps {
   type?: null | 'h1' | 'h2' | 'h3' | 'h4' | 'h5';
   className?: string | null;
@@ -13,7 +11,7 @@ export const LogoHeading: React.FC<LogoHeadingProps> = ({
   className,
   children,
 }) => {
-  const textSpecified = className?.split(' ').some((item) => /text-\[#[A-Za-z0-9]+\]/g.test(item));
+  const textSpecified = className?.split(' ').some(item => /text-\[#[A-Za-z0-9]+\]/g.test(item));
 
   const textClass = 'text-' + type;
 
