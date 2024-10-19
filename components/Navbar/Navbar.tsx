@@ -1,7 +1,7 @@
-import Link from "next/link";
-import React, { useState } from "react";
-import { Text } from "../Text/Text";
-import GoogleAuth from "../Auth/GoogleAuth";
+import Link from 'next/link';
+import React, { useState } from 'react';
+import { Text } from '../Text/Text';
+import GoogleAuth from '../Auth/GoogleAuth';
 
 export const Navbar = () => {
   const [expand, setExpand] = useState(false);
@@ -9,22 +9,22 @@ export const Navbar = () => {
     <nav className="bg-black">
       <div className="max-w-[1000px] mx-auto">
         <div className="flex justify-between h-16 items-center px-6">
-          <Link href={"/"}>
+          <Link href={'/'}>
             <img className="w-32" src="/assets/logo3.png" alt="" />
           </Link>
 
           <ul className="gap-7 hidden sm:flex">
-            <Link href={"/"}>
+            <Link href={'/'}>
               <Text className="cursor-pointer hover:text-tone-1 transform duration-150 text-white">
                 Home
               </Text>
             </Link>
-            <a href={"/#how-to-use"}>
+            <a href={'/#how-to-use'}>
               <Text className="cursor-pointer hover:text-tone-2 transform duration-150 text-white">
                 How To Use
               </Text>
             </a>
-            <Link href={"/my-music"}>
+            <Link href={'/my-music'}>
               <Text className="cursor-pointer hover:text-tone-1 transform duration-150 text-white">
                 My Music
               </Text>
@@ -47,17 +47,17 @@ export const Navbar = () => {
         {expand && (
           <div>
             <ul className="sm:hidden flex w-full justify-between px-6 cursor-pointer bg-black opacity-80 py-3">
-              <Link href={"/"}>
+              <Link href={'/'}>
                 <Text className="cursor-pointer hover:text-tone-1 transform duration-150 text-white">
                   Home
                 </Text>
               </Link>
-              <Link href={"/#how-to-use"}>
+              <Link href={'/#how-to-use'}>
                 <Text className="cursor-pointer hover:text-tone-2 transform duration-150 text-white">
                   How To Use
                 </Text>
               </Link>
-              <Link href={"/my-music"}>
+              <Link href={'/my-music'}>
                 <Text className="cursor-pointer hover:text-tone-1 transform duration-150 text-white">
                   My Music
                 </Text>

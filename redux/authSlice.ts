@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { UserCredential } from "firebase/auth";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { UserCredential } from 'firebase/auth';
 
 interface AuthState {
   isLoggedIn: boolean;
@@ -12,7 +12,7 @@ const initialState: AuthState = {
 };
 
 const authSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState,
   reducers: {
     login(state, action: PayloadAction<{ user: AuthState['user'] }>) {

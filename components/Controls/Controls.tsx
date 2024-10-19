@@ -1,8 +1,8 @@
-import React, { useRef, useState } from "react";
-import { LoopType } from "../../features/VideoPlayer/VideoPlayer";
-import { TimeCard, Button, Heading, Text } from "../../components";
-import { cloneDeep } from "lodash";
-import { uuid } from "../../utils/functions";
+import React, { useRef, useState } from 'react';
+import { LoopType } from '../../features/VideoPlayer/VideoPlayer';
+import { TimeCard, Button, Heading, Text } from '../../components';
+import { cloneDeep } from 'lodash';
+import { uuid } from '../../utils/functions';
 
 interface ControlsProps {
   setter: (e: any) => void;
@@ -31,13 +31,13 @@ export const Controls: React.FC<ControlsProps> = ({
   const loopRef = useRef<any>(null);
 
   function addTimeStamp() {
-    if (typeof window !== "undefined" && timeMap) {
+    if (typeof window !== 'undefined' && timeMap) {
       let temp = cloneDeep(timeMap);
       let x = {
         id: uuid(),
         vid: v_id,
         timeStamp: 0,
-        description: "Untitled",
+        description: 'Untitled',
         loop: 5,
         proficiency: 0,
       };
@@ -51,9 +51,9 @@ export const Controls: React.FC<ControlsProps> = ({
   function setProficiency(value: number, index: number) {
     if (timeMap) {
       const temp = timeMap.map((item, idx) => {
-        if (index === idx) return { ...item, proficiency: value }
-        else return item
-      })
+        if (index === idx) return { ...item, proficiency: value };
+        else return item;
+      });
       setter(temp);
       localStorage.setItem(v_id, JSON.stringify(temp));
     }
@@ -70,9 +70,7 @@ export const Controls: React.FC<ControlsProps> = ({
         ? descriptionRef.current.value
         : temp[selected].description;
 
-      temp[selected].loop = loopRef.current.value
-        ? loopRef.current.value
-        : temp[selected].loop;
+      temp[selected].loop = loopRef.current.value ? loopRef.current.value : temp[selected].loop;
 
       setter(temp);
       localStorage.setItem(v_id, JSON.stringify(timeMap));
@@ -81,20 +79,15 @@ export const Controls: React.FC<ControlsProps> = ({
   }
   const EditValues = () => {
     return (
-      <div
-        className={`${selected === -1 ? "opacity-50 cursor-not-allowed" : "opacity-100"
-          }`}
-      >
-        <div
-          className={`p-5 min-w-[200px] flex flex-col overflow-hidden gap-1 `}
-        >
+      <div className={`${selected === -1 ? 'opacity-50 cursor-not-allowed' : 'opacity-100'}`}>
+        <div className={`p-5 min-w-[200px] flex flex-col overflow-hidden gap-1 `}>
           <Heading variant="h4">
             {timeMap &&
-              selected > -1 &&
-              timeMap[selected].description === "Untitled" &&
-              timeMap[selected].timeStamp == 0
-              ? "Enter Values"
-              : "Edit Values"}
+            selected > -1 &&
+            timeMap[selected].description === 'Untitled' &&
+            timeMap[selected].timeStamp == 0
+              ? 'Enter Values'
+              : 'Edit Values'}
           </Heading>
           {/* timestamp input */}
           <Text variant="semibold" className="text-tone-1 text-[12px]">
@@ -106,9 +99,7 @@ export const Controls: React.FC<ControlsProps> = ({
             ref={timeStampRef}
             type="number"
             title="timeStamp"
-            placeholder={
-              timeMap ? timeMap[selected]?.timeStamp.toString() : "a"
-            }
+            placeholder={timeMap ? timeMap[selected]?.timeStamp.toString() : 'a'}
             name=""
             id=""
           />
@@ -122,9 +113,7 @@ export const Controls: React.FC<ControlsProps> = ({
             ref={descriptionRef}
             type="text"
             title="description"
-            placeholder={
-              timeMap ? timeMap[selected]?.description.toString() : "a"
-            }
+            placeholder={timeMap ? timeMap[selected]?.description.toString() : 'a'}
             name=""
             id=""
           />
@@ -140,11 +129,7 @@ export const Controls: React.FC<ControlsProps> = ({
               ref={loopRef}
               type="number"
               title="loop"
-              placeholder={
-                timeMap && selected > -1
-                  ? timeMap[selected]?.loop.toString() + "s"
-                  : ""
-              }
+              placeholder={timeMap && selected > -1 ? timeMap[selected]?.loop.toString() + 's' : ''}
               name=""
               id=""
             />
@@ -167,7 +152,7 @@ export const Controls: React.FC<ControlsProps> = ({
                 if (
                   timeMap &&
                   selected === 0 &&
-                  timeMap[selected].description === "Untitled" &&
+                  timeMap[selected].description === 'Untitled' &&
                   timeMap[selected].timeStamp === 0
                 ) {
                   let temp = cloneDeep(timeMap);
@@ -193,9 +178,10 @@ export const Controls: React.FC<ControlsProps> = ({
           Time Cards
         </Heading>
         <div
-          className={`${selected === -1 ? "cursor-pointer" : "cursor-not-allowed"
-            } inline-flex border-tone-1 mr-4 text-tone-2 my-auto px-3 hover:bg-tone-1 border-2 rounded-lg items-center hover:text-white tranform duration-100`}
-          onClick={selected === -1 ? addTimeStamp : () => { }}
+          className={`${
+            selected === -1 ? 'cursor-pointer' : 'cursor-not-allowed'
+          } inline-flex border-tone-1 mr-4 text-tone-2 my-auto px-3 hover:bg-tone-1 border-2 rounded-lg items-center hover:text-white tranform duration-100`}
+          onClick={selected === -1 ? addTimeStamp : () => {}}
         >
           <Text className="text-center" variant="semibold">
             ADD <br /> TIMESTAMP

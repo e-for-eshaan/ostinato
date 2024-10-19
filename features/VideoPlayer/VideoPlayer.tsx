@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Controls, PageSection } from "../../components";
-import ReactPlayer from "react-player";
-import { clearAllIntervals, myvideosSetter } from "../../utils/functions";
-import { useDispatch, useSelector } from "../../redux";
-import timeSlice, { setAllTimeStamps } from "../../redux/timeSlice";
+import React, { useEffect, useRef, useState } from 'react';
+import { Controls, PageSection } from '../../components';
+import ReactPlayer from 'react-player';
+import { clearAllIntervals, myvideosSetter } from '../../utils/functions';
+import { useDispatch, useSelector } from '../../redux';
+import timeSlice, { setAllTimeStamps } from '../../redux/timeSlice';
 
 interface VideoPlayerProps {
   v_id: string;
@@ -23,7 +23,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ v_id, pathName }) => {
   const dispatch = useDispatch();
   const setTimeMap = (e: LoopType[]) => {
     dispatch(setAllTimeStamps(e));
-  }
+  };
   const [selectedLoop, setSelectedLoop] = useState(-1);
   const [playing, setPlaying] = useState(false);
   const playerRef = React.useRef<ReactPlayer>(null);
@@ -40,7 +40,6 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ v_id, pathName }) => {
         localStorage.setItem(v_id, JSON.stringify([]));
         setTimeMap([]);
       }
-
     }
   }, [v_id]);
 

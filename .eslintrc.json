@@ -1,8 +1,5 @@
 {
-  "extends": [
-    "eslint:recommended",
-    "next"
-  ],
+  "extends": ["eslint:recommended", "next"],
   "plugins": ["prettier"],
   "rules": {
     "prettier/prettier": ["error", { "endOfLine": "auto" }]

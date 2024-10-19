@@ -1,17 +1,11 @@
-import React, { useEffect, useState } from "react";
-import {
-  FormatHeading,
-  Heading,
-  Layout,
-  MusicCard,
-  PageSection,
-} from "../../components";
+import React, { useEffect, useState } from 'react';
+import { FormatHeading, Heading, Layout, MusicCard, PageSection } from '../../components';
 
 const MyMusic = () => {
   const [myMusic, setMyMusic] = useState([]);
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      let allMap = localStorage.getItem("myMap");
+    if (typeof window !== 'undefined') {
+      let allMap = localStorage.getItem('myMap');
       let allMapObj = [];
       if (allMap) {
         allMapObj = JSON.parse(allMap);

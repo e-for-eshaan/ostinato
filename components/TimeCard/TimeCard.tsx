@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { LoopType } from "../../features/VideoPlayer/VideoPlayer";
-import { ProficiencyControl } from "../ProficiencyControl/ProficiencyControl";
+import { useState } from 'react';
+import { LoopType } from '../../features/VideoPlayer/VideoPlayer';
+import { ProficiencyControl } from '../ProficiencyControl/ProficiencyControl';
 
 interface TimeCardProps {
   selected: number;
@@ -31,7 +31,7 @@ export const TimeCard: React.FC<TimeCardProps> = ({
   loopSelected,
   setSelectedLoop,
   stopper,
-  onPause
+  onPause,
 }) => {
   return (
     <div
@@ -39,7 +39,7 @@ export const TimeCard: React.FC<TimeCardProps> = ({
     >
       <div
         className={`${
-          selected == index ? "bg-tone-1 text-black" : "bg-white"
+          selected == index ? 'bg-tone-1 text-black' : 'bg-white'
         } flex-col flex py-5 gap-1 items-center w-full justify-center`}
       >
         {selected === -1 && (
@@ -76,8 +76,8 @@ export const TimeCard: React.FC<TimeCardProps> = ({
             seekFunc(item.timeStamp as number, item.loop as number);
           }}
           className={
-            "hover:opacity-50 p-2 rounded-md w-[80px] mt-1 " +
-            (selected === index ? "bg-white" : "bg-tone-2 text-white")
+            'hover:opacity-50 p-2 rounded-md w-[80px] mt-1 ' +
+            (selected === index ? 'bg-white' : 'bg-tone-2 text-white')
           }
         >
           {item.timeStamp}
@@ -96,7 +96,7 @@ export const TimeCard: React.FC<TimeCardProps> = ({
           />
         ) : (
           <p
-            className={item.loop != 0 ? "" : "opacity-0"}
+            className={item.loop != 0 ? '' : 'opacity-0'}
             onClick={() => {
               // console.log();
             }}

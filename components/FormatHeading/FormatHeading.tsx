@@ -1,19 +1,17 @@
-import { LogoHeading } from "../../features/LogoHeading/LogoHeading";
+import { LogoHeading } from '../../features/LogoHeading/LogoHeading';
 
 interface FormatHeadingProps {
   label?: string;
 }
 
-export const FormatHeading: React.FC<FormatHeadingProps> = ({
-  label = "OSTINATO",
-}) => {
+export const FormatHeading: React.FC<FormatHeadingProps> = ({ label = 'OSTINATO' }) => {
   return (
     <div className="">
-      {label.split(" ").map((item, index) => {
+      {label.split(' ').map((item, index) => {
         return (
           <div key={index} className="">
-            <LogoHeading className={"relative"}>
-              {item.split("").map((char, indice) => {
+            <LogoHeading className={'relative'}>
+              {item.split('').map((char, indice) => {
                 if (indice % 2 === 0) {
                   return (
                     <span
