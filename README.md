@@ -1,6 +1,8 @@
-Find the website [here](https://ostinato.netlify.app/)  
+Find the website [here](https://ostinato.netlify.app/)
+
 # OSTINATO
-Ever tried learning a song by playing along, and getting frustrated by re-playing again and again. Presenting [OSTINATO](https://ostinato.netlify.app/). 
+
+Ever tried learning a song by playing along, and getting frustrated by re-playing again and again. Presenting [OSTINATO](https://ostinato.netlify.app/).
 <br/>
 A video player for musicians, built by musicians!
 <br/>
@@ -8,7 +10,8 @@ A video player for musicians, built by musicians!
 This project was built using NextJS, TailwindCSS. Enterprise-friendly practices were utilized to build this, keeping in mind, the robustness, type checks, and fool-proof design.
 
 ## Initialisation
-We initialise the application using NextJS and TailwindCSS, with TypeScript configuration. This was achieved using the following command 
+
+We initialise the application using NextJS and TailwindCSS, with TypeScript configuration. This was achieved using the following command
 
 ```bash
 npx create-next-app@latest --ts
@@ -28,7 +31,9 @@ npx tailwindcss init -p
 
 ![directories](https://i.postimg.cc/yxnvmB3k/directory.png)
 <br/>
-###### *Fig 1. Directory structure for the web app.*
+
+###### _Fig 1. Directory structure for the web app._
+
 <br/>
 
 Within the NextJS App, several folders were created.
@@ -48,56 +53,73 @@ Within the NextJS App, several folders were created.
 ## Features
 
 ### Landing Page
+
 It was built by first initialising a layout component, that provided a basic view with Navabar and Footer. It then asks for children components, and displays the page with the provided props.
 <br/>
 ![landing](https://i.postimg.cc/4xYB9Dfx/landing.gif)
 <br/>
-###### *Fig 2. The Landing Page*
+
+###### _Fig 2. The Landing Page_
+
 <br/>
 
 ### Playable Piano
+
 A simple easter egg just for fun.
 <br/>
 ![piano](https://i.postimg.cc/T2c7MjNf/piano.gif)
 <br/>
-###### *Fig 3. Piano keys emit sound on click*
+
+###### _Fig 3. Piano keys emit sound on click_
+
 <br/>
 
 ### My Music page
+
 The website stores all the visited pages/video urls into localstorage and hence, can retrieve previous tutorials that the user might want to revisit.
 <br/>
 ![myMusic](https://i.postimg.cc/7YsKbHyR/myMusic.gif)
 <br/>
-###### *Fig 4. My Music displays all the videos visited*
+
+###### _Fig 4. My Music displays all the videos visited_
+
 <br/>
 
 ### Instant video querying
+
 User doesn't require any search box or input to access the media in the player. The user can directly access the player by copying the video URL onto the youtube URL and hence redirecting the video throught the player.
 <br/>
 ![ezgif com-video-to-gif (3)](https://user-images.githubusercontent.com/76566992/233765304-46c4fb44-94e0-414d-ae30-cb2988c1e09a.gif)
 <br/>
-###### *Fig 5. URL based video query*
+
+###### _Fig 5. URL based video query_
+
 <br/>
 
-
 ### TimeStamp Edit
+
 CRUD operations can be performed on any timestamp. These can be created as loops or simple timestamps, and can be deleted or sorted.
 <br/>
 ![timeStamps](https://i.postimg.cc/HkF346n4/editting.gif)
 <br/>
-###### *Fig 6. TimeStamps*
+
+###### _Fig 6. TimeStamps_
+
 <br/>
 
 ### TimeStamp Looping
+
 The video loops till the duration of the selected timestamp
 <br/>
 ![looping](https://i.postimg.cc/8PPy1FxW/loop.gif)
 <br/>
-###### *Fig 6. looping*
+
+###### _Fig 6. looping_
+
 <br/>
 
-
 ## NextJS setup
+
 First, run the development server:
 
 ```bash

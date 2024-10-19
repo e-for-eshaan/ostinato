@@ -1,6 +1,6 @@
-import { configureStore } from "@reduxjs/toolkit";
-import authReducer from "./authSlice";
-import timeReducer from "./timeSlice";
+import { configureStore } from '@reduxjs/toolkit';
+import authReducer from './authSlice';
+import timeReducer from './timeSlice';
 
 export const store = configureStore({
   reducer: {
