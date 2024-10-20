@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React from 'react';
 import { LoopType } from '../../features/VideoPlayer/VideoPlayer';
 import { ProficiencyControl } from '../ProficiencyControl/ProficiencyControl';
 
@@ -38,9 +38,7 @@ export const TimeCard: React.FC<TimeCardProps> = ({
       className={`ml-4 text-black mx-2 min-w-[100px] my-5 flex relative rounded-md overflow-hidden `}
     >
       <div
-        className={`${
-          selected == index ? 'bg-tone-1 text-black' : 'bg-white'
-        } flex-col flex py-5 gap-1 items-center w-full justify-center`}
+        className={`${selected == index ? 'bg-tone-1 text-black' : 'bg-white'} flex-col flex py-5 gap-1 items-center w-full justify-center`}
       >
         {selected === -1 && (
           <p
