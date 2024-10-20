@@ -36,3 +36,11 @@ export const youtubeURLGen = (v_id: string) => {
 export const uuid = () => {
   return uuidv4();
 };
+
+export const storeJWT = (jwt: string) => {
+  localStorage.setItem('jwt', jwt);
+};
+
+export const getJWT = () => {
+  localStorage.getItem('jwt');
+};

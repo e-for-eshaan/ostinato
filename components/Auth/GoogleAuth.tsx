@@ -1,8 +1,9 @@
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import app from '../../firebaseConfig';
+import { app } from '../../firebaseConfig';
 import { useDispatch } from 'react-redux';
-import { login, logout } from '../../redux/authSlice';
 import { useSelector } from '../../redux';
+import { storeJWT } from '../../utils/functions';
+import { authSlice } from '../../redux/authSlice';
 
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
@@ -12,14 +13,21 @@ const GoogleAuth: React.FC = () => {
   const isSignedIn = useSelector(state => state.auth.isLoggedIn);
   const handleSignIn = async () => {
     try {
-      const result = await signInWithPopup(auth, provider);
-      dispatch(login({ user: result.user }));
+      const result = await signInWithPopup(auth, provider)
+        .then(async (res) => {
+          const token = await res.user.getIdToken();
+          return { token, user: res.user }
+        })
+        .then(async ({ token, user }) => {
+          storeJWT(token);
+          dispatch(authSlice.actions.login({ user }));
+        });
     } catch (error: any) {
       console.error(error.message);
     }
   };
   const handleSignOut = () => {
-    dispatch(logout());
+    dispatch(authSlice.actions.logout());
   };
 
   return (
