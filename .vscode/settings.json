@@ -1,28 +1,15 @@
 {
-  "workbench.editor.labelFormat": "short",
+  "editor.formatOnSave": true,
+  "editor.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode", // Ensure Prettier is used for formatting
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
-  },
-  "tsEssentialPlugins.autoImport.changeSorting": {
-    "track": ["@/constants/events"],
-    "useTheme": ["@mui/material"],
-    "log": ["next-axiom"],
-    "captureException": ["@sentry/node"],
-    "useDispatch": ["@/store"],
-    "useSelector": ["@/store"],
-    "Line": ["@/components/Text", "../Text"],
-    "createContext": ["react"]
-  },
-  "tsEssentialPlugins.patchOutline": true,
-  "editor.linkedEditing": true,
-  "tsEssentialPlugins.enableMethodSnippets": false,
-  "cSpell.words": [
-    "collab",
-    "openai",
-    "opsgenie",
-    "pagerduty",
-    "Serie",
-    "zenduty"
-  ],
-  "typescript.tsdk": "node_modules/typescript/lib",
+  }
 }
