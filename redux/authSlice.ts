@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { UserCredential } from 'firebase/auth';
+import { storeJWT } from '../utils/functions';
 
 interface AuthState {
   isLoggedIn: boolean;
@@ -11,7 +12,7 @@ const initialState: AuthState = {
   user: {} as UserCredential['user'],
 };
 
-const authSlice = createSlice({
+export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
@@ -22,9 +23,9 @@ const authSlice = createSlice({
     logout(state) {
       state.isLoggedIn = false;
       state.user = initialState.user;
+      storeJWT('');
     },
   },
 });
 
-export const { login, logout } = authSlice.actions;
 export default authSlice.reducer;
