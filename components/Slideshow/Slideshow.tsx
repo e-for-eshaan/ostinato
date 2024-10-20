@@ -5,7 +5,7 @@ export const Slideshow = () => {
   const [index, setIndex] = useState(0);
   useState;
   const ref = useRef<any>(null);
-  const hVal = ref?.current?.scrollWidth;
+  const hVal = ref?.current?.scrollWidth || 0;
   useEffect(() => {
     clearAllIntervals();
     setInterval(() => {

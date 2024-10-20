@@ -117,7 +117,7 @@ export const Piano = () => {
             );
           }
           default: {
-            return <WhiteKeys keyNum={item} clicker={clicker} />;
+            return <WhiteKeys key={item} keyNum={item} clicker={clicker} />;
           }
         }
       })}
