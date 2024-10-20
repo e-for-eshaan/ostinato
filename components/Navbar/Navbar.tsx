@@ -2,9 +2,15 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import { Text } from '../Text/Text';
 import GoogleAuth from '../Auth/GoogleAuth';
+import { useSelector } from '../../redux';
+import { useRouter } from 'next/router';
 
 export const Navbar = () => {
   const [expand, setExpand] = useState(false);
+  const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+
+  const router = useRouter();
+  const isHome = router.pathname === '/';
   return (
     <nav className="bg-black">
       <div className="max-w-[1000px] mx-auto">
@@ -14,21 +20,21 @@ export const Navbar = () => {
           </Link>
 
           <ul className="gap-7 hidden sm:flex">
-            <Link href={'/'}>
+            {!isHome && <Link href={'/'}>
               <Text className="cursor-pointer hover:text-tone-1 transform duration-150 text-white">
                 Home
               </Text>
-            </Link>
+            </Link>}
             <a href={'/#how-to-use'}>
               <Text className="cursor-pointer hover:text-tone-2 transform duration-150 text-white">
                 How To Use
               </Text>
             </a>
-            <Link href={'/my-music'}>
+            {isLoggedIn && <Link href={'/my-music'}>
               <Text className="cursor-pointer hover:text-tone-1 transform duration-150 text-white">
                 My Music
               </Text>
-            </Link>
+            </Link>}
             <Text className="cursor-pointer hover:text-tone-2 transform duration-150 text-white">
               <GoogleAuth />
             </Text>
@@ -57,11 +63,11 @@ export const Navbar = () => {
                   How To Use
                 </Text>
               </Link>
-              <Link href={'/my-music'}>
+              {isLoggedIn && <Link href={'/my-music'}>
                 <Text className="cursor-pointer hover:text-tone-1 transform duration-150 text-white">
                   My Music
                 </Text>
-              </Link>
+              </Link>}
               <Text className="cursor-pointer hover:text-tone-2 transform duration-150 text-white">
                 <GoogleAuth />
               </Text>
