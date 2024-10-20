@@ -42,5 +42,5 @@ export const storeJWT = (jwt: string) => {
 };
 
 export const getJWT = () => {
-  localStorage.getItem('jwt');
+  return localStorage.getItem('jwt');
 };
