@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { UserCredential } from 'firebase/auth';
-import { storeJWT } from '../utils/functions';
+import { setJWT } from '../utils/storage';
 
 interface AuthState {
   isLoggedIn: boolean;
@@ -14,7 +14,7 @@ export const useAuthStore = create<AuthState>(set => ({
   user: {} as UserCredential['user'],
   login: user => set({ isLoggedIn: true, user }),
   logout: () => {
-    storeJWT('');
+    setJWT('');
     set({ isLoggedIn: false, user: {} as UserCredential['user'] });
   },
 }));

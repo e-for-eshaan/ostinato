@@ -8,7 +8,7 @@ module.exports = {
     extend: {
       fontFamily: {
         poppins: ['Poppins', 'sans-serif'],
-        righteous: ['Righteous', 'sans-serif'],
+        righteous: ['Righteous', 'cursive'],
       },
       colors: {
         primary: '#000000',
@@ -36,6 +36,7 @@ module.exports = {
       animation: {
         appear: 'appear 0.1s ease-in 1',
         'disappear-anim': 'appear 0.1s ease-in 1 reverse',
+        pulse: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
     },
   },

@@ -15,3 +15,4 @@ export { Text } from './Text/Text';
 export { TimeCard } from './TimeCard/TimeCard';
 export { Slideshow } from './Slideshow/Slideshow';
 export { SyncToFirebase } from './SyncToFirebase/SyncToFirebase';
+export { VideoInput } from './VideoInput/VideoInput';

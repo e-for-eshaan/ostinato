@@ -8,7 +8,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <main className="min-h-screen">
       <Navbar />
-      <div className="min-h-[calc(100vh-192px)]">{children}</div>
+      <div className="pt-20">{children}</div>
       <Footer />
     </main>
   );
