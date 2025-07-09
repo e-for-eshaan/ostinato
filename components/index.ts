@@ -5,6 +5,7 @@ export { Footer } from './Footer/Footer';
 export { FormatHeading } from './FormatHeading/FormatHeading';
 export { Heading } from './Heading/Heading';
 export { Layout } from './Layout/Layout';
+export { VideoLayout } from './Layout/VideoLayout';
 export { Modal } from './Modal/Modal';
 export { MusicCard } from './MusicCard/MusicCard';
 export { Navbar } from './Navbar/Navbar';

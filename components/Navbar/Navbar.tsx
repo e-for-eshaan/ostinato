@@ -28,13 +28,13 @@ export const Navbar = () => {
       }`}
     >
       <div className="max-w-[1200px] mx-auto">
-        <div className="flex justify-between h-20 items-center px-6">
+        <div className="flex justify-between h-16 lg:h-20 items-center px-4 lg:px-6">
           <Link href={'/'} className="group">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-r from-tone-1 to-tone-2 rounded-lg flex items-center justify-center">
-                <span className="text-black font-righteous font-bold text-lg">O</span>
+              <div className="w-8 h-8 lg:w-10 lg:h-10 bg-gradient-to-r from-tone-1 to-tone-2 rounded-lg flex items-center justify-center">
+                <span className="text-black font-righteous font-bold text-sm lg:text-lg">O</span>
               </div>
-              <span className="font-righteous text-2xl font-bold text-white group-hover:text-tone-1 transition-colors duration-300">
+              <span className="font-righteous text-lg lg:text-2xl font-bold text-white group-hover:text-tone-1 transition-colors duration-300">
                 OSTINATO
               </span>
             </div>

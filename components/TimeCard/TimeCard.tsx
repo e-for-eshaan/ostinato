@@ -33,39 +33,48 @@ export const TimeCard: React.FC<TimeCardProps> = ({
   stopper,
   onPause,
 }) => {
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  };
+
   return (
-    <div
-      className={`ml-4 text-black mx-2 min-w-[100px] my-5 flex relative rounded-md overflow-hidden `}
-    >
+    <div>
       <div
-        className={`${selected == index ? 'bg-tone-1 text-black' : 'bg-white'} flex-col flex py-5 gap-1 items-center w-full justify-center`}
+        className={`relative group transition-all duration-300 ${
+          selected === index
+            ? 'bg-tone-1 shadow-lg shadow-tone-1/25'
+            : 'bg-white/10 hover:bg-white/20 backdrop-blur-sm'
+        } rounded-xl p-3 border border-white/10 hover:border-white/20`}
       >
+        {/* Edit/Delete Buttons */}
         {selected === -1 && (
-          <p
-            className="cursor-pointer hover:opacity-30 transform duration-100 absolute top-1 right-2 text-[11px]"
-            onClick={() => {
-              setSelected(index);
-            }}
-          >
-            Edit
-          </p>
+          <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+            <button
+              onClick={() => setSelected(index)}
+              className="w-6 h-6 bg-tone-1 text-black rounded-full flex items-center justify-center text-xs font-bold hover:bg-tone-2 transition-colors duration-200 mr-1"
+            >
+              ✏️
+            </button>
+            <button
+              onClick={() => {
+                if (timeMap) {
+                  let temp = [...timeMap];
+                  temp.splice(index, 1);
+                  if (temp.length === 0) setSelected(-1);
+                  localStorage.setItem(v_id, JSON.stringify(temp));
+                  setter(temp);
+                }
+              }}
+              className="w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center text-xs font-bold hover:bg-red-600 transition-colors duration-200"
+            >
+              ×
+            </button>
+          </div>
         )}
-        {selected === -1 && (
-          <p
-            className="cursor-pointer text-red-600 hover:opacity-30 transform duration-100 absolute top-1 left-2 text-[11px]"
-            onClick={() => {
-              if (timeMap) {
-                let temp = [...timeMap];
-                temp.splice(index, 1);
-                if (temp.length === 0) setSelected(-1);
-                localStorage.setItem(v_id, JSON.stringify(temp));
-                setter(temp);
-              }
-            }}
-          >
-            Delete
-          </p>
-        )}
+
+        {/* Time Button */}
         <button
           onClick={() => {
             if (item.loop != 0) {
@@ -73,40 +82,53 @@ export const TimeCard: React.FC<TimeCardProps> = ({
             }
             seekFunc(item.timeStamp as number, item.loop as number);
           }}
-          className={
-            'hover:opacity-50 p-2 rounded-md w-[80px] mt-1 ' +
-            (selected === index ? 'bg-white' : 'bg-tone-2 text-white')
-          }
+          className={`w-full mb-2 p-2 rounded-lg font-bold text-base transition-all duration-200 ${
+            selected === index
+              ? 'bg-black text-tone-1 shadow-lg'
+              : 'bg-tone-1 text-black hover:bg-tone-2 hover:shadow-lg'
+          }`}
         >
-          {item.timeStamp}
+          {formatTime(item.timeStamp)}
         </button>
 
-        <p className="text-[12px]">{item.description}</p>
+        {/* Loop Status */}
+        <div className="mb-2">
+          {loopSelected !== -1 && loopSelected === index ? (
+            <button
+              onClick={() => {
+                setSelectedLoop(-1);
+                stopper();
+                onPause();
+              }}
+              className="w-full p-1.5 bg-red-500 text-white rounded-lg font-semibold text-xs hover:bg-red-600 transition-colors duration-200 flex items-center justify-center"
+            >
+              <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
+              Stop Loop
+            </button>
+          ) : (
+            <div
+              className={`text-center p-1.5 rounded-lg ${
+                item.loop > 0
+                  ? 'bg-tone-2/20 text-tone-2 border border-tone-2/30'
+                  : 'bg-gray-500/20 text-gray-400 border border-gray-500/30'
+              }`}
+            >
+              <span className="text-xs font-medium">
+                {item.loop > 0 ? `∞ ${item.loop}s Loop` : 'No Loop'}
+              </span>
+            </div>
+          )}
+        </div>
 
-        {loopSelected !== -1 && loopSelected === index ? (
-          <div
-            onClick={() => {
-              setSelectedLoop(-1);
-              stopper();
-              onPause();
-            }}
-            className="cursor-pointer duration-150 relative h-6 w-6 ease-in rounded-[50%] border-[5px] border-t-blue-500 hover:rounded-md hover:animate-none hover:w-5 hover:mb-1 hover:h-5 hover:border-none hover:bg-red-600 border-l-blue-500 animate-spin hover:border-red-400"
+        {/* Proficiency */}
+        <div className="mb-2">
+          <h4 className="text-white/60 text-xs mb-2">Proficiency Level</h4>
+          <ProficiencyControl
+            currentProficieny={item.proficiency}
+            setter={setProficiency}
+            index={index}
           />
-        ) : (
-          <p
-            className={item.loop != 0 ? '' : 'opacity-0'}
-            onClick={() => {
-              // console.log();
-            }}
-          >
-            ∞ {item.loop}s
-          </p>
-        )}
-        <ProficiencyControl
-          currentProficieny={item.proficiency}
-          setter={setProficiency}
-          index={index}
-        />
+        </div>
       </div>
     </div>
   );

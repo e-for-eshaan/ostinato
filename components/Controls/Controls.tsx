@@ -79,76 +79,81 @@ export const Controls: React.FC<ControlsProps> = ({
   }
   const EditValues = () => {
     return (
-      <div className={`${selected === -1 ? 'opacity-50 cursor-not-allowed' : 'opacity-100'}`}>
-        <div className={`p-5 min-w-[200px] flex flex-col overflow-hidden gap-1 `}>
-          <Heading variant="h4">
-            {timeMap &&
-            selected > -1 &&
-            timeMap[selected].description === 'Untitled' &&
-            timeMap[selected].timeStamp == 0
-              ? 'Enter Values'
-              : 'Edit Values'}
-          </Heading>
-          {/* timestamp input */}
-          <Text variant="semibold" className="text-tone-1 text-[12px]">
-            Time-stamp
-          </Text>
-          <input
-            disabled={selected === -1}
-            className="text-black rounded-sm outline-none py-1 px-2 w-44"
-            ref={timeStampRef}
-            type="number"
-            title="timeStamp"
-            placeholder={timeMap ? timeMap[selected]?.timeStamp.toString() : 'a'}
-            name=""
-            id=""
-          />
-          {/* description input */}
-          <Text variant="semibold" className="text-tone-1 text-[12px] mt-2">
-            Description
-          </Text>
-          <input
-            disabled={selected === -1}
-            className="text-black rounded-sm outline-none py-1 px-2 w-44"
-            ref={descriptionRef}
-            type="text"
-            title="description"
-            placeholder={timeMap ? timeMap[selected]?.description.toString() : 'a'}
-            name=""
-            id=""
-          />
-          {/* loop input */}
-          {/* <hr /> */}
-          <Text variant="semibold" className="text-tone-1 text-[12px] mt-2">
-            Loop duration (0 = no loop)
-          </Text>
-          {
+      <div className={`p-4 ${selected === -1 ? 'opacity-50' : 'opacity-100'}`}>
+        <div className="space-y-4">
+          <div className="mb-4">
+            <h2 className="text-lg font-bold text-white mb-1">
+              {timeMap &&
+              selected > -1 &&
+              timeMap[selected].description === 'Untitled' &&
+              timeMap[selected].timeStamp == 0
+                ? 'Enter Values'
+                : 'Edit Values'}
+            </h2>
+            <p className="text-white/60 text-xs">Configure your practice timestamp</p>
+          </div>
+
+          {/* Time Stamp Input */}
+          <div>
+            <label className="block text-white font-semibold text-xs mb-1">
+              Time Stamp (seconds)
+            </label>
             <input
               disabled={selected === -1}
-              className="text-black rounded-sm outline-none py-1 px-2 w-44"
+              className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-md text-white placeholder-white/40 focus:outline-none focus:border-tone-1 focus:ring-1 focus:ring-tone-1/20 transition-all duration-200 text-sm"
+              ref={timeStampRef}
+              type="number"
+              step="0.1"
+              placeholder={timeMap ? timeMap[selected]?.timeStamp.toString() : '0'}
+            />
+          </div>
+
+          {/* Description Input */}
+          <div>
+            <label className="block text-white font-semibold text-xs mb-1">Description</label>
+            <input
+              disabled={selected === -1}
+              className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-md text-white placeholder-white/40 focus:outline-none focus:border-tone-1 focus:ring-1 focus:ring-tone-1/20 transition-all duration-200 text-sm"
+              ref={descriptionRef}
+              type="text"
+              placeholder={
+                timeMap ? timeMap[selected]?.description.toString() : 'Enter description'
+              }
+            />
+          </div>
+
+          {/* Loop Duration Input */}
+          <div>
+            <label className="block text-white font-semibold text-xs mb-1">
+              Loop Duration (seconds)
+            </label>
+            <input
+              disabled={selected === -1}
+              className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-md text-white placeholder-white/40 focus:outline-none focus:border-tone-1 focus:ring-1 focus:ring-tone-1/20 transition-all duration-200 text-sm"
               ref={loopRef}
               type="number"
-              title="loop"
-              placeholder={timeMap && selected > -1 ? timeMap[selected]?.loop.toString() + 's' : ''}
-              name=""
-              id=""
+              step="0.1"
+              placeholder={timeMap && selected > -1 ? timeMap[selected]?.loop.toString() : '5'}
             />
-          }
+            <p className="text-white/40 text-xs mt-1">Set to 0 for no loop</p>
+          </div>
 
-          {/* button */}
-          <div className="flex gap-3 mt-3 justify-between">
-            {/* Save */}
-            <Button
-              className="bg-tone-1 p-2 rounded-lg text-black"
-              label="Save"
-              clickFunc={upadateTimestamp}
+          {/* Action Buttons */}
+          <div className="flex gap-2 pt-4">
+            <button
+              onClick={upadateTimestamp}
               disabled={selected === -1}
-            />
+              className={`flex-1 py-2 px-3 rounded-md font-medium text-sm transition-all duration-200 ${
+                selected === -1
+                  ? 'bg-gray-600 text-gray-400 cursor-not-allowed'
+                  : 'bg-tone-1 text-black hover:bg-tone-2'
+              }`}
+            >
+              Save
+            </button>
 
-            <Button
-              className="bg-tone-2 p-2 rounded-lg text-white"
-              label="Cancel"
-              clickFunc={() => {
+            <button
+              onClick={() => {
                 if (
                   timeMap &&
                   selected === 0 &&
@@ -163,7 +168,14 @@ export const Controls: React.FC<ControlsProps> = ({
                 setSelected(-1);
               }}
               disabled={selected === -1}
-            />
+              className={`flex-1 py-2 px-3 rounded-md font-medium text-sm transition-all duration-200 ${
+                selected === -1
+                  ? 'bg-gray-600 text-gray-400 cursor-not-allowed'
+                  : 'bg-red-500 text-white hover:bg-red-600'
+              }`}
+            >
+              Cancel
+            </button>
           </div>
         </div>
       </div>
@@ -171,47 +183,70 @@ export const Controls: React.FC<ControlsProps> = ({
   };
 
   return (
-    //wrapper
-    <div className="pt-5 bg-black text-secondary w-full mb-10">
-      <div className="flex items-center gap-5">
-        <Heading variant="h1" className="ml-4 text-white">
-          Time Cards
-        </Heading>
-        <div
-          className={`${
-            selected === -1 ? 'cursor-pointer' : 'cursor-not-allowed'
-          } inline-flex border-tone-1 mr-4 text-tone-2 my-auto px-3 hover:bg-tone-1 border-2 rounded-lg items-center hover:text-white tranform duration-100`}
+    <div className="h-full flex flex-col bg-transparent">
+      {/* Top Tray */}
+      <div className="h-16 bg-white/5 border-b border-white/10 flex items-center justify-between px-4">
+        <h1 className="text-white font-semibold text-base">Time Cards</h1>
+        <button
           onClick={selected === -1 ? addTimeStamp : () => {}}
+          disabled={selected !== -1}
+          className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
+            selected === -1
+              ? 'bg-tone-2 text-black hover:bg-tone-1 cursor-pointer'
+              : 'bg-gray-600 text-gray-400 cursor-not-allowed'
+          }`}
         >
-          <Text className="text-center" variant="semibold">
-            ADD <br /> TIMESTAMP
-          </Text>
-        </div>
+          + Add New
+        </button>
       </div>
-      <div className="flex justify-between align-top items-stretch">
-        {/* TimeStamp edit */}
-        <EditValues />
-        <div className="items-start bg-black h-[380px] overflow-y-auto w-full transform duration-200 flex flex-wrap">
-          {timeMap?.map((item, index) => {
-            return (
-              <TimeCard
-                stopper={stopper}
-                seekFunc={seekFunc}
-                index={index}
-                item={item}
-                selected={selected}
-                setProficiency={setProficiency}
-                setSelected={setSelected}
-                setter={setter}
-                timeMap={timeMap}
-                v_id={v_id}
-                key={index}
-                loopSelected={loopSelected}
-                setSelectedLoop={setSelectedLoop}
-                onPause={onPause}
-              />
-            );
-          })}
+
+      {/* Content */}
+      <div className="flex-1 flex flex-col">
+        {/* Create/Edit Section - Only visible when editing */}
+        {selected !== -1 && (
+          <div className="border-b border-white/10">
+            <EditValues />
+          </div>
+        )}
+
+        {/* Time Cards Section */}
+        <div className="flex-1 p-4">
+          <div className="overflow-y-auto max-h-[calc(100vh-64px)] lg:max-h-[calc(100vh-80px)]">
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
+              {timeMap?.map((item, index) => {
+                return (
+                  <TimeCard
+                    stopper={stopper}
+                    seekFunc={seekFunc}
+                    index={index}
+                    item={item}
+                    selected={selected}
+                    setProficiency={setProficiency}
+                    setSelected={setSelected}
+                    setter={setter}
+                    timeMap={timeMap}
+                    v_id={v_id}
+                    key={index}
+                    loopSelected={loopSelected}
+                    setSelectedLoop={setSelectedLoop}
+                    onPause={onPause}
+                  />
+                );
+              })}
+            </div>
+
+            {(!timeMap || timeMap.length === 0) && (
+              <div className="text-center py-12">
+                <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <span className="text-xl">🎵</span>
+                </div>
+                <h3 className="text-white font-semibold mb-1 text-sm">No Timestamps Yet</h3>
+                <p className="text-white/60 text-xs">
+                  Click "Add New" to create your first practice marker
+                </p>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
