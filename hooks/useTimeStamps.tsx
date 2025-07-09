@@ -1,34 +1,18 @@
-import { useSelector } from 'react-redux';
 import { LoopType } from '../features/VideoPlayer/VideoPlayer';
-import { useDispatch } from '../redux';
-import { RootState } from '../redux/store';
-import {
-  TimeState,
-  setAllTimeStamps as setAllTimeStampsDispatch,
-  setCurrentTimeStamp as setCurrentTimeStampDispatch,
-} from '../redux/timeSlice';
+import { useTimeStore } from '../stores';
 
 export const useTimeStamps = () => {
-  const dispatch = useDispatch();
-  const allTimeStamps = useSelector<RootState, TimeState['allTimeStamps']>(
-    state => state.time.allTimeStamps
-  );
-  const currentTimeStamp = useSelector<RootState, TimeState['currentTimeStamp']>(
-    state => state.time.currentTimeStamp
-  );
-  const timeMapById = useSelector<RootState, TimeState['timeMapById']>(
-    state => state.time.timeMapById
-  );
-  const timeMapByVideo = useSelector<RootState, TimeState['timeMapByVideo']>(
-    state => state.time.timeMapByVideo
-  );
-
-  const setAllTimeStamps = (e: LoopType[]) => {
-    dispatch(setAllTimeStampsDispatch(e));
-  };
+  const {
+    allTimeStamps,
+    currentTimeStamp,
+    timeMapById,
+    timeMapByVideo,
+    setAllTimeStamps,
+    setCurrentTimeStamp,
+  } = useTimeStore();
 
   const setSelectedLoop = (e?: string | undefined) => {
-    dispatch(setCurrentTimeStampDispatch(e));
+    setCurrentTimeStamp(e);
   };
 
   return {

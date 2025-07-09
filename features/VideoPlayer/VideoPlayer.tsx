@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Controls, PageSection } from '../../components';
 import ReactPlayer from 'react-player';
-import { clearAllIntervals, myvideosSetter } from '../../utils/functions';
-import { useDispatch, useSelector } from '../../redux';
-import timeSlice, { setAllTimeStamps } from '../../redux/timeSlice';
+import { clearAllIntervals, myvideosSetter, syncToFirebase } from '../../utils/functions';
+import { useTimeStore } from '../../stores';
+import { useAuthStore } from '../../stores';
 
 interface VideoPlayerProps {
   v_id: string;
@@ -19,10 +19,15 @@ export type LoopType = {
 };
 
 export const VideoPlayer: React.FC<VideoPlayerProps> = ({ v_id, pathName }) => {
-  const timeMap = useSelector(state => state.time.allTimeStamps) as LoopType[];
-  const dispatch = useDispatch();
+  const { allTimeStamps: timeMap, setAllTimeStamps } = useTimeStore();
+  const { isLoggedIn } = useAuthStore();
+
   const setTimeMap = (e: LoopType[]) => {
-    dispatch(setAllTimeStamps(e));
+    setAllTimeStamps(e);
+    // Sync to Firebase if user is logged in
+    if (isLoggedIn) {
+      syncToFirebase(v_id, e);
+    }
   };
   const [selectedLoop, setSelectedLoop] = useState(-1);
   const [playing, setPlaying] = useState(false);

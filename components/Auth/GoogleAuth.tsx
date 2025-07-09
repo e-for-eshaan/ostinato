@@ -1,16 +1,13 @@
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { app, auth } from '../../firebaseConfig';
-import { useDispatch } from 'react-redux';
-import { useSelector } from '../../redux';
 import { storeJWT, getJWT } from '../../utils/functions';
-import { authSlice } from '../../redux/authSlice';
+import { useAuthStore } from '../../stores';
 import { useState, useCallback, useEffect } from 'react';
 
 const provider = new GoogleAuthProvider();
 
 const GoogleAuth: React.FC = () => {
-  const dispatch = useDispatch();
-  const isSignedIn = useSelector(state => state.auth.isLoggedIn);
+  const { isLoggedIn: isSignedIn, login, logout } = useAuthStore();
   const provider = new GoogleAuthProvider();
   const [signInLoading, setSignInLoading] = useState(false);
 
@@ -18,54 +15,53 @@ const GoogleAuth: React.FC = () => {
     setSignInLoading(true);
     try {
       const result = await signInWithPopup(auth, provider)
-        .then(async (res) => {
+        .then(async res => {
           const credential = GoogleAuthProvider.credentialFromResult(res);
           const token = await res.user.getIdToken();
-          const response = await fetch("/api/auth", {
-            method: "POST",
+          const response = await fetch('/api/auth', {
+            method: 'POST',
             headers: {
-              "Content-Type": "application/json",
+              'Content-Type': 'application/json',
             },
             body: JSON.stringify({ token }),
           });
 
-          return { token, user: (response.ok ? await response.json() : null) };
+          return { token, user: response.ok ? await response.json() : null };
         })
         .then(async ({ token, user }) => {
-          console.log("User data fetched successfully:", user);
+          console.log('User data fetched successfully:', user);
           storeJWT(token);
-          dispatch(authSlice.actions.login({ user }));
+          login(user);
         });
     } catch (error: any) {
       console.error(error.message);
     }
     setSignInLoading(false);
-
   };
 
   const handleSignOut = () => {
-    dispatch(authSlice.actions.logout());
+    logout();
   };
 
   const fetchUserData = useCallback(async (token: string) => {
     setSignInLoading(true);
-    const response = await fetch("/api/auth", {
-      method: "POST",
+    const response = await fetch('/api/auth', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({ token }),
     });
 
     const data = await response.json();
     if (response.ok) {
-      dispatch(authSlice.actions.login({ user: data.user }));
-      console.log("User data fetched successfully:", data.user);
+      login(data.user);
+      console.log('User data fetched successfully:', data.user);
     } else {
-      console.error("Failed to fetch user data:", data.error);
+      console.error('Failed to fetch user data:', data.error);
     }
     setSignInLoading(false);
-  }, [])
+  }, []);
 
   const handleFirstLogin = useCallback(async () => {
     setSignInLoading(true);
@@ -73,29 +69,22 @@ const GoogleAuth: React.FC = () => {
       const token = getJWT();
       if (!token) {
         setSignInLoading(false);
-        return
+        return;
       }
       await fetchUserData(token);
-    }
-    catch (error: any) {
+    } catch (error: any) {
       console.error(error.message);
     }
     setSignInLoading(false);
   }, []);
 
   useEffect(() => {
-    handleFirstLogin()
-  }, [])
+    handleFirstLogin();
+  }, []);
 
   return (
     <span key={String(isSignedIn)} onClick={isSignedIn ? handleSignOut : handleSignIn}>
-      {
-        signInLoading ?
-          <Loader size={20} />
-          : isSignedIn
-            ? 'Sign out'
-            : 'Sign in'
-      }
+      {signInLoading ? <Loader size={20} /> : isSignedIn ? 'Sign out' : 'Sign in'}
     </span>
   );
 };
@@ -105,9 +94,9 @@ export default GoogleAuth;
 type LoaderProps = {
   size?: number; // Size of the loader in pixels
   color?: string; // Color of the loader
-}
+};
 
-const Loader: React.FC<LoaderProps> = ({ size = 80, color = "white" }) => {
+const Loader: React.FC<LoaderProps> = ({ size = 80, color = 'white' }) => {
   return (
     <div className="flex items-center justify-center h-screen">
       <svg

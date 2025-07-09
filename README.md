@@ -118,6 +118,27 @@ The video loops till the duration of the selected timestamp
 
 <br/>
 
+## State Management
+
+This project uses **Zustand** for state management, which provides a lightweight and simple alternative to Redux. The state is organized into two main stores:
+
+- **Auth Store** (`stores/authStore.ts`): Manages user authentication state including login/logout functionality and user data
+- **Time Store** (`stores/timeStore.ts`): Manages video timestamps, loops, and time-related state for the video player
+
+### Store Usage
+
+```typescript
+// Using the auth store
+import { useAuthStore } from '../stores';
+
+const { isLoggedIn, user, login, logout } = useAuthStore();
+
+// Using the time store
+import { useTimeStore } from '../stores';
+
+const { allTimeStamps, setAllTimeStamps, currentTimeStamp } = useTimeStore();
+```
+
 ## NextJS setup
 
 First, run the development server:

@@ -2,12 +2,12 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import { Text } from '../Text/Text';
 import GoogleAuth from '../Auth/GoogleAuth';
-import { useSelector } from '../../redux';
+import { useAuthStore } from '../../stores';
 import { useRouter } from 'next/router';
 
 export const Navbar = () => {
   const [expand, setExpand] = useState(false);
-  const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+  const { isLoggedIn } = useAuthStore();
 
   const router = useRouter();
   const isHome = router.pathname === '/';
@@ -20,21 +20,25 @@ export const Navbar = () => {
           </Link>
 
           <ul className="gap-7 hidden sm:flex">
-            {!isHome && <Link href={'/'}>
-              <Text className="cursor-pointer hover:text-tone-1 transform duration-150 text-white">
-                Home
-              </Text>
-            </Link>}
+            {!isHome && (
+              <Link href={'/'}>
+                <Text className="cursor-pointer hover:text-tone-1 transform duration-150 text-white">
+                  Home
+                </Text>
+              </Link>
+            )}
             <a href={'/#how-to-use'}>
               <Text className="cursor-pointer hover:text-tone-2 transform duration-150 text-white">
                 How To Use
               </Text>
             </a>
-            {isLoggedIn && <Link href={'/my-music'}>
-              <Text className="cursor-pointer hover:text-tone-1 transform duration-150 text-white">
-                My Music
-              </Text>
-            </Link>}
+            {isLoggedIn && (
+              <Link href={'/my-music'}>
+                <Text className="cursor-pointer hover:text-tone-1 transform duration-150 text-white">
+                  My Music
+                </Text>
+              </Link>
+            )}
             <Text className="cursor-pointer hover:text-tone-2 transform duration-150 text-white">
               <GoogleAuth />
             </Text>
@@ -63,11 +67,13 @@ export const Navbar = () => {
                   How To Use
                 </Text>
               </Link>
-              {isLoggedIn && <Link href={'/my-music'}>
-                <Text className="cursor-pointer hover:text-tone-1 transform duration-150 text-white">
-                  My Music
-                </Text>
-              </Link>}
+              {isLoggedIn && (
+                <Link href={'/my-music'}>
+                  <Text className="cursor-pointer hover:text-tone-1 transform duration-150 text-white">
+                    My Music
+                  </Text>
+                </Link>
+              )}
               <Text className="cursor-pointer hover:text-tone-2 transform duration-150 text-white">
                 <GoogleAuth />
               </Text>
