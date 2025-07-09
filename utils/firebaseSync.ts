@@ -1,17 +1,12 @@
 import { syncToFirebase, syncAllLocalStorageToFirebase } from './functions';
+import { getVideoTimeStamps } from './storage';
 
 // Function to sync a specific video's timestamps to Firebase
 export const syncVideoToFirebase = async (videoId: string) => {
   try {
-    const timeStampsData = localStorage.getItem(videoId);
-    if (!timeStampsData) {
+    const timeStamps = getVideoTimeStamps(videoId);
+    if (timeStamps.length === 0) {
       console.log(`No data found for video ${videoId}`);
-      return;
-    }
-
-    const timeStamps = JSON.parse(timeStampsData);
-    if (!Array.isArray(timeStamps)) {
-      console.log(`Invalid data format for video ${videoId}`);
       return;
     }
 
@@ -35,15 +30,14 @@ export const syncAllToFirebase = async () => {
 // Function to sync the specific video data you mentioned
 export const syncSpecificVideo = async () => {
   const videoId = '2V9CyR06Ojo';
-  const timeStampsData = localStorage.getItem(videoId);
+  const timeStamps = getVideoTimeStamps(videoId);
 
-  if (!timeStampsData) {
+  if (timeStamps.length === 0) {
     console.log('No data found for video 2V9CyR06Ojo');
     return;
   }
 
   try {
-    const timeStamps = JSON.parse(timeStampsData);
     await syncToFirebase(videoId, timeStamps);
     console.log(`Successfully synced video ${videoId} with ${timeStamps.length} timestamps`);
   } catch (error) {

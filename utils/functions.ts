@@ -2,6 +2,15 @@ import { v4 as uuidv4 } from 'uuid';
 import { db, auth } from '../firebaseConfig';
 import { doc, setDoc, getDoc, collection, query, where, getDocs } from 'firebase/firestore';
 import { LoopType } from '../features/VideoPlayer/VideoPlayer';
+import {
+  getVideoTimeStamps,
+  setVideoTimeStamps,
+  getMyVideos,
+  setMyVideos,
+  addVideoToMyVideos,
+  getJWT,
+  setJWT,
+} from './storage';
 
 export function clearAllIntervals() {
   if (typeof window !== 'undefined') {
@@ -16,19 +25,7 @@ export function clearAllIntervals() {
 }
 
 export const myvideosSetter = (v_id: string) => {
-  let allMap = localStorage.getItem('myMap');
-  let allMapObj = [];
-  if (allMap) {
-    allMapObj = JSON.parse(allMap);
-    if (allMapObj.includes(v_id)) {
-      //do nothing
-    } else {
-      allMapObj.unshift(v_id);
-    }
-  } else {
-    allMapObj.unshift(v_id);
-  }
-  localStorage.setItem('myMap', JSON.stringify(allMapObj));
+  addVideoToMyVideos(v_id);
 };
 
 export const youtubeURLGen = (v_id: string) => {
@@ -38,14 +35,6 @@ export const youtubeURLGen = (v_id: string) => {
 
 export const uuid = () => {
   return uuidv4();
-};
-
-export const storeJWT = (jwt: string) => {
-  localStorage.setItem('jwt', jwt);
-};
-
-export const getJWT = () => {
-  return localStorage.getItem('jwt');
 };
 
 // Firebase sync functions
@@ -111,27 +100,18 @@ export const syncAllLocalStorageToFirebase = async () => {
       return;
     }
 
-    // Get all localStorage keys that look like video IDs
-    const allKeys = Object.keys(localStorage);
-    const videoKeys = allKeys.filter(key => key.length > 10 && !['jwt', 'myMap'].includes(key));
+    // Get all videos from storage
+    const myVideos = getMyVideos();
+    console.log(`Found ${myVideos.length} videos to sync`);
 
-    console.log(`Found ${videoKeys.length} videos to sync`);
-
-    for (const videoId of videoKeys) {
-      const timeStampsData = localStorage.getItem(videoId);
-      if (timeStampsData) {
-        try {
-          const timeStamps = JSON.parse(timeStampsData);
-          if (Array.isArray(timeStamps)) {
-            await syncToFirebase(videoId, timeStamps);
-          }
-        } catch (error) {
-          console.error(`Error parsing timestamps for video ${videoId}:`, error);
-        }
+    for (const videoId of myVideos) {
+      const timeStamps = getVideoTimeStamps(videoId);
+      if (timeStamps.length > 0) {
+        await syncToFirebase(videoId, timeStamps);
       }
     }
 
-    console.log('Finished syncing all localStorage data to Firebase');
+    console.log('Finished syncing all storage data to Firebase');
   } catch (error) {
     console.error('Error syncing all data to Firebase:', error);
   }

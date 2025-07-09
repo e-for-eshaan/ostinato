@@ -7,19 +7,14 @@ import {
   PageSection,
   SyncToFirebase,
 } from '../../components';
+import { getMyVideos } from '../../utils/storage';
 
 const MyMusic = () => {
-  const [myMusic, setMyMusic] = useState([]);
+  const [myMusic, setMyMusic] = useState<string[]>([]);
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      let allMap = localStorage.getItem('myMap');
-      let allMapObj = [];
-      if (allMap) {
-        allMapObj = JSON.parse(allMap);
-      } else {
-        //do nothing
-      }
-      setMyMusic(allMapObj);
+      const myVideos = getMyVideos();
+      setMyMusic(myVideos);
     }
   }, []);
 

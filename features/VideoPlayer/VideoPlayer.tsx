@@ -4,6 +4,7 @@ import ReactPlayer from 'react-player';
 import { clearAllIntervals, myvideosSetter, syncToFirebase } from '../../utils/functions';
 import { useTimeStore } from '../../stores';
 import { useAuthStore } from '../../stores';
+import { getVideoTimeStamps, setVideoTimeStamps } from '../../utils/storage';
 
 interface VideoPlayerProps {
   v_id: string;
@@ -35,14 +36,12 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ v_id, pathName }) => {
 
   useEffect(() => {
     if (typeof window !== undefined && v_id) {
-      // localStorage.setItem("timeMap", JSON.stringify(initMap));
       myvideosSetter(v_id);
-      let item = localStorage.getItem(v_id);
-      if (item) {
-        let itemObj = JSON.parse(item);
-        setTimeMap(itemObj);
+      const timeStamps = getVideoTimeStamps(v_id);
+      if (timeStamps.length > 0) {
+        setTimeMap(timeStamps);
       } else {
-        localStorage.setItem(v_id, JSON.stringify([]));
+        setVideoTimeStamps(v_id, []);
         setTimeMap([]);
       }
     }

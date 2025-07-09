@@ -1,8 +1,8 @@
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { app, auth } from '../../firebaseConfig';
-import { storeJWT, getJWT } from '../../utils/functions';
 import { useAuthStore } from '../../stores';
 import { useState, useCallback, useEffect } from 'react';
+import { setJWT, getJWT } from '../../utils/storage';
 
 const provider = new GoogleAuthProvider();
 
@@ -30,7 +30,7 @@ const GoogleAuth: React.FC = () => {
         })
         .then(async ({ token, user }) => {
           console.log('User data fetched successfully:', user);
-          storeJWT(token);
+          setJWT(token);
           login(user);
         });
     } catch (error: any) {
