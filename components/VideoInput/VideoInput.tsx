@@ -37,8 +37,8 @@ export const VideoInput: React.FC<VideoInputProps> = ({ className = '' }) => {
         return;
       }
 
-      // Redirect to the video page
-      router.push(`/${videoId}`);
+      // Redirect to the video page with watch?v= format
+      router.push(`/watch?v=${videoId}`);
     } catch (err) {
       setError('Something went wrong. Please try again.');
       setIsLoading(false);

@@ -1,3 +1,4 @@
+import mockJson from '../mocks/default.json';
 import { v4 as uuidv4 } from 'uuid';
 import { db, auth } from '../firebaseConfig';
 import { doc, setDoc, getDoc, collection, query, where, getDocs } from 'firebase/firestore';
@@ -115,4 +116,21 @@ export const syncAllLocalStorageToFirebase = async () => {
   } catch (error) {
     console.error('Error syncing all data to Firebase:', error);
   }
+};
+
+// Default video data for demo purposes
+const defaultVideoData = mockJson;
+
+export const createDefault = () => {
+  const videoId = '2V9CyR06Ojo';
+
+  // Set myMap to include the video ID
+  setMyVideos([videoId]);
+
+  // Set the video timestamps data
+  setVideoTimeStamps(videoId, defaultVideoData as LoopType[]);
+
+  console.log('Created default video data for:', videoId);
+
+  return videoId;
 };
