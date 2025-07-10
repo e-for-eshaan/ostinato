@@ -8,7 +8,9 @@ export const AboutSection = () => {
 
   const handleTryItNow = () => {
     const videoId = createDefault();
-    router.push(`/watch?v=${videoId}`);
+    setTimeout(() => {
+      router.push(`/watch?v=${videoId}`);
+    }, 100);
   };
 
   return (

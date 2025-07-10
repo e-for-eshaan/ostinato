@@ -4,7 +4,7 @@ import { Text } from '../Text/Text';
 import GoogleAuth from '../Auth/GoogleAuth';
 import { useAuthStore } from '../../stores';
 import { useRouter } from 'next/router';
-import { createDefault } from '../../utils/functions';
+import { handleTryNow } from '../../utils/functions';
 import { User, LogOut, Play, Settings, Music, ChevronDown } from 'lucide-react';
 
 export const Navbar = () => {
@@ -35,11 +35,6 @@ export const Navbar = () => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
-
-  const handleTryNow = () => {
-    const videoId = createDefault();
-    router.push(`/watch?v=${videoId}`);
-  };
 
   const handleSignOut = () => {
     logout();

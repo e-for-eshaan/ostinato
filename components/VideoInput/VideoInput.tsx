@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { RANDOM_DEFAULT } from '../../lib/constants';
 import { Play, Sparkles } from 'lucide-react';
+import { handleTryNow } from '../../utils/functions';
 
 interface VideoInputProps {
   className?: string;
@@ -45,11 +46,6 @@ export const VideoInput: React.FC<VideoInputProps> = ({ className = '' }) => {
       setError('Something went wrong. Please try again.');
       setIsLoading(false);
     }
-  };
-
-  const handleTryNow = () => {
-    const videoId = '2V9CyR06Ojo'; // Default demo video
-    router.push(`/watch?v=${videoId}`);
   };
 
   return (

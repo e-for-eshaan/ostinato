@@ -134,3 +134,12 @@ export const createDefault = () => {
 
   return videoId;
 };
+
+export const handleTryNow = () => {
+  const videoId = createDefault();
+
+  // Use window.location for navigation to avoid router dependency
+  if (typeof window !== 'undefined') {
+    window.location.href = `/watch?v=${videoId}`;
+  }
+};
