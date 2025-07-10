@@ -15,6 +15,11 @@ import {
   Edit3,
   Share2,
   Download,
+  X,
+  Link,
+  AlertCircle,
+  CheckCircle,
+  Youtube,
 } from 'lucide-react';
 import { useRouter } from 'next/router';
 import { createDefault } from '../../utils/functions';
@@ -33,8 +38,15 @@ const MyMusic = () => {
   const [myMusic, setMyMusic] = useState<MusicItem[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
-  const [sortBy, setSortBy] = useState<'recent' | 'name' | 'duration'>('recent');
+  const [sortBy, setSortBy] = useState<
+    'recent' | 'name' | 'duration' | 'timestamps' | 'lastPlayed'
+  >('recent');
   const [isLoading, setIsLoading] = useState(true);
+  const [showCreateModal, setShowCreateModal] = useState(false);
+  const [youtubeUrl, setYoutubeUrl] = useState('');
+  const [isCreating, setIsCreating] = useState(false);
+  const [urlError, setUrlError] = useState('');
+  const [urlSuccess, setUrlSuccess] = useState('');
   const router = useRouter();
 
   useEffect(() => {
@@ -73,6 +85,76 @@ const MyMusic = () => {
   };
 
   const handleCreateNew = () => {
+    setShowCreateModal(true);
+  };
+
+  const extractVideoId = (url: string): string | null => {
+    const patterns = [
+      /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/,
+      /youtube\.com\/v\/([^&\n?#]+)/,
+    ];
+
+    for (const pattern of patterns) {
+      const match = url.match(pattern);
+      if (match) return match[1];
+    }
+    return null;
+  };
+
+  const validateYoutubeUrl = (url: string): boolean => {
+    const videoId = extractVideoId(url);
+    return videoId !== null && videoId.length === 11;
+  };
+
+  const handleUrlChange = (url: string) => {
+    setYoutubeUrl(url);
+    setUrlError('');
+    setUrlSuccess('');
+
+    if (url.trim()) {
+      if (validateYoutubeUrl(url)) {
+        setUrlSuccess('Valid YouTube URL!');
+      } else {
+        setUrlError('Please enter a valid YouTube URL');
+      }
+    }
+  };
+
+  const handleCreateSession = async () => {
+    if (!youtubeUrl.trim()) {
+      setUrlError('Please enter a YouTube URL');
+      return;
+    }
+
+    const videoId = extractVideoId(youtubeUrl);
+    if (!videoId) {
+      setUrlError('Invalid YouTube URL');
+      return;
+    }
+
+    setIsCreating(true);
+
+    try {
+      // Simulate API call delay
+      await new Promise(resolve => setTimeout(resolve, 1500));
+
+      // Create the session
+      const newVideoId = createDefault(); // This would normally use the extracted videoId
+      setShowCreateModal(false);
+      setYoutubeUrl('');
+      setUrlError('');
+      setUrlSuccess('');
+
+      // Navigate to the new session
+      router.push(`/watch?v=${newVideoId}`);
+    } catch (error) {
+      setUrlError('Failed to create session. Please try again.');
+    } finally {
+      setIsCreating(false);
+    }
+  };
+
+  const handleQuickStart = () => {
     const videoId = createDefault();
     router.push(`/watch?v=${videoId}`);
   };
@@ -87,6 +169,13 @@ const MyMusic = () => {
         return a.title.localeCompare(b.title);
       case 'duration':
         return a.duration.localeCompare(b.duration);
+      case 'timestamps':
+        return b.timestampCount - a.timestampCount;
+      case 'lastPlayed':
+        return (
+          new Date(b.lastPlayed || b.createdAt).getTime() -
+          new Date(a.lastPlayed || a.createdAt).getTime()
+        );
       default:
         return (
           new Date(b.lastPlayed || b.createdAt).getTime() -
@@ -185,15 +274,44 @@ const MyMusic = () => {
 
               {/* Sort and View Controls */}
               <div className="flex items-center gap-4">
-                <select
-                  value={sortBy}
-                  onChange={e => setSortBy(e.target.value as any)}
-                  className="px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-tone-1"
-                >
-                  <option value="recent">Most Recent</option>
-                  <option value="name">Name</option>
-                  <option value="duration">Duration</option>
-                </select>
+                <div className="relative">
+                  <select
+                    value={sortBy}
+                    onChange={e => setSortBy(e.target.value as any)}
+                    className="appearance-none px-4 py-3 pr-10 bg-white/10 border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-tone-1 cursor-pointer hover:bg-white/15 transition-all duration-200"
+                  >
+                    <option value="recent" className="bg-gray-800 text-white">
+                      Most Recent
+                    </option>
+                    <option value="name" className="bg-gray-800 text-white">
+                      Name (A-Z)
+                    </option>
+                    <option value="duration" className="bg-gray-800 text-white">
+                      Duration
+                    </option>
+                    <option value="timestamps" className="bg-gray-800 text-white">
+                      Most Timestamps
+                    </option>
+                    <option value="lastPlayed" className="bg-gray-800 text-white">
+                      Last Played
+                    </option>
+                  </select>
+                  <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                    <svg
+                      className="w-5 h-5 text-white/50"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  </div>
+                </div>
 
                 <div className="flex items-center bg-white/10 rounded-xl p-1">
                   <button
@@ -203,6 +321,7 @@ const MyMusic = () => {
                         ? 'bg-tone-1 text-black'
                         : 'text-white/70 hover:text-white'
                     }`}
+                    title="Grid View"
                   >
                     <Grid className="w-5 h-5" />
                   </button>
@@ -213,6 +332,7 @@ const MyMusic = () => {
                         ? 'bg-tone-1 text-black'
                         : 'text-white/70 hover:text-white'
                     }`}
+                    title="List View"
                   >
                     <List className="w-5 h-5" />
                   </button>
@@ -336,6 +456,101 @@ const MyMusic = () => {
             </div>
           )}
         </div>
+
+        {/* Create Session Modal */}
+        {showCreateModal && (
+          <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+            <div className="bg-gray-900 rounded-3xl border border-white/10 max-w-md w-full p-8 relative">
+              {/* Close Button */}
+              <button
+                onClick={() => {
+                  setShowCreateModal(false);
+                  setYoutubeUrl('');
+                  setUrlError('');
+                  setUrlSuccess('');
+                }}
+                className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors"
+              >
+                <X className="w-6 h-6" />
+              </button>
+
+              {/* Header */}
+              <div className="text-center mb-8">
+                <div className="w-16 h-16 bg-tone-1/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <Youtube className="w-8 h-8 text-tone-1" />
+                </div>
+                <h2 className="text-2xl font-bold text-white mb-2">Create New Session</h2>
+                <p className="text-white/70">Enter a YouTube URL to start practicing</p>
+              </div>
+
+              {/* URL Input */}
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-white font-medium mb-2">YouTube Video URL</label>
+                  <div className="relative">
+                    <Link className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-white/50" />
+                    <input
+                      type="url"
+                      placeholder="https://www.youtube.com/watch?v=..."
+                      value={youtubeUrl}
+                      onChange={e => handleUrlChange(e.target.value)}
+                      className="w-full pl-10 pr-4 py-4 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-tone-1 focus:border-transparent"
+                    />
+                  </div>
+
+                  {/* Status Messages */}
+                  {urlError && (
+                    <div className="flex items-center gap-2 mt-2 text-red-400 text-sm">
+                      <AlertCircle className="w-4 h-4" />
+                      {urlError}
+                    </div>
+                  )}
+                  {urlSuccess && (
+                    <div className="flex items-center gap-2 mt-2 text-green-400 text-sm">
+                      <CheckCircle className="w-4 h-4" />
+                      {urlSuccess}
+                    </div>
+                  )}
+                </div>
+
+                {/* Action Buttons */}
+                <div className="flex flex-col gap-3 pt-4">
+                  <button
+                    onClick={handleCreateSession}
+                    disabled={isCreating || !youtubeUrl.trim() || !!urlError}
+                    className="w-full py-4 bg-tone-1 text-black font-semibold rounded-xl hover:bg-tone-2 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                  >
+                    {isCreating ? (
+                      <>
+                        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-black mr-2"></div>
+                        Creating Session...
+                      </>
+                    ) : (
+                      <>
+                        <Plus className="w-5 h-5 mr-2" />
+                        Create Session
+                      </>
+                    )}
+                  </button>
+
+                  <button
+                    onClick={handleQuickStart}
+                    className="w-full py-4 bg-white/10 text-white font-medium rounded-xl hover:bg-white/20 transition-all duration-300 border border-white/20"
+                  >
+                    Quick Start (Demo)
+                  </button>
+                </div>
+
+                {/* Help Text */}
+                <div className="text-center pt-4">
+                  <p className="text-white/50 text-sm">
+                    Supported formats: youtube.com/watch?v=..., youtu.be/..., youtube.com/embed/...
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </Layout>
   );
