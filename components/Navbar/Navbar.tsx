@@ -1,14 +1,18 @@
 import Link from 'next/link';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Text } from '../Text/Text';
 import GoogleAuth from '../Auth/GoogleAuth';
 import { useAuthStore } from '../../stores';
 import { useRouter } from 'next/router';
+import { createDefault } from '../../utils/functions';
+import { User, LogOut, Play, Settings, Music, ChevronDown } from 'lucide-react';
 
 export const Navbar = () => {
   const [expand, setExpand] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { isLoggedIn } = useAuthStore();
+  const [userDropdownOpen, setUserDropdownOpen] = useState(false);
+  const { isLoggedIn, user, logout } = useAuthStore();
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const router = useRouter();
   const isHome = router.pathname === '/';
@@ -20,6 +24,32 @@ export const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setUserDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const handleTryNow = () => {
+    const videoId = createDefault();
+    router.push(`/watch?v=${videoId}`);
+  };
+
+  const handleSignOut = () => {
+    logout();
+    setUserDropdownOpen(false);
+  };
+
+  const getFirstName = (displayName: string | null) => {
+    if (!displayName) return 'User';
+    return displayName.split(' ')[0];
+  };
 
   return (
     <nav
@@ -40,7 +70,7 @@ export const Navbar = () => {
             </div>
           </Link>
 
-          <ul className="gap-8 hidden lg:flex items-center">
+          <ul className="gap-6 hidden lg:flex items-center">
             {!isHome && (
               <Link href={'/'}>
                 <Text className="cursor-pointer hover:text-tone-1 transform duration-300 text-white font-medium">
@@ -49,19 +79,71 @@ export const Navbar = () => {
               </Link>
             )}
             <a href={'/#how-to-use'}>
-              <Text className="cursor-pointer hover:text-tone-2 transform duration-300 text-white font-medium">
+              <button className="bg-tone-2 cursor-pointer transform duration-300 text-white font-medium px-3 py-2 rounded-lg transition-all">
                 How To Use
-              </Text>
+              </button>
             </a>
-            {isLoggedIn && (
-              <Link href={'/my-music'}>
-                <Text className="cursor-pointer hover:text-tone-1 transform duration-300 text-white font-medium">
-                  My Music
-                </Text>
-              </Link>
-            )}
-            <div className="ml-4">
-              <GoogleAuth />
+
+            {/* Try Now Button */}
+            <button
+              onClick={handleTryNow}
+              className="inline-flex items-center px-4 py-2 bg-tone-1 text-black font-semibold rounded-lg hover:bg-tone-2 transition-all duration-300 transform hover:scale-105"
+            >
+              <Play className="w-4 h-4 mr-2" />
+              Try Now
+            </button>
+
+            {/* Enhanced Login Section */}
+            <div className="flex items-center space-x-4">
+              {isLoggedIn ? (
+                <div className="relative" ref={dropdownRef}>
+                  <button
+                    onClick={() => setUserDropdownOpen(!userDropdownOpen)}
+                    className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-lg px-3 py-2 hover:bg-white/20 transition-all duration-300"
+                  >
+                    <div className="w-6 h-6 bg-gradient-to-r from-tone-1 to-tone-2 rounded-full flex items-center justify-center">
+                      <User className="w-3 h-3 text-black" />
+                    </div>
+                    <span className="text-white text-sm font-medium">
+                      {getFirstName(user?.displayName)}
+                    </span>
+                    <ChevronDown
+                      className={`w-4 h-4 text-white transition-transform duration-200 ${userDropdownOpen ? 'rotate-180' : ''}`}
+                    />
+                  </button>
+
+                  {userDropdownOpen && (
+                    <div className="absolute right-0 mt-2 w-48 bg-black/95 backdrop-blur-sm border border-white/10 rounded-lg shadow-xl">
+                      <div className="py-1">
+                        <Link href="/my-music">
+                          <button className="w-full text-left px-4 py-2 text-sm text-white hover:bg-white/10 transition-colors duration-200 flex items-center">
+                            <Music className="w-4 h-4 mr-2" />
+                            My Music
+                          </button>
+                        </Link>
+                        <Link href="/user">
+                          <button className="w-full text-left px-4 py-2 text-sm text-white hover:bg-white/10 transition-colors duration-200 flex items-center">
+                            <Settings className="w-4 h-4 mr-2" />
+                            Account Settings
+                          </button>
+                        </Link>
+                        <button
+                          onClick={handleSignOut}
+                          className="w-full text-left px-4 py-2 text-sm text-white hover:bg-white/10 transition-colors duration-200 flex items-center"
+                        >
+                          <LogOut className="w-4 h-4 mr-2" />
+                          Sign Out
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div className="flex items-center space-x-3">
+                  <div className="text-white/70 text-sm">Ready to practice?</div>
+                  <GoogleAuth />
+                </div>
+              )}
             </div>
           </ul>
 
@@ -98,18 +180,57 @@ export const Navbar = () => {
                 </Text>
               </Link>
               <Link href={'/#how-to-use'}>
-                <Text className="cursor-pointer hover:text-tone-2 transform duration-300 text-white font-medium py-2">
+                <button className="bg-tone-2 cursor-pointer transform duration-300 text-white font-medium py-2 px-3 rounded-lg transition-all w-full text-left">
                   How To Use
-                </Text>
+                </button>
               </Link>
-              {isLoggedIn && (
-                <Link href={'/my-music'}>
-                  <Text className="cursor-pointer hover:text-tone-1 transform duration-300 text-white font-medium py-2">
-                    My Music
-                  </Text>
-                </Link>
-              )}
+
+              {/* Mobile Try Now Button */}
+              <button
+                onClick={handleTryNow}
+                className="inline-flex items-center px-4 py-2 bg-tone-1 text-black font-semibold rounded-lg hover:bg-tone-2 transition-all duration-300 w-full justify-center"
+              >
+                <Play className="w-4 h-4 mr-2" />
+                Try Now
+              </button>
+
+              {/* Mobile Login Section */}
               <div className="pt-2">
+                {isLoggedIn ? (
+                  <div className="space-y-2">
+                    <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-lg px-3 py-2">
+                      <div className="w-6 h-6 bg-gradient-to-r from-tone-1 to-tone-2 rounded-full flex items-center justify-center">
+                        <User className="w-3 h-3 text-black" />
+                      </div>
+                      <span className="text-white text-sm font-medium">
+                        {getFirstName(user?.displayName)}
+                      </span>
+                    </div>
+                    <div className="space-y-1">
+                      <Link href="/my-music">
+                        <button className="w-full text-left px-3 py-2 text-sm text-white hover:bg-white/10 transition-colors duration-200 flex items-center rounded">
+                          <Music className="w-4 h-4 mr-2" />
+                          My Music
+                        </button>
+                      </Link>
+                      <Link href="/user">
+                        <button className="w-full text-left px-3 py-2 text-sm text-white hover:bg-white/10 transition-colors duration-200 flex items-center rounded">
+                          <Settings className="w-4 h-4 mr-2" />
+                          Account Settings
+                        </button>
+                      </Link>
+                      <button
+                        onClick={handleSignOut}
+                        className="w-full text-left px-3 py-2 text-sm text-white hover:bg-white/10 transition-colors duration-200 flex items-center rounded"
+                      >
+                        <LogOut className="w-4 h-4 mr-2" />
+                        Sign Out
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="text-white/70 text-sm mb-2">Ready to practice?</div>
+                )}
                 <GoogleAuth />
               </div>
             </ul>
