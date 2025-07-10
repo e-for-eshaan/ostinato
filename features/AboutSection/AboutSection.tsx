@@ -1,6 +1,7 @@
 import { FormatHeading, Heading, PageSection, Slideshow, Text } from '../../components';
 import { createDefault } from '../../utils/functions';
 import { useRouter } from 'next/router';
+import { Music, Repeat, BarChart3 } from 'lucide-react';
 
 export const AboutSection = () => {
   const router = useRouter();
@@ -110,7 +111,7 @@ export const AboutSection = () => {
         <div className="mt-20 grid md:grid-cols-3 gap-8">
           <div className="text-center p-6 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10">
             <div className="w-16 h-16 bg-tone-2 rounded-2xl flex items-center justify-center mx-auto mb-4">
-              <span className="text-black text-2xl">🎵</span>
+              <Music className="w-8 h-8 text-white" />
             </div>
             <h3 className="text-xl font-semibold text-white mb-2">Precise Control</h3>
             <p className="text-white/70">
@@ -120,7 +121,7 @@ export const AboutSection = () => {
 
           <div className="text-center p-6 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10">
             <div className="w-16 h-16 bg-tone-2 rounded-2xl flex items-center justify-center mx-auto mb-4">
-              <span className="text-black text-2xl">🔄</span>
+              <Repeat className="w-8 h-8 text-white" />
             </div>
             <h3 className="text-xl font-semibold text-white mb-2">Smart Loops</h3>
             <p className="text-white/70">
@@ -130,7 +131,7 @@ export const AboutSection = () => {
 
           <div className="text-center p-6 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10">
             <div className="w-16 h-16 bg-tone-2 rounded-2xl flex items-center justify-center mx-auto mb-4">
-              <span className="text-black text-2xl">📊</span>
+              <BarChart3 className="w-8 h-8 text-white" />
             </div>
             <h3 className="text-xl font-semibold text-white mb-2">Progress Tracking</h3>
             <p className="text-white/70">

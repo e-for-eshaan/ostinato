@@ -5,3 +5,6 @@ export const NAVBAR_HEIGHT_CLASS = 'h-16 lg:h-20'; // Tailwind class equivalent
 
 // Video Player Layout
 export const VIDEO_PLAYER_HEIGHT_CLASS = 'h-[calc(100vh-64px)] lg:h-[calc(100vh-80px)]';
+
+// Random Video URL for dice feature
+export const RANDOM_DEFAULT = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
