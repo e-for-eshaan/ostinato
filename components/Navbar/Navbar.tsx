@@ -140,7 +140,6 @@ export const Navbar = () => {
                 </div>
               ) : (
                 <div className="flex items-center space-x-3">
-                  <div className="text-white/70 text-sm">Ready to practice?</div>
                   <GoogleAuth />
                 </div>
               )}
