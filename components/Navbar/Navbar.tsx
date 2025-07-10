@@ -73,13 +73,13 @@ export const Navbar = () => {
           <ul className="gap-6 hidden lg:flex items-center">
             {!isHome && (
               <Link href={'/'}>
-                <Text className="cursor-pointer hover:text-tone-1 transform duration-300 text-white font-medium">
+                <button className="cursor-pointer hover:text-tone-1 transform text-white font-medium px-4 py-2.5 rounded-lg hover:bg-white/10 transition-all duration-300 h-10 flex items-center">
                   Home
-                </Text>
+                </button>
               </Link>
             )}
             <a href={'/#how-to-use'}>
-              <button className="bg-tone-2 cursor-pointer transform duration-300 text-white font-medium px-3 py-2 rounded-lg transition-all">
+              <button className="bg-tone-2 cursor-pointer transform duration-300 text-white font-medium px-4 py-2.5 rounded-lg transition-all h-10 flex items-center">
                 How To Use
               </button>
             </a>
@@ -87,7 +87,7 @@ export const Navbar = () => {
             {/* Try Now Button */}
             <button
               onClick={handleTryNow}
-              className="inline-flex items-center px-4 py-2 bg-tone-1 text-black font-semibold rounded-lg hover:bg-tone-2 transition-all duration-300 transform hover:scale-105"
+              className="inline-flex items-center px-4 py-2.5 bg-tone-1 text-black font-semibold rounded-lg hover:bg-tone-2 transition-all duration-300 transform hover:scale-105 h-10"
             >
               <Play className="w-4 h-4 mr-2" />
               Try Now
@@ -99,7 +99,7 @@ export const Navbar = () => {
                 <div className="relative" ref={dropdownRef}>
                   <button
                     onClick={() => setUserDropdownOpen(!userDropdownOpen)}
-                    className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-lg px-3 py-2 hover:bg-white/20 transition-all duration-300"
+                    className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2.5 hover:bg-white/20 transition-all duration-300 h-10"
                   >
                     <div className="w-6 h-6 bg-gradient-to-r from-tone-1 to-tone-2 rounded-full flex items-center justify-center">
                       <User className="w-3 h-3 text-black" />
@@ -129,7 +129,7 @@ export const Navbar = () => {
                         </Link>
                         <button
                           onClick={handleSignOut}
-                          className="w-full text-left px-4 py-2 text-sm text-white hover:bg-white/10 transition-colors duration-200 flex items-center"
+                          className="w-full text-left px-4 py-2 text-sm text-white hover:bg-white/10 transition-colors duration-200 hidden md:flex items-center"
                         >
                           <LogOut className="w-4 h-4 mr-2" />
                           Sign Out
@@ -172,28 +172,29 @@ export const Navbar = () => {
 
         {expand && (
           <div className="lg:hidden bg-black/95 backdrop-blur-sm border-t border-gray-800">
-            <ul className="flex flex-col space-y-4 px-6 py-4">
-              <Link href={'/'}>
-                <Text className="cursor-pointer hover:text-tone-1 transform duration-300 text-white font-medium py-2">
-                  Home
-                </Text>
-              </Link>
-              <Link href={'/#how-to-use'}>
-                <button className="bg-tone-2 cursor-pointer transform duration-300 text-white font-medium py-2 px-3 rounded-lg transition-all w-full text-left">
-                  How To Use
+            <div className="px-6 py-4">
+              {/* Navigation Buttons - Horizontal Layout */}
+              <div className="flex gap-2 mb-4">
+                <Link href={'/'} className="flex-1">
+                  <button className="w-full cursor-pointer hover:text-tone-1 transform text-white font-medium px-4 py-2.5 rounded-lg hover:bg-white/10 transition-all duration-300 h-10 flex items-center justify-center">
+                    Home
+                  </button>
+                </Link>
+                <Link href={'/#how-to-use'} className="flex-1">
+                  <button className="w-full bg-tone-2 cursor-pointer transform duration-300 text-white font-medium px-4 py-2.5 rounded-lg transition-all h-10 flex items-center justify-center">
+                    How To Use
+                  </button>
+                </Link>
+                <button
+                  onClick={handleTryNow}
+                  className="flex-1 inline-flex items-center justify-center px-4 py-2.5 bg-tone-1 text-black font-semibold rounded-lg hover:bg-tone-2 transition-all duration-300 h-10"
+                >
+                  <Play className="w-4 h-4 mr-2" />
+                  Try Now
                 </button>
-              </Link>
+              </div>
 
-              {/* Mobile Try Now Button */}
-              <button
-                onClick={handleTryNow}
-                className="inline-flex items-center px-4 py-2 bg-tone-1 text-black font-semibold rounded-lg hover:bg-tone-2 transition-all duration-300 w-full justify-center"
-              >
-                <Play className="w-4 h-4 mr-2" />
-                Try Now
-              </button>
-
-              {/* Mobile Login Section */}
+              {/* Login Section */}
               <div className="pt-2">
                 {isLoggedIn ? (
                   <div className="space-y-2">
@@ -218,13 +219,6 @@ export const Navbar = () => {
                           Account Settings
                         </button>
                       </Link>
-                      <button
-                        onClick={handleSignOut}
-                        className="w-full text-left px-3 py-2 text-sm text-white hover:bg-white/10 transition-colors duration-200 flex items-center rounded"
-                      >
-                        <LogOut className="w-4 h-4 mr-2" />
-                        Sign Out
-                      </button>
                     </div>
                   </div>
                 ) : (
@@ -232,7 +226,7 @@ export const Navbar = () => {
                 )}
                 <GoogleAuth />
               </div>
-            </ul>
+            </div>
           </div>
         )}
       </div>
