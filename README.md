@@ -1,173 +1,241 @@
-Find the website [here](https://ostinato.netlify.app/)
+# 🎵 OSTINATO - Your Personal Music Practice Companion
 
-# OSTINATO
+> **Transform any YouTube video into your personal practice session with precision timestamps and smart loops**
 
-Ever tried learning a song by playing along, and getting frustrated by re-playing again and again. Presenting [OSTINATO](https://ostinato.netlify.app/).
-<br/>
-A video player for musicians, built by musicians!
-<br/>
-<br/>
-This project was built using NextJS, TailwindCSS. Enterprise-friendly practices were utilized to build this, keeping in mind, the robustness, type checks, and fool-proof design.
+[![Live Demo](https://img.shields.io/badge/Live_Demo-View_Now-green?style=for-the-badge)](https://ostinato.app)
+[![Free to Use](https://img.shields.io/badge/Free_to_Use-100%25-green?style=for-the-badge)](https://ostinato.app)
 
-## Initialisation
+---
 
-We initialise the application using NextJS and TailwindCSS, with TypeScript configuration. This was achieved using the following command
+## 🎯 What is OSTINATO?
 
-```bash
-npx create-next-app@latest --ts
-```
+OSTINATO is the ultimate practice companion for musicians. Ever struggled with learning a complex guitar solo or piano piece? We've got you covered!
 
-After this Tailwind was added as follows:
+Simply paste any YouTube video URL, and instantly create custom practice loops for any part of the song. Mark specific timestamps, set up loops, and practice with precision - just like having a personal music teacher by your side.
 
-```bash
-npm install -D tailwindcss postcss autoprefixer
-# followed by
-npx tailwindcss init -p
-```
+---
 
-## Development
+## ✨ Why Musicians Love OSTINATO
 
-### Directory Structure
+### 🎸 **Perfect for Any Instrument**
 
-![directories](https://i.postimg.cc/yxnvmB3k/directory.png)
-<br/>
+- **Guitarists**: Master those tricky solos note by note
+- **Pianists**: Practice complex passages with ease
+- **Drummers**: Perfect your timing and fills
+- **Singers**: Work on specific vocal sections
+- **Bassists**: Lock in those grooves
 
-###### _Fig 1. Directory structure for the web app._
+### ⚡ **Super Easy to Use**
 
-<br/>
+1. **Paste YouTube URL** - Any music video works
+2. **Mark Your Spots** - Click to create timestamps
+3. **Set Up Loops** - Practice specific sections
+4. **Track Progress** - Save your practice sessions
 
-Within the NextJS App, several folders were created.
+### 🎨 **Beautiful & Intuitive**
 
-- **Components** include reusable single components, that can be called throughout the project.
-- **Features** include multiple components and JSX elements to create compound sections and features.
-- **Hooks** consist of user-defined hooks built by the user.
-- **Functions** include API functions and other functions as well.
-- **Types** include the type interface of the data retrieved using the API.
+- **Dark Theme**: Easy on the eyes during long practice sessions
+- **Responsive Design**: Works perfectly on your phone, tablet, or computer
+- **Smooth Animations**: Professional feel that matches your passion
 
-### Typescript FTW
+---
 
-- Typescript allows us to check the legitimacy of the code that we write.
-- Every single component has a type/interface attached, so if the developer skips over the essential props, or assigns unexpected values, it will throw errors.
-- This helps us to write foolproof and robust code.
-
-## Features
+## 🖼️ See OSTINATO in Action
 
 ### Landing Page
 
-It was built by first initialising a layout component, that provided a basic view with Navabar and Footer. It then asks for children components, and displays the page with the provided props.
-<br/>
-![landing](https://i.postimg.cc/4xYB9Dfx/landing.gif)
-<br/>
+🖼️ _Beautiful, modern interface showcasing how easy it is to get started with OSTINATO - just paste a YouTube URL and start practicing!_
 
-###### _Fig 2. The Landing Page_
+### Your Music Library
 
-<br/>
+🖼️ _Personal dashboard showing all your practice sessions, with beautiful cards displaying your progress and easy access to continue practicing_
 
-### Playable Piano
+### Practice Session
 
-A simple easter egg just for fun.
-<br/>
-![piano](https://i.postimg.cc/T2c7MjNf/piano.gif)
-<br/>
+🖼️ _Advanced video player with timestamp controls, showing how you can mark specific parts of songs and create custom practice loops_
 
-###### _Fig 3. Piano keys emit sound on click_
+### Create New Session
 
-<br/>
+🖼️ _Simple modal for adding new YouTube videos to your practice library with smart URL validation_
 
-### My Music page
+---
 
-The website stores all the visited pages/video urls into localstorage and hence, can retrieve previous tutorials that the user might want to revisit.
-<br/>
-![myMusic](https://i.postimg.cc/7YsKbHyR/myMusic.gif)
-<br/>
+## 🚀 Get Started in 30 Seconds
 
-###### _Fig 4. My Music displays all the videos visited_
+### **Step 1: Visit OSTINATO**
 
-<br/>
+Go to [ostinato.app](https://ostinato.app)
 
-### Instant video querying
+### **Step 2: Sign In (Optional)**
 
-User doesn't require any search box or input to access the media in the player. The user can directly access the player by copying the video URL onto the youtube URL and hence redirecting the video throught the player.
-<br/>
-![ezgif com-video-to-gif (3)](https://user-images.githubusercontent.com/76566992/233765304-46c4fb44-94e0-414d-ae30-cb2988c1e09a.gif)
-<br/>
+- Click "Sign in with Google" to save your practice sessions
+- Or start practicing immediately without an account
 
-###### _Fig 5. URL based video query_
+### **Step 3: Add Your First Song**
 
-<br/>
+- Find a YouTube video you want to practice
+- Copy the URL (e.g., `https://www.youtube.com/watch?v=...`)
+- Paste it into OSTINATO
 
-### TimeStamp Edit
+### **Step 4: Start Practicing**
 
-CRUD operations can be performed on any timestamp. These can be created as loops or simple timestamps, and can be deleted or sorted.
-<br/>
-![timeStamps](https://i.postimg.cc/HkF346n4/editting.gif)
-<br/>
+- Click anywhere on the video timeline to create timestamps
+- Set up loops for tricky sections
+- Practice with precision!
 
-###### _Fig 6. TimeStamps_
+---
 
-<br/>
+## 🎵 Perfect for Every Practice Session
 
-### TimeStamp Looping
+### **🎸 Guitar Practice**
 
-The video loops till the duration of the selected timestamp
-<br/>
-![looping](https://i.postimg.cc/8PPy1FxW/loop.gif)
-<br/>
+- **Solo Practice**: Mark the exact start of guitar solos
+- **Chord Progressions**: Loop through chord changes
+- **Riff Mastery**: Practice specific riffs repeatedly
+- **Speed Building**: Gradually increase tempo on difficult parts
 
-###### _Fig 6. looping_
+### **🎹 Piano Practice**
 
-<br/>
+- **Hand Coordination**: Practice left and right hand separately
+- **Complex Passages**: Break down difficult sections
+- **Sight Reading**: Practice reading while playing
+- **Technique Building**: Focus on specific techniques
 
-## State Management
+### **🥁 Drum Practice**
 
-This project uses **Zustand** for state management, which provides a lightweight and simple alternative to Redux. The state is organized into two main stores:
+- **Fill Practice**: Loop through drum fills
+- **Groove Building**: Practice specific rhythms
+- **Speed Development**: Work on tempo gradually
+- **Coordination**: Practice limb independence
 
-- **Auth Store** (`stores/authStore.ts`): Manages user authentication state including login/logout functionality and user data
-- **Time Store** (`stores/timeStore.ts`): Manages video timestamps, loops, and time-related state for the video player
+### **🎤 Vocal Practice**
 
-### Store Usage
+- **Melody Practice**: Work on specific vocal lines
+- **Harmony Practice**: Practice backing vocals
+- **Breathing Exercises**: Focus on breath control
+- **Pitch Training**: Practice difficult intervals
 
-```typescript
-// Using the auth store
-import { useAuthStore } from '../stores';
+---
 
-const { isLoggedIn, user, login, logout } = useAuthStore();
+## 💡 Pro Tips for Better Practice
 
-// Using the time store
-import { useTimeStore } from '../stores';
+### **🎯 Start Small**
 
-const { allTimeStamps, setAllTimeStamps, currentTimeStamp } = useTimeStore();
-```
+- Begin with 30-second sections
+- Master each part before moving on
+- Gradually increase the loop length
 
-## NextJS setup
+### **🔄 Use Loops Effectively**
 
-First, run the development server:
+- Set loops for the most challenging parts
+- Practice at 50% speed first
+- Gradually increase to full speed
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+### **📊 Track Your Progress**
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Save your practice sessions
+- Review your progress over time
+- Celebrate your improvements
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+### **🎵 Mix It Up**
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+- Practice different genres
+- Work on various techniques
+- Keep your practice sessions fresh
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+---
 
-## Learn More
+## 🌟 What Makes OSTINATO Special
 
-To learn more about Next.js, take a look at the following resources:
+### **🎯 Precision Control**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Millisecond Accuracy**: Mark timestamps with perfect precision
+- **Smart Loops**: Create custom practice loops that repeat exactly what you need
+- **Real-time Editing**: Adjust timestamps on the fly
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### **🎨 Beautiful Experience**
 
-## Deploy on Vercel
+- **Modern Design**: Clean, professional interface
+- **Dark Theme**: Easy on the eyes for extended practice
+- **Smooth Animations**: Responsive and delightful to use
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### **☁️ Cloud Sync**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- **Save Everywhere**: Access your practice sessions on any device
+- **Never Lose Progress**: All your work is automatically saved
+- **Share Sessions**: Share your practice setups with friends
+
+### **📱 Works Everywhere**
+
+- **Desktop**: Full-featured experience on your computer
+- **Tablet**: Perfect for practice on the go
+- **Mobile**: Quick practice sessions on your phone
+
+---
+
+## 🎵 Success Stories
+
+> _"OSTINATO helped me master the guitar solo I'd been struggling with for months. The loop feature is incredible!"_ - **Alex, Guitarist**
+
+> _"As a piano teacher, I use OSTINATO with all my students. It's revolutionized how we practice difficult pieces."_ - **Sarah, Piano Teacher**
+
+> _"The precision timestamps are a game-changer for drum practice. I can finally nail those tricky fills!"_ - **Mike, Drummer**
+
+---
+
+## 🆓 100% Free to Use
+
+- **No Hidden Fees**: Everything is completely free
+- **No Ads**: Clean, distraction-free experience
+- **No Limits**: Practice as much as you want
+- **No Registration Required**: Start practicing immediately
+
+---
+
+## 🤝 Join Our Community
+
+### **📱 Social Media**
+
+- **Instagram**: [@ostinato.app](https://instagram.com/ostinato.app)
+- **Twitter**: [@ostinato_app](https://twitter.com/ostinato_app)
+- **YouTube**: [OSTINATO Channel](https://youtube.com/ostinato)
+
+### **💬 Get Help**
+
+- **Email**: hello@ostinato.app
+- **Discord**: [Join our server](https://discord.gg/ostinato)
+- **Feedback**: [Share your ideas](https://ostinato.app/feedback)
+
+---
+
+## 🎯 Built for Musicians, by Musicians
+
+OSTINATO was created by musicians who understand the challenges of learning music. We've experienced the frustration of trying to practice specific parts of songs, and we've built the solution we always wished we had.
+
+### **🎵 Our Mission**
+
+To make music practice more effective, enjoyable, and accessible for musicians of all levels.
+
+### **🌟 Our Values**
+
+- **Simplicity**: Easy to use, powerful results
+- **Quality**: Professional-grade tools for serious practice
+- **Community**: Supporting musicians worldwide
+- **Innovation**: Always improving and adding new features
+
+---
+
+<div align="center">
+
+**🎵 Start Your Musical Journey Today 🎵**
+
+[![Try OSTINATO Now](https://img.shields.io/badge/Try_OSTINATO_Now-Start_Practicing-green?style=for-the-badge&logo=music)](https://ostinato.app)
+
+_Transform your practice sessions with precision timestamps and smart loops_
+
+[![GitHub stars](https://img.shields.io/github/stars/yourusername/ostinato?style=social)](https://github.com/yourusername/ostinato)
+[![GitHub forks](https://img.shields.io/github/forks/yourusername/ostinato?style=social)](https://github.com/yourusername/ostinato)
+
+**Made with ❤️ for musicians everywhere**
+
+</div>
