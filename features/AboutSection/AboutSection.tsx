@@ -16,7 +16,7 @@ export const AboutSection = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-8 lg:mb-12">
-          <FormatHeading label="HOW TO USE" />
+          <h1 className="text-8xl font-righteous text-white mb-4">HOW TO USE</h1>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-righteous font-bold text-white mt-4 mb-3">
             Get Started in <span className="text-tone-1">4 Simple Steps</span>
           </h2>
