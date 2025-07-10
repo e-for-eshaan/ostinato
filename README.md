@@ -44,19 +44,27 @@ Simply paste any YouTube video URL, and instantly create custom practice loops f
 
 ### Landing Page
 
-🖼️ _Beautiful, modern interface showcasing how easy it is to get started with OSTINATO - just paste a YouTube URL and start practicing!_
+<img width="1728" alt="image" src="https://github.com/user-attachments/assets/f10df5a3-ddff-4bcd-99de-79aafd3ee5d3" />
+
+_Beautiful, modern interface showcasing how easy it is to get started with OSTINATO - just paste a YouTube URL and start practicing!_
 
 ### Your Music Library
 
-🖼️ _Personal dashboard showing all your practice sessions, with beautiful cards displaying your progress and easy access to continue practicing_
+<img width="1728" alt="image" src="https://github.com/user-attachments/assets/cd1c0c7e-3af1-43b9-a3e6-7054ada773dc" />
+
+ _Personal dashboard showing all your practice sessions, with beautiful cards displaying your progress and easy access to continue practicing_
 
 ### Practice Session
 
-🖼️ _Advanced video player with timestamp controls, showing how you can mark specific parts of songs and create custom practice loops_
+<img width="1728" alt="image" src="https://github.com/user-attachments/assets/f7730d49-5f52-453d-a887-38a49409af5b" />
+
+ _Advanced video player with timestamp controls, showing how you can mark specific parts of songs and create custom practice loops_
 
 ### Create New Session
 
-🖼️ _Simple modal for adding new YouTube videos to your practice library with smart URL validation_
+<img width="1726" alt="image" src="https://github.com/user-attachments/assets/95d6b8f8-f807-4e67-805c-16b7a2a5bbc5" />
+ 
+ _Simple modal for adding new YouTube videos to your practice library with smart URL validation_
 
 ---
 
