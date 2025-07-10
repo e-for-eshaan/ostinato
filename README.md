@@ -2,8 +2,8 @@
 
 > **Transform any YouTube video into your personal practice session with precision timestamps and smart loops**
 
-[![Live Demo](https://img.shields.io/badge/Live_Demo-View_Now-green?style=for-the-badge)](https://ostinato.app)
-[![Free to Use](https://img.shields.io/badge/Free_to_Use-100%25-green?style=for-the-badge)](https://ostinato.app)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-View_Now-green?style=for-the-badge)](https://ostinato.netlify.app/)
+[![Free to Use](https://img.shields.io/badge/Free_to_Use-100%25-green?style=for-the-badge)](https://ostinato.netlify.app/)
 
 ---
 
@@ -200,22 +200,6 @@ Go to [ostinato.app](https://ostinato.app)
 
 ---
 
-## 🤝 Join Our Community
-
-### **📱 Social Media**
-
-- **Instagram**: [@ostinato.app](https://instagram.com/ostinato.app)
-- **Twitter**: [@ostinato_app](https://twitter.com/ostinato_app)
-- **YouTube**: [OSTINATO Channel](https://youtube.com/ostinato)
-
-### **💬 Get Help**
-
-- **Email**: hello@ostinato.app
-- **Discord**: [Join our server](https://discord.gg/ostinato)
-- **Feedback**: [Share your ideas](https://ostinato.app/feedback)
-
----
-
 ## 🎯 Built for Musicians, by Musicians
 
 OSTINATO was created by musicians who understand the challenges of learning music. We've experienced the frustration of trying to practice specific parts of songs, and we've built the solution we always wished we had.
@@ -237,12 +221,12 @@ To make music practice more effective, enjoyable, and accessible for musicians o
 
 **🎵 Start Your Musical Journey Today 🎵**
 
-[![Try OSTINATO Now](https://img.shields.io/badge/Try_OSTINATO_Now-Start_Practicing-green?style=for-the-badge&logo=music)](https://ostinato.app)
+[![Try OSTINATO Now](https://img.shields.io/badge/Try_OSTINATO_Now-Start_Practicing-green?style=for-the-badge&logo=music)](https://ostinato.netlify.app/)
 
 _Transform your practice sessions with precision timestamps and smart loops_
 
-[![GitHub stars](https://img.shields.io/github/stars/yourusername/ostinato?style=social)](https://github.com/yourusername/ostinato)
-[![GitHub forks](https://img.shields.io/github/forks/yourusername/ostinato?style=social)](https://github.com/yourusername/ostinato)
+[![GitHub stars](https://img.shields.io/github/stars/e-for-eshaan/ostinato?style=social)](https://github.com/e-for-eshaan/ostinato)
+[![GitHub forks](https://img.shields.io/github/forks/e-for-eshaan?style=social)](https://github.com/e-for-eshaan/ostinato)
 
 **Made with ❤️ for musicians everywhere**
 
